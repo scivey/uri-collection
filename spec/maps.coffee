@@ -53,7 +53,7 @@ describe "URICollection", ->
 
 			for i in URL_INDICES
 				assert ( copy.stringAt(i) is collection.stringAt(i) )
-				assert ( _mapped.stringAt(0) isnt collection.stringAt(0))
+				assert ( _mapped.stringAt(i) isnt collection.stringAt(i))
 
 
 		it "should produce the same result as a series of individual URIjs instance manipulations.", ->
@@ -156,44 +156,6 @@ describe "URICollection", ->
 			assert( eachified instanceof URICollection )
 			assert( eachified.size() is collection.size() )
 
-	describe "countBy", ->
-
-		counterFn = (aLink) ->
-			aLink.domain() + " " + aLink.tld()
-
-		it "should accept a property string and use the matching property as the counting criteria", ->
-
-			counted = collection.countBy "domain"
-			for i in URL_INDICES
-				assert( _.has(counted, collection.at(i).domain() ) )
-
-		it "should accept a function and use it to create the counting criteria", ->
-
-			counted = collection.countBy(counterFn)
-
-			for i in URL_INDICES
-				#console.log i
-				assert( _.has(counted, counterFn(collection.at(i))) ) 
-
-
-		it "should return a total count equal to the number of instances in the collection", ->
-
-			counted = collection.countBy "domain"
-			stringSum = _.chain(counted)
-					.values()
-					.reduce( add, 0 )
-					.value()
-
-			assert ( stringSum is collection.size() )
-
-
-			counted = collection.countBy(counterFn)
-			funcSum = _.chain(counted)
-					.values()
-					.reduce( add, 0 )
-					.value()
-
-			assert ( funcSum is collection.size() )
 
 	describe "invoke", ->
 
@@ -242,56 +204,3 @@ describe "URICollection", ->
 				assert( invoked.at(i).toString() is plainResults[i].toString() )
 
 
-	describe "groupBy", ->
-		groupingFn = (aLink) ->
-			aLink.domain() + " " + aLink.tld()
-
-		it "should accept a property string and use the matching property as the grouping criteria", ->
-
-			grouped = collection.groupBy "domain"
-			for i in URL_INDICES
-				assert( _.has(grouped, collection.at(i).domain() ) )
-
-		it "should accept a function and use it to create the grouping criteria", ->
-
-			grouped = collection.groupBy(groupingFn)
-
-			for i in URL_INDICES
-				#console.log i
-				assert( _.has(grouped, groupingFn(collection.at(i))) )
-
-		it "should have the same number of keys as the number of unique results for the grouping function over a plain array of the collection's elements.", ->
-
-			list = collection.toArray()
-			uniqueCount = _.chain(list)
-							.map( groupingFn )
-							.uniq()
-							.value().length
-
-			grouped = collection.groupBy(groupingFn)
-			groupCount = _.keys(grouped).length
-
-			assert( uniqueCount is groupCount )
-
-
-		it "should have the same total number of URIs as the original collection", ->
-
-
-			grouped = collection.groupBy "domain"
-
-			stringCount = _.chain(grouped)
-						.values()
-						.map( (oneList) -> oneList.length)
-						.reduce( add, 0 )
-						.value()
-
-			assert ( stringCount is collection.size() )
-
-			grouped2 = collection.groupBy(groupingFn)
-			funcCount = _.chain(grouped2)
-						.values()
-						.map( (oneList) -> oneList.length)
-						.reduce( add, 0 )
-						.value()
-
-			assert ( funcCount is collection.size() )

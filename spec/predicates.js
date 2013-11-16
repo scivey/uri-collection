@@ -76,17 +76,37 @@
       containsUrls = [];
       containsColl = {};
       beforeEach(function() {
-        containsUrls = ["http://www.google.com/foo", "http://www.cnn.com/theNewsIGuess", "http://www.foo.com/index.html", "http://www.powwow.net"];
+        containsUrls = ["http://www.google.com/foo", "http://www.cnn.com/theNewsIGuess", "http://www.foo.com/index.html", "http://www.powwow.net/"];
         return containsColl = new URICollection(containsUrls);
       });
       it("when passed a string, returns true if the string is equal to the `.toString()` result of any element.", function() {
         var result;
-        result = containsColl.contains("http://www.powwow.net");
+        result = containsColl.contains("http://www.powwow.net/");
+        return assert(result === true);
+      });
+      it("when passed a string, returns false if the string is not equal to the `.toString()` result of any element.", function() {
+        var result;
+        result = containsColl.contains("http://www.jollyhumorousanecdotes.net/");
         return assert(result === false);
       });
-      return it("when passed a string, returns false if the string is not equal to the `.toString()` result of any element.", function() {
+      it("when passed a URLjs instance, returns true if the `.toString()` of that instance equals the `.toString()` of any element.", function() {
         var result;
-        result = containsColl.contains("http://www.jollyhumorousanecdotes.net");
+        result = containsColl.contains(new URI("http://www.powwow.net"));
+        return assert(result === true);
+      });
+      it("when passed a URLjs instance, returns false if the `.toString()` of that instance does not equal the `.toString()` of any element.", function() {
+        var result;
+        result = containsColl.contains(new URI("http://www.jollyhumorousanecdotes.net/"));
+        return assert(result === false);
+      });
+      it("when passed a RegExp instance, returns true if calling that RegExp's `#test()` with any element's `.toString()` value returns true.", function() {
+        var result;
+        result = containsColl.contains(/^.*www.*$/i);
+        return assert(result === true);
+      });
+      return it("when passed a RegExp instance, returns false if calling that RegExp's `#test()` with every element's `.toString()` value returns false.", function() {
+        var result;
+        result = containsColl.contains(/^.*grognogblog.*$/i);
         return assert(result === false);
       });
     });

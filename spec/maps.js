@@ -56,7 +56,7 @@
         for (_j = 0, _len = URL_INDICES.length; _j < _len; _j++) {
           i = URL_INDICES[_j];
           assert(copy.stringAt(i) === collection.stringAt(i));
-          _results1.push(assert(_mapped.stringAt(0) !== collection.stringAt(0)));
+          _results1.push(assert(_mapped.stringAt(i) !== collection.stringAt(i)));
         }
         return _results1;
       });
@@ -178,42 +178,7 @@
         return assert(eachified.size() === collection.size());
       });
     });
-    describe("countBy", function() {
-      var counterFn;
-      counterFn = function(aLink) {
-        return aLink.domain() + " " + aLink.tld();
-      };
-      it("should accept a property string and use the matching property as the counting criteria", function() {
-        var counted, i, _j, _len, _results1;
-        counted = collection.countBy("domain");
-        _results1 = [];
-        for (_j = 0, _len = URL_INDICES.length; _j < _len; _j++) {
-          i = URL_INDICES[_j];
-          _results1.push(assert(_.has(counted, collection.at(i).domain())));
-        }
-        return _results1;
-      });
-      it("should accept a function and use it to create the counting criteria", function() {
-        var counted, i, _j, _len, _results1;
-        counted = collection.countBy(counterFn);
-        _results1 = [];
-        for (_j = 0, _len = URL_INDICES.length; _j < _len; _j++) {
-          i = URL_INDICES[_j];
-          _results1.push(assert(_.has(counted, counterFn(collection.at(i)))));
-        }
-        return _results1;
-      });
-      return it("should return a total count equal to the number of instances in the collection", function() {
-        var counted, funcSum, stringSum;
-        counted = collection.countBy("domain");
-        stringSum = _.chain(counted).values().reduce(add, 0).value();
-        assert(stringSum === collection.size());
-        counted = collection.countBy(counterFn);
-        funcSum = _.chain(counted).values().reduce(add, 0).value();
-        return assert(funcSum === collection.size());
-      });
-    });
-    describe("invoke", function() {
+    return describe("invoke", function() {
       it("should return the same number of results as there are elements in the original collection.", function() {
         var invoked;
         invoked = collection.invoke("domain");
@@ -257,53 +222,6 @@
           _results1.push(assert(invoked.at(i).toString() === plainResults[i].toString()));
         }
         return _results1;
-      });
-    });
-    return describe("groupBy", function() {
-      var groupingFn;
-      groupingFn = function(aLink) {
-        return aLink.domain() + " " + aLink.tld();
-      };
-      it("should accept a property string and use the matching property as the grouping criteria", function() {
-        var grouped, i, _j, _len, _results1;
-        grouped = collection.groupBy("domain");
-        _results1 = [];
-        for (_j = 0, _len = URL_INDICES.length; _j < _len; _j++) {
-          i = URL_INDICES[_j];
-          _results1.push(assert(_.has(grouped, collection.at(i).domain())));
-        }
-        return _results1;
-      });
-      it("should accept a function and use it to create the grouping criteria", function() {
-        var grouped, i, _j, _len, _results1;
-        grouped = collection.groupBy(groupingFn);
-        _results1 = [];
-        for (_j = 0, _len = URL_INDICES.length; _j < _len; _j++) {
-          i = URL_INDICES[_j];
-          _results1.push(assert(_.has(grouped, groupingFn(collection.at(i)))));
-        }
-        return _results1;
-      });
-      it("should have the same number of keys as the number of unique results for the grouping function over a plain array of the collection's elements.", function() {
-        var groupCount, grouped, list, uniqueCount;
-        list = collection.toArray();
-        uniqueCount = _.chain(list).map(groupingFn).uniq().value().length;
-        grouped = collection.groupBy(groupingFn);
-        groupCount = _.keys(grouped).length;
-        return assert(uniqueCount === groupCount);
-      });
-      return it("should have the same total number of URIs as the original collection", function() {
-        var funcCount, grouped, grouped2, stringCount;
-        grouped = collection.groupBy("domain");
-        stringCount = _.chain(grouped).values().map(function(oneList) {
-          return oneList.length;
-        }).reduce(add, 0).value();
-        assert(stringCount === collection.size());
-        grouped2 = collection.groupBy(groupingFn);
-        funcCount = _.chain(grouped2).values().map(function(oneList) {
-          return oneList.length;
-        }).reduce(add, 0).value();
-        return assert(funcCount === collection.size());
       });
     });
   });

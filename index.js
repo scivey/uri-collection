@@ -113,7 +113,14 @@
     };
 
     URICollection.prototype.at = function(index) {
-      return this._uris[index].clone();
+      if (index < 0) {
+        index = this.size() + index;
+      }
+      if (this._uris[index] != null) {
+        return this._uris[index].clone();
+      } else {
+        return null;
+      }
     };
 
     URICollection.prototype.stringAt = function(index) {
@@ -136,7 +143,7 @@
     return new URICollection(_uris);
   };
 
-  _collectionReturningMethods = ["filter", "reject", "sortBy", "shuffle", "initial"];
+  _collectionReturningMethods = ["filter", "reject", "shuffle", "initial"];
 
   _.each(_collectionReturningMethods, function(aMethod) {
     return URICollection.prototype[aMethod] = function() {
@@ -149,7 +156,7 @@
     };
   });
 
-  _nonCollectionReturningMethods = ["reduce", "reduceRight", "find", "some", "every", "contains", "max", "min", "size", "first", "last", "rest"];
+  _nonCollectionReturningMethods = ["reduce", "reduceRight", "some", "every", "find", "size"];
 
   _.each(_nonCollectionReturningMethods, function(aMethod) {
     return URICollection.prototype[aMethod] = function() {
@@ -161,6 +168,44 @@
     };
   });
 
+  URICollection.prototype.first = function(n) {
+    var _origUris;
+    if ((n != null) && n !== 1) {
+      _origUris = _.first(this._uris, n);
+      return new URICollection(cloneUris(_origUris));
+    } else {
+      return this.at(0).clone();
+    }
+  };
+
+  URICollection.prototype.last = function(n) {
+    var _origUris;
+    if ((n != null) && n !== 1) {
+      _origUris = _.last(this._uris, n);
+      return new URICollection(cloneUris(_origUris));
+    } else {
+      return this.at(this.size() - 1).clone();
+    }
+  };
+
+  URICollection.prototype.rest = function(n) {
+    var _origUris;
+    if (n == null) {
+      n = 1;
+    }
+    _origUris = _.rest(this._uris, n);
+    return new URICollection(cloneUris(_origUris));
+  };
+
+  URICollection.prototype.initial = function(n) {
+    var _origUris;
+    if (n == null) {
+      n = 1;
+    }
+    _origUris = _.initial(this._uris, n);
+    return new URICollection(cloneUris(_origUris));
+  };
+
   URICollection.prototype.contains = function(val) {
     var _stringUris;
     _stringUris = this._strungList();
@@ -168,6 +213,10 @@
       return _.contains(_stringUris, val);
     } else if (val instanceof URI) {
       return _.contains(_stringUris, val.toString());
+    } else if (_.isRegExp(val)) {
+      return _.some(_stringUris, function(aString) {
+        return val.test(aString);
+      });
     }
     throw new Error("Unrecognized value passed for URICollection.contains: " + val);
   };
@@ -255,6 +304,20 @@
       countFn = propOrFunc;
     }
     return _results = _.countBy(_uris, countFn);
+  };
+
+  URICollection.prototype.sortBy = function(propOrFunc) {
+    var sortFn, _results, _uris;
+    _uris = cloneUris(this._uris);
+    if (_.isString(propOrFunc)) {
+      sortFn = function(listElem) {
+        return _.result(listElem, propOrFunc);
+      };
+    } else {
+      sortFn = propOrFunc;
+    }
+    _results = _.sortBy(_uris, sortFn);
+    return new URICollection(_results);
   };
 
   URICollection.prototype.pluck = function(attrib) {

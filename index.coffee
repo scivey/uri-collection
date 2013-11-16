@@ -84,7 +84,13 @@ class URICollection
 		_uris
 
 	at: (index) ->
-		@_uris[index].clone()
+		if index < 0
+			index = @size() + index
+
+		if @_uris[index]?
+			return @_uris[index].clone()
+		else
+			return null
 
 	stringAt: (index) ->
 		@_uris[index].toString()
@@ -106,7 +112,6 @@ URICollection.prototype.clone = ->
 _collectionReturningMethods = [
 	"filter"
 	"reject"
-	"sortBy"
 	"shuffle"
 	"initial"
 ]
@@ -118,19 +123,16 @@ _.each _collectionReturningMethods, (aMethod) ->
 		_result = _[aMethod].apply(null, params)
 		return new URICollection(_result)
 
+
+
+
 _nonCollectionReturningMethods = [
 	"reduce"
 	"reduceRight"
-	"find"
 	"some"
 	"every"
-	"contains"
-	"max"
-	"min"
+	"find"
 	"size"
-	"first"
-	"last"
-	"rest"
 ]
 
 _.each _nonCollectionReturningMethods, (aMethod) ->
@@ -140,6 +142,50 @@ _.each _nonCollectionReturningMethods, (aMethod) ->
 		return _[aMethod].apply(null, params)
 
 
+# returns the first `n` list elements.
+# if `n` is null or 1, a URI instance is returned.
+# 
+# otherwise, a URICollection instance is returned.
+URICollection.prototype.first = (n) ->
+	if n? and n isnt 1
+		_origUris = _.first(@_uris, n)
+		return new URICollection( cloneUris(_origUris) )
+	else
+		return @at(0).clone()
+
+
+# Returns the last `n` list elements.
+# If `n` is null or 1, a URI instance is returned.
+# 
+# Otherwise, a URICollection instance is returned.
+URICollection.prototype.last = (n) ->
+	if n? and n isnt 1
+		_origUris = _.last(@_uris, n)
+		return new URICollection( cloneUris(_origUris) )
+	else
+		return @at(@size() - 1).clone()
+
+
+# Returns the elements from index `n` to the end.
+# Returns a URICollection instance, even if only one element is returned.
+URICollection.prototype.rest = (n) ->
+	n ?= 1
+	_origUris = _.rest(@_uris, n)
+	return new URICollection( cloneUris(_origUris) )
+
+# Returns the elements from index 0 to index `n`.
+# Returns a URICollection instance, even if only one element is returned.
+URICollection.prototype.initial = (n) ->
+	n ?= 1
+	_origUris = _.initial(@_uris, n)
+	return new URICollection( cloneUris(_origUris) )
+
+
+# takes either: 
+# 	- a query object like findWhere,
+# 	- a single string, indicating a straight text HREF,
+# 	- a key-val pair indicating a simple query-object-like thing.
+
 URICollection.prototype.contains = (val) ->
 	_stringUris = @_strungList()
 
@@ -147,8 +193,11 @@ URICollection.prototype.contains = (val) ->
 		return _.contains(_stringUris, val)
 	else if (val instanceof URI)
 		return _.contains(_stringUris, val.toString())
+	else if _.isRegExp(val)
+		return _.some(_stringUris, (aString) -> val.test(aString) )
 	
 	throw new Error("Unrecognized value passed for URICollection.contains: #{val}")
+
 
 
 URICollection.prototype.find = (iterFn) ->
@@ -265,6 +314,18 @@ URICollection.prototype.countBy = (propOrFunc, asStrings) ->
 
 
 
+URICollection.prototype.sortBy = (propOrFunc) ->
+	_uris = cloneUris(@_uris)
+	if _.isString(propOrFunc)
+		sortFn = (listElem) ->
+			_.result(listElem, propOrFunc)
+	else
+		sortFn = propOrFunc
+	#console.log _uris.length
+	_results = _.sortBy(_uris, sortFn)
+	return new URICollection(_results)
+
+
 URICollection.prototype.pluck = (attrib) ->
 	# don't need to clone internal URI list,
 	# since we aren't returning URI instances themselves.
@@ -306,10 +367,7 @@ URICollection.prototype.sample = (n) ->
 
 
 #URICollection.prototype.contains = (attrib, val) ->
-	# takes either: 
-	# 	- a query object like findWhere,
-	# 	- a single string, indicating a straight text HREF,
-	# 	- a key-val pair indicating a simple query-object-like thing.
+
 
 
 ###
