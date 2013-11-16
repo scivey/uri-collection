@@ -4,7 +4,8 @@
   "description": "uri-collection\r ==============",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./spec",
+    "prepublish": "coffee -c ./"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "mocha": "~1.14.0",
-    "should": "~2.1.0",
     "coffee": "0.0.1",
     "better-assert": "~1.0.0"
   }
