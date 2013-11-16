@@ -110,7 +110,7 @@ describe "URICollection", ->
 
 			stringCount = _.chain(grouped)
 						.values()
-						.map( (oneList) -> oneList.length)
+						.map( (oneList) -> oneList.size())
 						.reduce( add, 0 )
 						.value()
 
@@ -119,7 +119,7 @@ describe "URICollection", ->
 			grouped2 = collection.groupBy(groupingFn)
 			funcCount = _.chain(grouped2)
 						.values()
-						.map( (oneList) -> oneList.length)
+						.map( (oneList) -> oneList.size())
 						.reduce( add, 0 )
 						.value()
 

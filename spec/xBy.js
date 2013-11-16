@@ -103,12 +103,12 @@
         var funcCount, grouped, grouped2, stringCount;
         grouped = collection.groupBy("domain");
         stringCount = _.chain(grouped).values().map(function(oneList) {
-          return oneList.length;
+          return oneList.size();
         }).reduce(add, 0).value();
         assert(stringCount === collection.size());
         grouped2 = collection.groupBy(groupingFn);
         funcCount = _.chain(grouped2).values().map(function(oneList) {
-          return oneList.length;
+          return oneList.size();
         }).reduce(add, 0).value();
         return assert(funcCount === collection.size());
       });

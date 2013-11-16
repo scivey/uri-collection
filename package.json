@@ -31,6 +31,8 @@
   "devDependencies": {
     "mocha": "~1.14.0",
     "coffee": "0.0.1",
-    "better-assert": "~1.0.0"
+    "better-assert": "~1.0.0",
+    "dox": "~0.4.4",
+    "handlebars": "~1.1.2"
   }
 }

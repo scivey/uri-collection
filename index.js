@@ -71,6 +71,14 @@
       return this._strungOut;
     };
 
+    /**
+    	 * Add URIs to the collection.
+    	 *
+    	 * @param {String,Object,Array} linkList A single link, multiple links, or an array of links.  A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance.
+    	 * @return {URICollection} A reference to the same URICollection (i.e. chained).
+    */
+
+
     URICollection.prototype.add = function() {
       var linkList, _uris;
       linkList = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -85,12 +93,26 @@
       return this;
     };
 
+    /**
+    	 * Alias for `#add()`
+    	 * @param {String,Object,Array} linkList A single link, multiple links, or an array of links.  A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance.
+    	 * @return {URICollection} A reference to the same URICollection (i.e. chained).
+    */
+
+
     URICollection.prototype.push = function() {
       var linkList;
       linkList = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       this.add(_.flatten(linkList));
       return this;
     };
+
+    /**
+    	 * Returns an array of URI strings created by calling `#toString()` on each URIjs instance in the collection.
+    	 * @return {Array} An array of URI strings.
+    	 * @api public
+    */
+
 
     URICollection.prototype.toString = function() {
       var _strings;
@@ -100,17 +122,28 @@
       return _strings;
     };
 
-    URICollection.prototype.strung = function() {
-      var _strings;
-      _strings = this.toString();
-      return _strings.join("\n");
-    };
+    /**
+    	 * Returns a plain array of cloned URIjs instances matching those in the collection. 
+    	 *
+    	 * @return {Array} An array of URIjs instances.
+    	 * @api public
+    */
+
 
     URICollection.prototype.toArray = function() {
       var _uris;
       _uris = cloneUris(this._uris);
       return _uris;
     };
+
+    /**
+    	 * Returns a clone of the URIjs instance at index `i`. 
+    	 *
+    	 * @param {Number} i The index of the instance to clone.
+    	 * @return {URI} A clone of the corresponding URIjs instance from the collection.
+    	 * @api public
+    */
+
 
     URICollection.prototype.at = function(index) {
       if (index < 0) {
@@ -123,6 +156,15 @@
       }
     };
 
+    /**
+    	 * Returns the `#toString()` result of the URIjs instance at index `i`. 
+    	 *
+    	 * @param {Number} i The index of the instance to call `#toString()` on.
+    	 * @return {String} The string returned from calling `#toString()` on the instance.
+    	 * @api public
+    */
+
+
     URICollection.prototype.stringAt = function(index) {
       return this._uris[index].toString();
     };
@@ -131,11 +173,13 @@
 
   })();
 
-  URICollection.prototype.toArray = function() {
-    var _uris;
-    _uris = cloneUris(this._uris);
-    return _uris;
-  };
+  /**
+   * Returns a new URICollection instance containing clones of the same URIs.
+   *
+   * @return {URICollection} A new URICollection.
+   * @api public
+  */
+
 
   URICollection.prototype.clone = function() {
     var _uris;
@@ -143,7 +187,7 @@
     return new URICollection(_uris);
   };
 
-  _collectionReturningMethods = ["filter", "reject", "shuffle", "initial"];
+  _collectionReturningMethods = ["filter", "reject", "shuffle"];
 
   _.each(_collectionReturningMethods, function(aMethod) {
     return URICollection.prototype[aMethod] = function() {
@@ -156,7 +200,7 @@
     };
   });
 
-  _nonCollectionReturningMethods = ["reduce", "reduceRight", "some", "every", "find", "size"];
+  _nonCollectionReturningMethods = ["reduce", "reduceRight", "some", "every", "size"];
 
   _.each(_nonCollectionReturningMethods, function(aMethod) {
     return URICollection.prototype[aMethod] = function() {
@@ -168,6 +212,14 @@
     };
   });
 
+  /**
+   * Returns the first `n` list elements.
+   * 
+   * @param {Number} n The number of elements to return, defaulting to 1.
+   * @return {URICollection,URI} If `n > 1`, returns a `URICollection`.  If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance.
+  */
+
+
   URICollection.prototype.first = function(n) {
     var _origUris;
     if ((n != null) && n !== 1) {
@@ -177,6 +229,14 @@
       return this.at(0).clone();
     }
   };
+
+  /**
+   * Returns the last `n` list elements.
+   * 
+   * @param {Number} n The number of elements to return, defaulting to 1.
+   * @return {URICollection,URI} If `n > 1`, returns a `URICollection`.  If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance.
+  */
+
 
   URICollection.prototype.last = function(n) {
     var _origUris;
@@ -188,6 +248,14 @@
     }
   };
 
+  /**
+   * Returns a new URICollection with copies of the elements from index `n` to the end.
+   * 
+   * @param {Number} n The index to start copying from, defaulting to 1.
+   * @return {URICollection} A URICollection instance, even if only one element is returned.  This is in line with Underscore's behavior.
+  */
+
+
   URICollection.prototype.rest = function(n) {
     var _origUris;
     if (n == null) {
@@ -197,6 +265,14 @@
     return new URICollection(cloneUris(_origUris));
   };
 
+  /**
+   * Returns a new URICollection with copies of the elements from from index 0 up to index `#length() - n`.
+   * 
+   * @param {Number} n The number of ending elements to omit, defaulting to 1.
+   * @return {URICollection} A URICollection instance, even if only one element is returned.  This is in line with Underscore's behavior.
+  */
+
+
   URICollection.prototype.initial = function(n) {
     var _origUris;
     if (n == null) {
@@ -205,6 +281,20 @@
     _origUris = _.initial(this._uris, n);
     return new URICollection(cloneUris(_origUris));
   };
+
+  /**
+   * Predicate function indicating whether the collection contains the passed URI, given as a string, `URIjs` instance, or `RegExp`.
+   * 
+   * The comparison is against the array of `#toString()` results of the collection's elements.
+   * 
+   * If a URIjs instance is passed in as `val`, its own `#toString()` is used for comparison.
+   * 
+   * If a RegExp instance is passed in as `val`, the result is determined by calling its `#.test()` method with each collection element's `#toString()`, short-circuiting when any returns true.
+   * 
+   * @param {String,Object,RegExp} val The value to search for.
+   * @return {Boolean} `true` if the collection contains the value; `false` otherwise.
+  */
+
 
   URICollection.prototype.contains = function(val) {
     var _stringUris;
@@ -221,15 +311,35 @@
     throw new Error("Unrecognized value passed for URICollection.contains: " + val);
   };
 
-  URICollection.prototype.find = function(iterFn) {
+  /**
+   * Accepts a truth-testing function and returns the first element to cause a `true` return value.  Proxies to Underscore's `_.find`, but returns a cloned URIjs instance to ensure immutability of collection elements.
+   * 
+   * @param {Function} testFn The truth-testing function which will iterate over collection elements, short-circuiting at the first to return true.
+   * @return {URI,null} If a result is found, a clone of the matching `URIjs` instance.  Otherwise, returns `null`.
+  */
+
+
+  URICollection.prototype.find = function(testFn) {
     var result, _uris;
     _uris = cloneUris(this._uris);
-    result = _.find(_uris, iterFn);
+    result = _.find(_uris, testFn);
     if (result != null) {
       return result;
     }
     return null;
   };
+
+  /**
+   * Accepts an iterator function and applies it to a cloned list of collection elements, returning a new `URICollection` instance with the results.
+   * 
+   * This is distinct from `#map()` because this implementation of `#each()` _always_ returns a new URICollection, even if `iterFn` doesn't have any return value.  `#map()` only returns a new URICollection if it results in an array of `URIjs` instances. 
+   *
+   * No changes are made to the original collection elements.
+   * 
+   * @param {Function} iterFn The iterator function which will be called with each collection element in sequence.
+   * @return {URICollection} A URICollection instance created by applying `iterFn` to each of a cloned array of internal `URIjs` instances.
+  */
+
 
   URICollection.prototype.each = function(iterFn) {
     var _results, _uris;
@@ -237,6 +347,20 @@
     _results = _.map(_uris, iterFn);
     return new URICollection(_results);
   };
+
+  /**
+   * Accepts an iterator function and applies it to a cloned list of collection elements.  Depending on the iterator's output, this method will either return a new `URICollection` instance or a plain array.
+   * 
+   * If the `mapFn` returns an array of `URIjs` instances, they will be wrapped in a new `URICollection` and returned.  If it returns another type of result, the plain array will be returned to the client.
+   * 
+   * A given map operation's outputs are assumed to be homogeneous with respect to type, so the type of the internal array resulting from proxying to `_.map(list, mapFn)` is determined by testing only the first element. 
+   * 
+   * No changes are made to the original collection elements.
+   * 
+   * @param {Function} mapFn The iterator function which will be called with each collection element in sequence.
+   * @return {Array,URICollection} Either a new `URICollection` (if an array of `URIjs` instances are returned) or a plain array of results (e.g. if strings of element hostnames are returned.)
+  */
+
 
   URICollection.prototype.map = function() {
     var params, _results, _uris;
@@ -250,6 +374,21 @@
       return _results;
     }
   };
+
+  /**
+   * Accepts a method name and optional additional arguments to pass to that method, and invokes the given method on each URIjs instance in the collection.
+   * 
+   * Because `URIjs` methods without argument return attribute information - e.g. `uri.domain()` returns the string-format URI domain - a plain array of results is returned if no additional arguments are supplied.
+   * 
+   * Calling `URIjs` methods with arguments generally causes mutation and returns the object - e.g. `uri.domain("justcats.net")` returns the same object with its domain changed to `justcats.net`.  For this reason, passing additional arguments causes the result to be wrapped in a new URICollection instance.
+   *
+   * No changes are made to the original collection elements.
+   
+   * @param {String} methodName A string representing the method name to invoke on each collection element.
+   * @param {Array} args (Optional) Additional arguments to pass when invoking `methodName`.
+   * @return {Array,URICollection} If no additional arguments are passed, a plain array of results.  Otherwise, a new URICollection wrapping clones of the URIjs elements from the original collection.
+  */
+
 
   URICollection.prototype.invoke = function() {
     var params, _method, _results, _uris;
@@ -267,6 +406,15 @@
       return new URICollection(_results);
     }
   };
+
+  /**
+   * Accepts a property name or a function and uses it to create a plain Javascript object with the collection's elements keyed by the results of the grouping function or property.
+   *
+   * @param {String,Function} groupingMethod A string representing a method to invoke on each element, grouping by the output, or a function which is passed each element in sequence and calculates the correct group key.
+   * @param {Boolean} asStrings (Optional) If `true` is passed, the value for each group key on the returned object will be an array of URI strings instead of URICollections.
+   * @return {Object} An object with keys determined by the grouping criteria, with URICollections as the values.  If `asStrings=true`, the values are converted to arrays of URI strings.
+  */
+
 
   URICollection.prototype.groupBy = function(propOrFunc, asStrings) {
     var groupFn, _finalResults, _results, _uris;
@@ -288,11 +436,23 @@
           })
         ];
       }).object().value();
+    } else {
+      _finalResults = _.chain(_results).pairs().map(function(aPair) {
+        return [aPair[0], new URICollection(aPair[1])];
+      }).object().value();
     }
     return _finalResults;
   };
 
-  URICollection.prototype.countBy = function(propOrFunc, asStrings) {
+  /**
+   * Accepts a property name or a function and uses it to create a plain Javascript object keyed by the outputs of the counting function, with values equal to the number of times a given output was returned.
+   *
+   * @param {String,Function} countingMethod A string representing a method to invoke on each element, counting by the output, or a function which is passed each element in sequence and calculates the correct result to count by.
+   * @return {Object} An object with keys determined by the counting criteria, with `Number` values corresponding to the number of times a given key was returned.
+  */
+
+
+  URICollection.prototype.countBy = function(propOrFunc) {
     var countFn, _results, _uris;
     if (_.isString(propOrFunc)) {
       _uris = this._uris;
@@ -305,6 +465,13 @@
     }
     return _results = _.countBy(_uris, countFn);
   };
+
+  /**
+   * Accepts a method name or a function and uses it to create a new URICollection with elements ordered by the function output or method invocation output for each object.
+   * @param {String,Function} sortingMethod A string representing a method to invoke on each element, returning a value used to sort by, or a function which is passed each element in sequence and calculates the correct value to sort by.
+   * @return {URICollection} A new collection with elements sorted according to the returned sorting criteria.
+  */
+
 
   URICollection.prototype.sortBy = function(propOrFunc) {
     var sortFn, _results, _uris;
@@ -320,6 +487,14 @@
     return new URICollection(_results);
   };
 
+  /**
+   * Accepts a property name and returns a plain array with the value of that property for each element in the collection.
+   * Similar to Underscore's own `_.pluck` but internally uses _.resolve in a map operation, because URIjs properties are all returned by methods. 
+   * @param {String} propertyName A string representing the property to pluck from each collection element.
+   * @return {Array} A plain array of results.
+  */
+
+
   URICollection.prototype.pluck = function(attrib) {
     var _results, _uris;
     _uris = this._uris;
@@ -328,6 +503,13 @@
     });
     return _results;
   };
+
+  /**
+   * Accepts a query object and returns all collection elements with properties matching the key-value pairs in that object.
+   * @param {Object} queryObject A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`
+   * @return {URICollection} A new URICollection instance.
+  */
+
 
   URICollection.prototype.where = function(whereObject) {
     var _pred, _results;
@@ -338,6 +520,13 @@
     return new URICollection(_results);
   };
 
+  /**
+   * Accepts a query object and returns the first collection element with properties matching the key-value pairs in that object.  Like `#where()`, but only returns the first result and does not wrap it in a collection - it returns a `URIjs` instance.
+   * @param {Object} queryObject A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`
+   * @return {URI} A clone of the first `URIjs` element in the collection matching the query.
+  */
+
+
   URICollection.prototype.findWhere = function(whereObject) {
     var _pred, _result;
     _pred = compileWhereObjectIntoPredicate(whereObject);
@@ -347,6 +536,13 @@
     }
     return _result.clone();
   };
+
+  /**
+   * Returns `n` randomly selected elements from the collection.  If `n==1` or `typeof n === "null"`, returns a `URIjs` instance.  If `n > 1`, returns a new `URICollection` instance.
+   * @param {Number} n The number of elements to return in the sample, defaulting to 1.
+   * @return {URICollection,URI} A URICollection instance if `n > 1`, or a `URIjs` instance otherwise.
+  */
+
 
   URICollection.prototype.sample = function(n) {
     var params, sample, _results, _uris;
@@ -360,55 +556,6 @@
       return sample.clone();
     }
   };
-
-  /*
-  links = [
-  	"http://www.cnn.com/somepage#para?q=aSearch"
-  	"http://www.google.com"
-  	"http://www.google.com/mail"
-  	"http://www.reddit.com/r/stuff"
-  ]
-  
-  uris = new URICollection()
-  uris.add(links)
-  
-  notCnn = uris.filter (oneUri) ->
-  	#console.log oneUri.domain()
-  	oneUri.domain() isnt "cnn.com"
-  
-  pandas = uris.map (aUri) -> 
-  	aUri.domain("pandakingdom.com")
-  */
-
-
-  /*
-  console.log pandas.strung()
-  
-  console.log uris.sample(2).pluck("domain")
-  
-  console.log uris.map( (uri) -> uri.domain("microsoft.com").protocol("ftp") ).toString()
-  console.log uris.toString()
-  
-  console.log uris.where( {domain: 'reddit.com'} ).toString()
-  
-  console.log uris.groupBy("domain", true)
-  
-  console.log uris.findWhere( {domain: 'google.com'}).toString()
-  
-  console.log uris.countBy("domain")
-  
-  console.log uris.size()
-  */
-
-
-  /*
-  	filter: (pred) ->
-  		_match = []
-  		_.each @_uris, (oneUri) ->
-  			if pred(oneUri) then _match.push(oneUri)
-  		return new URICollection(_match)
-  */
-
 
   module.exports = {
     URICollection: URICollection,

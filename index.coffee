@@ -4,6 +4,8 @@ _ = require "underscore"
 
 log = (msg) -> console.log msg
 
+
+
 compileWhereObjectIntoPredicate = (whereObj) ->
 	_tests = _.pairs whereObj
 	_count = _tests.length - 1
@@ -14,8 +16,6 @@ compileWhereObjectIntoPredicate = (whereObj) ->
 			unless elemVal is _tests[i][1]
 				return false
 		return true
-
-
 
 
 
@@ -31,6 +31,7 @@ cloneUris = (uriList) ->
 
 
 
+# Tests a given string or object reference and returns true if it's a `URIjs` instance.
 isURI = (aUri) ->
 	if _.isString(aUri)
 		return false
@@ -49,11 +50,20 @@ class URICollection
 			#console.log "si!"
 			@add(initialLinks)
 
+
 	_strungList: ->
 		if @_strungOut.length isnt @_uris.length
 			@_strungOut = _.map @_uris, (oneUri) -> 
 				oneUri.toString()
 		@_strungOut
+
+
+	###*
+	 * Add URIs to the collection.
+	 *
+	 * @param {String,Object,Array} linkList A single link, multiple links, or an array of links.  A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance.
+	 * @return {URICollection} A reference to the same URICollection (i.e. chained).
+	###		
 
 	add: (linkList...) ->
 		linkList = _.flatten linkList
@@ -66,22 +76,48 @@ class URICollection
 			_uris.push aLink
 		return this
 
+	###*
+	 * Alias for `#add()`
+	 * @param {String,Object,Array} linkList A single link, multiple links, or an array of links.  A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance.
+	 * @return {URICollection} A reference to the same URICollection (i.e. chained).
+	###		
 	push: (linkList...) ->
 		@add _.flatten(linkList)
 		return this
+
+
+	###*
+	 * Returns an array of URI strings created by calling `#toString()` on each URIjs instance in the collection.
+	 * @return {Array} An array of URI strings.
+	 * @api public
+	###		
 
 	toString: ->
 		_strings = _.map @_uris, (oneLink) -> oneLink.toString()
 		_strings
 
 
-	strung: ->
-		_strings = @toString()
-		return _strings.join("\n")
+
+
+	###*
+	 * Returns a plain array of cloned URIjs instances matching those in the collection. 
+	 *
+	 * @return {Array} An array of URIjs instances.
+	 * @api public
+	###		
 
 	toArray: ->
 		_uris = cloneUris(@_uris)
 		_uris
+
+
+	###*
+	 * Returns a clone of the URIjs instance at index `i`. 
+	 *
+	 * @param {Number} i The index of the instance to clone.
+	 * @return {URI} A clone of the corresponding URIjs instance from the collection.
+	 * @api public
+	###		
 
 	at: (index) ->
 		if index < 0
@@ -92,28 +128,37 @@ class URICollection
 		else
 			return null
 
+
+	###*
+	 * Returns the `#toString()` result of the URIjs instance at index `i`. 
+	 *
+	 * @param {Number} i The index of the instance to call `#toString()` on.
+	 * @return {String} The string returned from calling `#toString()` on the instance.
+	 * @api public
+	###	
 	stringAt: (index) ->
 		@_uris[index].toString()
 
-URICollection.prototype.toArray = ->
-	# clone internal list of URI objects,
-	# and return the raw array
-	_uris = cloneUris(@_uris)
-	_uris
 
-
-
-
+###*
+ * Returns a new URICollection instance containing clones of the same URIs.
+ *
+ * @return {URICollection} A new URICollection.
+ * @api public
+###	
 
 URICollection.prototype.clone = ->
 	_uris = cloneUris(@_uris)
 	return new URICollection(_uris)
 
+
+
+
+
 _collectionReturningMethods = [
 	"filter"
 	"reject"
 	"shuffle"
-	"initial"
 ]
 
 _.each _collectionReturningMethods, (aMethod) ->
@@ -131,7 +176,6 @@ _nonCollectionReturningMethods = [
 	"reduceRight"
 	"some"
 	"every"
-	"find"
 	"size"
 ]
 
@@ -142,10 +186,14 @@ _.each _nonCollectionReturningMethods, (aMethod) ->
 		return _[aMethod].apply(null, params)
 
 
-# returns the first `n` list elements.
-# if `n` is null or 1, a URI instance is returned.
-# 
-# otherwise, a URICollection instance is returned.
+
+###*
+ * Returns the first `n` list elements.
+ * 
+ * @param {Number} n The number of elements to return, defaulting to 1.
+ * @return {URICollection,URI} If `n > 1`, returns a `URICollection`.  If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance.
+###	
+
 URICollection.prototype.first = (n) ->
 	if n? and n isnt 1
 		_origUris = _.first(@_uris, n)
@@ -154,10 +202,12 @@ URICollection.prototype.first = (n) ->
 		return @at(0).clone()
 
 
-# Returns the last `n` list elements.
-# If `n` is null or 1, a URI instance is returned.
-# 
-# Otherwise, a URICollection instance is returned.
+###*
+ * Returns the last `n` list elements.
+ * 
+ * @param {Number} n The number of elements to return, defaulting to 1.
+ * @return {URICollection,URI} If `n > 1`, returns a `URICollection`.  If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance.
+###	
 URICollection.prototype.last = (n) ->
 	if n? and n isnt 1
 		_origUris = _.last(@_uris, n)
@@ -166,26 +216,42 @@ URICollection.prototype.last = (n) ->
 		return @at(@size() - 1).clone()
 
 
-# Returns the elements from index `n` to the end.
-# Returns a URICollection instance, even if only one element is returned.
+###*
+ * Returns a new URICollection with copies of the elements from index `n` to the end.
+ * 
+ * @param {Number} n The index to start copying from, defaulting to 1.
+ * @return {URICollection} A URICollection instance, even if only one element is returned.  This is in line with Underscore's behavior.
+###
 URICollection.prototype.rest = (n) ->
 	n ?= 1
 	_origUris = _.rest(@_uris, n)
 	return new URICollection( cloneUris(_origUris) )
 
-# Returns the elements from index 0 to index `n`.
-# Returns a URICollection instance, even if only one element is returned.
+###*
+ * Returns a new URICollection with copies of the elements from from index 0 up to index `#length() - n`.
+ * 
+ * @param {Number} n The number of ending elements to omit, defaulting to 1.
+ * @return {URICollection} A URICollection instance, even if only one element is returned.  This is in line with Underscore's behavior.
+###
 URICollection.prototype.initial = (n) ->
 	n ?= 1
 	_origUris = _.initial(@_uris, n)
 	return new URICollection( cloneUris(_origUris) )
 
 
-# takes either: 
-# 	- a query object like findWhere,
-# 	- a single string, indicating a straight text HREF,
-# 	- a key-val pair indicating a simple query-object-like thing.
 
+###*
+ * Predicate function indicating whether the collection contains the passed URI, given as a string, `URIjs` instance, or `RegExp`.
+ * 
+ * The comparison is against the array of `#toString()` results of the collection's elements.
+ * 
+ * If a URIjs instance is passed in as `val`, its own `#toString()` is used for comparison.
+ * 
+ * If a RegExp instance is passed in as `val`, the result is determined by calling its `#.test()` method with each collection element's `#toString()`, short-circuiting when any returns true.
+ * 
+ * @param {String,Object,RegExp} val The value to search for.
+ * @return {Boolean} `true` if the collection contains the value; `false` otherwise.
+###
 URICollection.prototype.contains = (val) ->
 	_stringUris = @_strungList()
 
@@ -199,36 +265,54 @@ URICollection.prototype.contains = (val) ->
 	throw new Error("Unrecognized value passed for URICollection.contains: #{val}")
 
 
-
-URICollection.prototype.find = (iterFn) ->
+###*
+ * Accepts a truth-testing function and returns the first element to cause a `true` return value.  Proxies to Underscore's `_.find`, but returns a cloned URIjs instance to ensure immutability of collection elements.
+ * 
+ * @param {Function} testFn The truth-testing function which will iterate over collection elements, short-circuiting at the first to return true.
+ * @return {URI,null} If a result is found, a clone of the matching `URIjs` instance.  Otherwise, returns `null`.
+###
+URICollection.prototype.find = (testFn) ->
 	_uris = cloneUris(@_uris)
 
-	result = _.find _uris, iterFn
+	result = _.find _uris, testFn
 
 	if result?
 		return result
 
 	return null
 
+
+###*
+ * Accepts an iterator function and applies it to a cloned list of collection elements, returning a new `URICollection` instance with the results.
+ * 
+ * This is distinct from `#map()` because this implementation of `#each()` _always_ returns a new URICollection, even if `iterFn` doesn't have any return value.  `#map()` only returns a new URICollection if it results in an array of `URIjs` instances. 
+ *
+ * No changes are made to the original collection elements.
+ * 
+ * @param {Function} iterFn The iterator function which will be called with each collection element in sequence.
+ * @return {URICollection} A URICollection instance created by applying `iterFn` to each of a cloned array of internal `URIjs` instances. 
+###
+
 URICollection.prototype.each = (iterFn) ->
-	# distinct from `map` because iterator doesn't necessarily
-	# need to return a list of URI instances - e.g. could just
-	# call uri.domain("google.com") and not return anything.
-	# 
-	# that would cause the map implementation in use to return
-	# an (empty) vanilla array, not a URICollection.
-	# 
-	# This seems more in line with the likely expectation of
-	# getting the same type of list back.
 	_uris = cloneUris(@_uris)
 	_results = _.map _uris, iterFn
 	return new URICollection(_results)
 
 
+
+###*
+ * Accepts an iterator function and applies it to a cloned list of collection elements.  Depending on the iterator's output, this method will either return a new `URICollection` instance or a plain array.
+ * 
+ * If the `mapFn` returns an array of `URIjs` instances, they will be wrapped in a new `URICollection` and returned.  If it returns another type of result, the plain array will be returned to the client.
+ * 
+ * A given map operation's outputs are assumed to be homogeneous with respect to type, so the type of the internal array resulting from proxying to `_.map(list, mapFn)` is determined by testing only the first element. 
+ * 
+ * No changes are made to the original collection elements.
+ * 
+ * @param {Function} mapFn The iterator function which will be called with each collection element in sequence.
+ * @return {Array,URICollection} Either a new `URICollection` (if an array of `URIjs` instances are returned) or a plain array of results (e.g. if strings of element hostnames are returned.) 
+###
 URICollection.prototype.map = (params...) ->
-	# returns a new URICollection _if_ the results are URI
-	# instances, and a plain array otherwise.
-	# In
 
 	_uris = cloneUris(@_uris)
 	params.unshift _uris
@@ -246,7 +330,19 @@ URICollection.prototype.map = (params...) ->
 		return _results
 
 
-
+###*
+ * Accepts a method name and optional additional arguments to pass to that method, and invokes the given method on each URIjs instance in the collection.
+ * 
+ * Because `URIjs` methods without argument return attribute information - e.g. `uri.domain()` returns the string-format URI domain - a plain array of results is returned if no additional arguments are supplied.
+ * 
+ * Calling `URIjs` methods with arguments generally causes mutation and returns the object - e.g. `uri.domain("justcats.net")` returns the same object with its domain changed to `justcats.net`.  For this reason, passing additional arguments causes the result to be wrapped in a new URICollection instance.
+ *
+ * No changes are made to the original collection elements.
+ 
+ * @param {String} methodName A string representing the method name to invoke on each collection element.
+ * @param {Array} args (Optional) Additional arguments to pass when invoking `methodName`.
+ * @return {Array,URICollection} If no additional arguments are passed, a plain array of results.  Otherwise, a new URICollection wrapping clones of the URIjs elements from the original collection. 
+###
 URICollection.prototype.invoke = (params...) ->
 	if params.length is 1
 		# no arguments passed in = no mutation on URI objects,
@@ -261,23 +357,15 @@ URICollection.prototype.invoke = (params...) ->
 		return new URICollection(_results)
 
 
-
-
+###*
+ * Accepts a property name or a function and uses it to create a plain Javascript object with the collection's elements keyed by the results of the grouping function or property.
+ *
+ * @param {String,Function} groupingMethod A string representing a method to invoke on each element, grouping by the output, or a function which is passed each element in sequence and calculates the correct group key.
+ * @param {Boolean} asStrings (Optional) If `true` is passed, the value for each group key on the returned object will be an array of URI strings instead of URICollections.
+ * @return {Object} An object with keys determined by the grouping criteria, with URICollections as the values.  If `asStrings=true`, the values are converted to arrays of URI strings. 
+###
 URICollection.prototype.groupBy = (propOrFunc, asStrings) ->
-	# `propOrFunc` is either a grouping function or a property to group by.
-	# this requires special handling because all URI.[x] properties are really
-	# functions.
-	# 
-	# We can't return a new URICollection instance here because the structure resulting
-	# from `_.groupBy` isn't a normal list - it's a collection of sublists keyed by
-	# group names.
-	# 
-	# By default, each group's value is an array of URI instances.
-	# 
-	# passing `true` for `asStrings` indicates that client wants group values in the
-	# form of arrays of strings instead, i.e. the arrays resulting from calling `.toString()` on
-	# each URI instance of each group list.
-	# 
+
 	_uris = cloneUris(@_uris)
 	if _.isString(propOrFunc)
 		groupFn = (listElem) ->
@@ -294,10 +382,24 @@ URICollection.prototype.groupBy = (propOrFunc, asStrings) ->
 							.map( (aPair) -> [aPair[0], _.map(aPair[1], (el) -> el.toString())] )
 							.object()
 							.value()
+	else
+		_finalResults = _.chain(_results)
+							.pairs()
+							.map( (aPair) -> [aPair[0], new URICollection(aPair[1])] )
+							.object()
+							.value()
 
 	_finalResults
 
-URICollection.prototype.countBy = (propOrFunc, asStrings) ->
+
+###*
+ * Accepts a property name or a function and uses it to create a plain Javascript object keyed by the outputs of the counting function, with values equal to the number of times a given output was returned.
+ *
+ * @param {String,Function} countingMethod A string representing a method to invoke on each element, counting by the output, or a function which is passed each element in sequence and calculates the correct result to count by.
+ * @return {Object} An object with keys determined by the counting criteria, with `Number` values corresponding to the number of times a given key was returned.
+###
+
+URICollection.prototype.countBy = (propOrFunc) ->
 	if _.isString(propOrFunc)
 		# if it's a string then we control the iterator fn,
 		# so we know no mutation will happen.
@@ -314,6 +416,12 @@ URICollection.prototype.countBy = (propOrFunc, asStrings) ->
 
 
 
+###*
+ * Accepts a method name or a function and uses it to create a new URICollection with elements ordered by the function output or method invocation output for each object.
+ * @param {String,Function} sortingMethod A string representing a method to invoke on each element, returning a value used to sort by, or a function which is passed each element in sequence and calculates the correct value to sort by.
+ * @return {URICollection} A new collection with elements sorted according to the returned sorting criteria.
+###
+
 URICollection.prototype.sortBy = (propOrFunc) ->
 	_uris = cloneUris(@_uris)
 	if _.isString(propOrFunc)
@@ -326,6 +434,12 @@ URICollection.prototype.sortBy = (propOrFunc) ->
 	return new URICollection(_results)
 
 
+###*
+ * Accepts a property name and returns a plain array with the value of that property for each element in the collection.
+ * Similar to Underscore's own `_.pluck` but internally uses _.resolve in a map operation, because URIjs properties are all returned by methods. 
+ * @param {String} propertyName A string representing the property to pluck from each collection element.
+ * @return {Array} A plain array of results.
+###
 URICollection.prototype.pluck = (attrib) ->
 	# don't need to clone internal URI list,
 	# since we aren't returning URI instances themselves.
@@ -334,7 +448,11 @@ URICollection.prototype.pluck = (attrib) ->
 		return _.result(oneUri, attrib)
 	return _results
 
-
+###*
+ * Accepts a query object and returns all collection elements with properties matching the key-value pairs in that object.
+ * @param {Object} queryObject A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`
+ * @return {URICollection} A new URICollection instance.
+###
 URICollection.prototype.where = (whereObject) ->
 	_pred = compileWhereObjectIntoPredicate(whereObject)
 	_results = _.chain( @_uris )
@@ -344,7 +462,11 @@ URICollection.prototype.where = (whereObject) ->
 	return new URICollection(_results)
 
 
-
+###*
+ * Accepts a query object and returns the first collection element with properties matching the key-value pairs in that object.  Like `#where()`, but only returns the first result and does not wrap it in a collection - it returns a `URIjs` instance.
+ * @param {Object} queryObject A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`
+ * @return {URI} A clone of the first `URIjs` element in the collection matching the query.
+###
 URICollection.prototype.findWhere = (whereObject) ->
 	_pred = compileWhereObjectIntoPredicate(whereObject)
 	_result = _.find( @_uris, _pred )
@@ -352,6 +474,12 @@ URICollection.prototype.findWhere = (whereObject) ->
 		return null
 	_result.clone()
 
+
+###*
+ * Returns `n` randomly selected elements from the collection.  If `n==1` or `typeof n === "null"`, returns a `URIjs` instance.  If `n > 1`, returns a new `URICollection` instance.
+ * @param {Number} n The number of elements to return in the sample, defaulting to 1.
+ * @return {URICollection,URI} A URICollection instance if `n > 1`, or a `URIjs` instance otherwise.
+###
 URICollection.prototype.sample = (n) ->
 	# if n is null or 1, we return a single URI instance.
 	# otherwise, return an instance of URICollection containing
@@ -366,59 +494,6 @@ URICollection.prototype.sample = (n) ->
 		return sample.clone()
 
 
-#URICollection.prototype.contains = (attrib, val) ->
-
-
-
-###
-links = [
-	"http://www.cnn.com/somepage#para?q=aSearch"
-	"http://www.google.com"
-	"http://www.google.com/mail"
-	"http://www.reddit.com/r/stuff"
-]
-
-uris = new URICollection()
-uris.add(links)
-
-notCnn = uris.filter (oneUri) ->
-	#console.log oneUri.domain()
-	oneUri.domain() isnt "cnn.com"
-
-pandas = uris.map (aUri) -> 
-	aUri.domain("pandakingdom.com")
-###
-###
-console.log pandas.strung()
-
-console.log uris.sample(2).pluck("domain")
-
-console.log uris.map( (uri) -> uri.domain("microsoft.com").protocol("ftp") ).toString()
-console.log uris.toString()
-
-console.log uris.where( {domain: 'reddit.com'} ).toString()
-
-console.log uris.groupBy("domain", true)
-
-console.log uris.findWhere( {domain: 'google.com'}).toString()
-
-console.log uris.countBy("domain")
-
-console.log uris.size()
-###
-
-#console.log uris.toString()
-#console.log uris.shuffle().toString()
-#console.log uris.shuffle().toString()
-
-#console.log uris.find( (el) -> el.domain() is "reddit.com").toString()
-###
-	filter: (pred) ->
-		_match = []
-		_.each @_uris, (oneUri) ->
-			if pred(oneUri) then _match.push(oneUri)
-		return new URICollection(_match)
-###
 
 module.exports =
 	URICollection: URICollection
