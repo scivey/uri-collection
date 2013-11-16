@@ -19,7 +19,6 @@
       var elemVal, i, _i;
       for (i = _i = 0; 0 <= _count ? _i <= _count : _i >= _count; i = 0 <= _count ? ++_i : --_i) {
         elemVal = _.result(listElem, _tests[i][0]);
-        console.log(elemVal);
         if (elemVal !== _tests[i][1]) {
           return false;
         }
@@ -57,10 +56,20 @@
       var initialLinks;
       initialLinks = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       this._uris = [];
+      this._strungOut = [];
       if (initialLinks != null) {
         this.add(initialLinks);
       }
     }
+
+    URICollection.prototype._strungList = function() {
+      if (this._strungOut.length !== this._uris.length) {
+        this._strungOut = _.map(this._uris, function(oneUri) {
+          return oneUri.toString();
+        });
+      }
+      return this._strungOut;
+    };
 
     URICollection.prototype.add = function() {
       var linkList, _uris;
@@ -140,7 +149,7 @@
     };
   });
 
-  _nonCollectionReturningMethods = ["reduce", "reduceRight", "find", "some", "contains", "max", "min", "size", "first", "last", "rest"];
+  _nonCollectionReturningMethods = ["reduce", "reduceRight", "find", "some", "every", "contains", "max", "min", "size", "first", "last", "rest"];
 
   _.each(_nonCollectionReturningMethods, function(aMethod) {
     return URICollection.prototype[aMethod] = function() {
@@ -151,6 +160,27 @@
       return _[aMethod].apply(null, params);
     };
   });
+
+  URICollection.prototype.contains = function(val) {
+    var _stringUris;
+    _stringUris = this._strungList();
+    if (_.isString(val)) {
+      return _.contains(_stringUris, val);
+    } else if (val instanceof URI) {
+      return _.contains(_stringUris, val.toString());
+    }
+    throw new Error("Unrecognized value passed for URICollection.contains: " + val);
+  };
+
+  URICollection.prototype.find = function(iterFn) {
+    var result, _uris;
+    _uris = cloneUris(this._uris);
+    result = _.find(_uris, iterFn);
+    if (result != null) {
+      return result;
+    }
+    return null;
+  };
 
   URICollection.prototype.each = function(iterFn) {
     var _results, _uris;
@@ -180,7 +210,7 @@
       _results = _.map(this._uris, function(oneUri) {
         return oneUri[_method]();
       });
-      return results;
+      return _results;
     } else {
       _uris = cloneUris(this._uris);
       params.unshift(_uris);
@@ -197,7 +227,7 @@
         return _.result(listElem, propOrFunc);
       };
     } else {
-      groupFn = propOrfunc;
+      groupFn = propOrFunc;
     }
     _results = _.groupBy(_uris, groupFn);
     _finalResults = _results;
@@ -221,7 +251,7 @@
         return _.result(listElem, propOrFunc);
       };
     } else {
-      _uris = cloneUris(_uris);
+      _uris = cloneUris(this._uris);
       countFn = propOrFunc;
     }
     return _results = _.countBy(_uris, countFn);
@@ -249,6 +279,9 @@
     var _pred, _result;
     _pred = compileWhereObjectIntoPredicate(whereObject);
     _result = _.find(this._uris, _pred);
+    if (_result == null) {
+      return null;
+    }
     return _result.clone();
   };
 

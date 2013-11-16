@@ -10,7 +10,7 @@ compileWhereObjectIntoPredicate = (whereObj) ->
 	_predicate = (listElem) ->
 		for i in [0.._count]
 			elemVal = _.result(listElem, _tests[i][0])
-			console.log elemVal
+			#console.log elemVal
 			unless elemVal is _tests[i][1]
 				return false
 		return true
@@ -44,9 +44,16 @@ isURI = (aUri) ->
 class URICollection
 	constructor: (initialLinks...) ->
 		@_uris = []
+		@_strungOut = []
 		if initialLinks?
 			#console.log "si!"
 			@add(initialLinks)
+
+	_strungList: ->
+		if @_strungOut.length isnt @_uris.length
+			@_strungOut = _.map @_uris, (oneUri) -> 
+				oneUri.toString()
+		@_strungOut
 
 	add: (linkList...) ->
 		linkList = _.flatten linkList
@@ -89,6 +96,9 @@ URICollection.prototype.toArray = ->
 	_uris
 
 
+
+
+
 URICollection.prototype.clone = ->
 	_uris = cloneUris(@_uris)
 	return new URICollection(_uris)
@@ -113,6 +123,7 @@ _nonCollectionReturningMethods = [
 	"reduceRight"
 	"find"
 	"some"
+	"every"
 	"contains"
 	"max"
 	"min"
@@ -127,6 +138,28 @@ _.each _nonCollectionReturningMethods, (aMethod) ->
 		_uris = cloneUris(@_uris)
 		params.unshift _uris
 		return _[aMethod].apply(null, params)
+
+
+URICollection.prototype.contains = (val) ->
+	_stringUris = @_strungList()
+
+	if _.isString(val)
+		return _.contains(_stringUris, val)
+	else if (val instanceof URI)
+		return _.contains(_stringUris, val.toString())
+	
+	throw new Error("Unrecognized value passed for URICollection.contains: #{val}")
+
+
+URICollection.prototype.find = (iterFn) ->
+	_uris = cloneUris(@_uris)
+
+	result = _.find _uris, iterFn
+
+	if result?
+		return result
+
+	return null
 
 URICollection.prototype.each = (iterFn) ->
 	# distinct from `map` because iterator doesn't necessarily
@@ -171,7 +204,7 @@ URICollection.prototype.invoke = (params...) ->
 		# so no need to clone them.
 		_method = params[0]
 		_results = _.map @_uris, (oneUri) -> oneUri[_method]()
-		return results
+		return _results
 	else
 		_uris = cloneUris(@_uris)
 		params.unshift _uris
@@ -201,7 +234,7 @@ URICollection.prototype.groupBy = (propOrFunc, asStrings) ->
 		groupFn = (listElem) ->
 			_.result(listElem, propOrFunc)
 	else
-		groupFn = propOrfunc
+		groupFn = propOrFunc
 
 	_results = _.groupBy _uris, groupFn
 	_finalResults = _results
@@ -225,9 +258,9 @@ URICollection.prototype.countBy = (propOrFunc, asStrings) ->
 
 	else
 		# otherwise we clone for safety.
-		_uris = cloneUris(_uris)
+		_uris = cloneUris(@_uris)
 		countFn = propOrFunc
-
+	#console.log _uris.length
 	_results = _.countBy(_uris, countFn)
 
 
@@ -249,9 +282,13 @@ URICollection.prototype.where = (whereObject) ->
 				.value()
 	return new URICollection(_results)
 
+
+
 URICollection.prototype.findWhere = (whereObject) ->
 	_pred = compileWhereObjectIntoPredicate(whereObject)
 	_result = _.find( @_uris, _pred )
+	unless _result?
+		return null
 	_result.clone()
 
 URICollection.prototype.sample = (n) ->
