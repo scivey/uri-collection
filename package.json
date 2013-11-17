@@ -1,0 +1,24 @@
+{
+  "name": "uri-collection-page",
+  "version": "0.0.1",
+  "description": "Node.js: uri-collection\r =================\r Scott Ivey -> http://www.scivey.net",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scivey/uri-collection.git"
+  },
+  "author": "Scott Ivey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scivey/uri-collection/issues"
+  },
+  "devDependencies": {
+    "handlebars": "~1.1.2"
+  },
+  "dependencies": {
+    "underscore": "~1.5.2"
+  }
+}

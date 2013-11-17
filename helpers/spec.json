@@ -1,0 +1,1047 @@
+{
+  "stats": {
+    "suites": 35,
+    "tests": 103,
+    "passes": 103,
+    "pending": 0,
+    "failures": 0,
+    "start": "2013-11-16T15:45:09.241Z",
+    "end": "2013-11-16T15:45:09.313Z",
+    "duration": 72
+  },
+  "tests": [
+    {
+      "title": "should accept a single URL string.",
+      "fullTitle": "URICollection construction should accept a single URL string.",
+      "duration": 2
+    },
+    {
+      "title": "should accept multiple URL strings.",
+      "fullTitle": "URICollection construction should accept multiple URL strings.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array of multiple URL strings.",
+      "fullTitle": "URICollection construction should accept an array of multiple URL strings.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array with a single URL string.",
+      "fullTitle": "URICollection construction should accept an array with a single URL string.",
+      "duration": 0
+    },
+    {
+      "title": "should accept a single URIjs instance.",
+      "fullTitle": "URICollection construction should accept a single URIjs instance.",
+      "duration": 0
+    },
+    {
+      "title": "should accept multiple URIjs instances.",
+      "fullTitle": "URICollection construction should accept multiple URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array of multiple URIjs instances.",
+      "fullTitle": "URICollection construction should accept an array of multiple URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array with a single URIjs instance.",
+      "fullTitle": "URICollection construction should accept an array with a single URIjs instance.",
+      "duration": 0
+    },
+    {
+      "title": "should return true for URI instances.",
+      "fullTitle": "isURI should return true for URI instances.",
+      "duration": 0
+    },
+    {
+      "title": "should not return true for strings.",
+      "fullTitle": "isURI should not return true for strings.",
+      "duration": 0
+    },
+    {
+      "title": "should not return true for other constructed objects.",
+      "fullTitle": "isURI should not return true for other constructed objects.",
+      "duration": 0
+    },
+    {
+      "title": "should return a new URICollection when a map operation returns URIjs instances.",
+      "fullTitle": "URICollection map should return a new URICollection when a map operation returns URIjs instances.",
+      "duration": 9
+    },
+    {
+      "title": "should return a vanilla array when a map operation returns results other than URIjs instances.",
+      "fullTitle": "URICollection map should return a vanilla array when a map operation returns results other than URIjs instances.",
+      "duration": 1
+    },
+    {
+      "title": "should not mutate URIjs instances in the original collection",
+      "fullTitle": "URICollection map should not mutate URIjs instances in the original collection",
+      "duration": 1
+    },
+    {
+      "title": "should produce the same result as a series of individual URIjs instance manipulations.",
+      "fullTitle": "URICollection map should produce the same result as a series of individual URIjs instance manipulations.",
+      "duration": 1
+    },
+    {
+      "title": "should return a vanilla javascript array",
+      "fullTitle": "URICollection toArray should return a vanilla javascript array",
+      "duration": 0
+    },
+    {
+      "title": "should return *clones* of its internal URIjs instances",
+      "fullTitle": "URICollection toArray should return *clones* of its internal URIjs instances",
+      "duration": 1
+    },
+    {
+      "title": "should return a new URICollection instance",
+      "fullTitle": "URICollection clone should return a new URICollection instance",
+      "duration": 1
+    },
+    {
+      "title": "should create a copy with the same number of elements",
+      "fullTitle": "URICollection clone should create a copy with the same number of elements",
+      "duration": 0
+    },
+    {
+      "title": "should create a copy with individual URIjs elements cloned themselves",
+      "fullTitle": "URICollection clone should create a copy with individual URIjs elements cloned themselves",
+      "duration": 0
+    },
+    {
+      "title": "should create a copy with DEEP-equal elements",
+      "fullTitle": "URICollection clone should create a copy with DEEP-equal elements",
+      "duration": 0
+    },
+    {
+      "title": "should return a new URI collection, even without an iterator return value",
+      "fullTitle": "URICollection each should return a new URI collection, even without an iterator return value",
+      "duration": 0
+    },
+    {
+      "title": "should not mutate URIjs instances in the original collection",
+      "fullTitle": "URICollection each should not mutate URIjs instances in the original collection",
+      "duration": 0
+    },
+    {
+      "title": "should produce the same result as a series of individual URIjs instance manipulations.",
+      "fullTitle": "URICollection each should produce the same result as a series of individual URIjs instance manipulations.",
+      "duration": 1
+    },
+    {
+      "title": "should extract the given property from each URI instance.",
+      "fullTitle": "URICollection pluck should extract the given property from each URI instance.",
+      "duration": 1
+    },
+    {
+      "title": "should return an array with length equal to that of the collection.",
+      "fullTitle": "URICollection pluck should return an array with length equal to that of the collection.",
+      "duration": 0
+    },
+    {
+      "title": "should return the same number of results as there are elements in the original collection.",
+      "fullTitle": "URICollection invoke should return the same number of results as there are elements in the original collection.",
+      "duration": 0
+    },
+    {
+      "title": "should return a vanilla array when passed a method name but no additional parameters.",
+      "fullTitle": "URICollection invoke should return a vanilla array when passed a method name but no additional parameters.",
+      "duration": 0
+    },
+    {
+      "title": "should return a new URICollection when passed a method name and additional parameters.",
+      "fullTitle": "URICollection invoke should return a new URICollection when passed a method name and additional parameters.",
+      "duration": 0
+    },
+    {
+      "title": "when called with only a method name, should return the same array of results returned from manual iteration + no-arg invocation over a plain array of URIjs instances.",
+      "fullTitle": "URICollection invoke when called with only a method name, should return the same array of results returned from manual iteration + no-arg invocation over a plain array of URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "when called with a method and additional parameters, should return a collection of URIjs instances deep-equal to the manual-iteration equivalent.",
+      "fullTitle": "URICollection invoke when called with a method and additional parameters, should return a collection of URIjs instances deep-equal to the manual-iteration equivalent.",
+      "duration": 1
+    },
+    {
+      "title": "should return true if any collection elements pass the truth test",
+      "fullTitle": "URICollection some should return true if any collection elements pass the truth test",
+      "duration": 0
+    },
+    {
+      "title": "should return false if zero collection elements pass the truth test",
+      "fullTitle": "URICollection some should return false if zero collection elements pass the truth test",
+      "duration": 1
+    },
+    {
+      "title": "should return true if all collection elements pass the truth test",
+      "fullTitle": "URICollection every should return true if all collection elements pass the truth test",
+      "duration": 1
+    },
+    {
+      "title": "should return false if any collection elements fail the truth test",
+      "fullTitle": "URICollection every should return false if any collection elements fail the truth test",
+      "duration": 0
+    },
+    {
+      "title": "when passed a string, returns true if the string is equal to the `.toString()` result of any element.",
+      "fullTitle": "URICollection contains when passed a string, returns true if the string is equal to the `.toString()` result of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a string, returns false if the string is not equal to the `.toString()` result of any element.",
+      "fullTitle": "URICollection contains when passed a string, returns false if the string is not equal to the `.toString()` result of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a URLjs instance, returns true if the `.toString()` of that instance equals the `.toString()` of any element.",
+      "fullTitle": "URICollection contains when passed a URLjs instance, returns true if the `.toString()` of that instance equals the `.toString()` of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a URLjs instance, returns false if the `.toString()` of that instance does not equal the `.toString()` of any element.",
+      "fullTitle": "URICollection contains when passed a URLjs instance, returns false if the `.toString()` of that instance does not equal the `.toString()` of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a RegExp instance, returns true if calling that RegExp's `#test()` with any element's `.toString()` value returns true.",
+      "fullTitle": "URICollection contains when passed a RegExp instance, returns true if calling that RegExp's `#test()` with any element's `.toString()` value returns true.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a RegExp instance, returns false if calling that RegExp's `#test()` with every element's `.toString()` value returns false.",
+      "fullTitle": "URICollection contains when passed a RegExp instance, returns false if calling that RegExp's `#test()` with every element's `.toString()` value returns false.",
+      "duration": 0
+    },
+    {
+      "title": "should not wrap its output in a URICollection.",
+      "fullTitle": "URICollection reduce should not wrap its output in a URICollection.",
+      "duration": 0
+    },
+    {
+      "title": "should return the same result as iteration over a plain array of the same URIs.",
+      "fullTitle": "URICollection reduce should return the same result as iteration over a plain array of the same URIs.",
+      "duration": 0
+    },
+    {
+      "title": "should return correct results.",
+      "fullTitle": "URICollection reduce should return correct results.",
+      "duration": 0
+    },
+    {
+      "title": "should not wrap its output in a URICollection.",
+      "fullTitle": "URICollection reduceRight should not wrap its output in a URICollection.",
+      "duration": 1
+    },
+    {
+      "title": "should return the same result as iteration over a plain array of the same URIs.",
+      "fullTitle": "URICollection reduceRight should return the same result as iteration over a plain array of the same URIs.",
+      "duration": 0
+    },
+    {
+      "title": "should return correct results.",
+      "fullTitle": "URICollection reduceRight should return correct results.",
+      "duration": 1
+    },
+    {
+      "title": "should return different results than `reduce` when operation is non-associative",
+      "fullTitle": "URICollection reduceRight should return different results than `reduce` when operation is non-associative",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance.",
+      "fullTitle": "URICollection find should return a URIjs instance.",
+      "duration": 1
+    },
+    {
+      "title": "should return the first matching instance",
+      "fullTitle": "URICollection find should return the first matching instance",
+      "duration": 0
+    },
+    {
+      "title": "should return null if no match is found",
+      "fullTitle": "URICollection find should return null if no match is found",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance.",
+      "fullTitle": "URICollection findWhere should return a URIjs instance.",
+      "duration": 1
+    },
+    {
+      "title": "should convert a key-val query into a function invoking the correct instance method",
+      "fullTitle": "URICollection findWhere should convert a key-val query into a function invoking the correct instance method",
+      "duration": 0
+    },
+    {
+      "title": "should return the first matching instance",
+      "fullTitle": "URICollection findWhere should return the first matching instance",
+      "duration": 1
+    },
+    {
+      "title": "should return null if no match is found",
+      "fullTitle": "URICollection findWhere should return null if no match is found",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance.",
+      "fullTitle": "URICollection where should return a URICollection instance.",
+      "duration": 1
+    },
+    {
+      "title": "should convert a key-val query into a function invoking the correct instance method",
+      "fullTitle": "URICollection where should convert a key-val query into a function invoking the correct instance method",
+      "duration": 0
+    },
+    {
+      "title": "should return _every_ matching URIjs instance.",
+      "fullTitle": "URICollection where should return _every_ matching URIjs instance.",
+      "duration": 0
+    },
+    {
+      "title": "should return _only_ matching URIjs instances.",
+      "fullTitle": "URICollection where should return _only_ matching URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "should return an empty URICollection instance if no matches are found.",
+      "fullTitle": "URICollection where should return an empty URICollection instance if no matches are found.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance when called with no parameters or with n == 1.",
+      "fullTitle": "URICollection sample should return a URIjs instance when called with no parameters or with n == 1.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance when called with n > 1.",
+      "fullTitle": "URICollection sample should return a URICollection instance when called with n > 1.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection with size == n when n > 1.",
+      "fullTitle": "URICollection sample should return a URICollection with size == n when n > 1.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance.",
+      "fullTitle": "URICollection filter should return a URICollection instance.",
+      "duration": 1
+    },
+    {
+      "title": "should return all matches from the collection",
+      "fullTitle": "URICollection filter should return all matches from the collection",
+      "duration": 0
+    },
+    {
+      "title": "should return the same result (count + deep-equal) as manual iteration over a plain array of the same URIs",
+      "fullTitle": "URICollection filter should return the same result (count + deep-equal) as manual iteration over a plain array of the same URIs",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance.",
+      "fullTitle": "URICollection reject should return a URICollection instance.",
+      "duration": 0
+    },
+    {
+      "title": "should return all matches from the collection",
+      "fullTitle": "URICollection reject should return all matches from the collection",
+      "duration": 0
+    },
+    {
+      "title": "should return the same result (count + deep-equal) as iteration over a plain array of the same URIs",
+      "fullTitle": "URICollection reject should return the same result (count + deep-equal) as iteration over a plain array of the same URIs",
+      "duration": 1
+    },
+    {
+      "title": "should return a URIjs instance",
+      "fullTitle": "URICollection at should return a URIjs instance",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance with a `.toString()` value equal to the string value at index `i` of the collection's `.toArray()` output.",
+      "fullTitle": "URICollection at should return a URIjs instance with a `.toString()` value equal to the string value at index `i` of the collection's `.toArray()` output.",
+      "duration": 1
+    },
+    {
+      "title": "should return null if there is no URL instance at that index.",
+      "fullTitle": "URICollection at should return null if there is no URL instance at that index.",
+      "duration": 0
+    },
+    {
+      "title": "should return the (N - 1)th from the last element if a negative index is passed.",
+      "fullTitle": "URICollection at should return the (N - 1)th from the last element if a negative index is passed.",
+      "duration": 0
+    },
+    {
+      "title": "if N==null or N==1, should return a URIjs instance",
+      "fullTitle": "URICollection first if N==null or N==1, should return a URIjs instance",
+      "duration": 1
+    },
+    {
+      "title": "if N>1, should return a URICollection instance.",
+      "fullTitle": "URICollection first if N>1, should return a URICollection instance.",
+      "duration": 0
+    },
+    {
+      "title": "if N>1, should return a collection with N elements.",
+      "fullTitle": "URICollection first if N>1, should return a collection with N elements.",
+      "duration": 0
+    },
+    {
+      "title": "should return the first N elements",
+      "fullTitle": "URICollection first should return the first N elements",
+      "duration": 1
+    },
+    {
+      "title": "if N==null or N==1, should return a URIjs instance",
+      "fullTitle": "URICollection last if N==null or N==1, should return a URIjs instance",
+      "duration": 0
+    },
+    {
+      "title": "if N>1, should return a URICollection instance.",
+      "fullTitle": "URICollection last if N>1, should return a URICollection instance.",
+      "duration": 0
+    },
+    {
+      "title": "if N>1, should return a collection with N elements.",
+      "fullTitle": "URICollection last if N>1, should return a collection with N elements.",
+      "duration": 0
+    },
+    {
+      "title": "should return the last N elements",
+      "fullTitle": "URICollection last should return the last N elements",
+      "duration": 1
+    },
+    {
+      "title": "should return a URICollection instance for any N, including null",
+      "fullTitle": "URICollection rest should return a URICollection instance for any N, including null",
+      "duration": 0
+    },
+    {
+      "title": "if n is null, should return a number of elements equal to `size() - 1`",
+      "fullTitle": "URICollection rest if n is null, should return a number of elements equal to `size() - 1`",
+      "duration": 0
+    },
+    {
+      "title": "if n is NOT null, should return a number of elements equal to `size() - n`",
+      "fullTitle": "URICollection rest if n is NOT null, should return a number of elements equal to `size() - n`",
+      "duration": 0
+    },
+    {
+      "title": "should return the elements from index N to the end.",
+      "fullTitle": "URICollection rest should return the elements from index N to the end.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance for any N, including null.",
+      "fullTitle": "URICollection initial should return a URICollection instance for any N, including null.",
+      "duration": 0
+    },
+    {
+      "title": "if n is null, should return a number of elements equal to `size() - 1`",
+      "fullTitle": "URICollection initial if n is null, should return a number of elements equal to `size() - 1`",
+      "duration": 0
+    },
+    {
+      "title": "if n is NOT null, should return a number of elements equal to `size() - n`",
+      "fullTitle": "URICollection initial if n is NOT null, should return a number of elements equal to `size() - n`",
+      "duration": 1
+    },
+    {
+      "title": "should return the elements from index 0 to (size - (n+1)).",
+      "fullTitle": "URICollection initial should return the elements from index 0 to (size - (n+1)).",
+      "duration": 0
+    },
+    {
+      "title": "should accept a property string and use the matching property as the counting criteria",
+      "fullTitle": "URICollection countBy should accept a property string and use the matching property as the counting criteria",
+      "duration": 1
+    },
+    {
+      "title": "should accept a function and use it to create the counting criteria",
+      "fullTitle": "URICollection countBy should accept a function and use it to create the counting criteria",
+      "duration": 0
+    },
+    {
+      "title": "should return a total count equal to the number of instances in the collection",
+      "fullTitle": "URICollection countBy should return a total count equal to the number of instances in the collection",
+      "duration": 2
+    },
+    {
+      "title": "should accept a property string and use the matching property as the grouping criteria",
+      "fullTitle": "URICollection groupBy should accept a property string and use the matching property as the grouping criteria",
+      "duration": 1
+    },
+    {
+      "title": "should accept a function and use it to create the grouping criteria",
+      "fullTitle": "URICollection groupBy should accept a function and use it to create the grouping criteria",
+      "duration": 1
+    },
+    {
+      "title": "should have the same number of keys as the number of unique results for the grouping function over a plain array of the collection's elements.",
+      "fullTitle": "URICollection groupBy should have the same number of keys as the number of unique results for the grouping function over a plain array of the collection's elements.",
+      "duration": 0
+    },
+    {
+      "title": "should have the same total number of URIs as the original collection",
+      "fullTitle": "URICollection groupBy should have the same total number of URIs as the original collection",
+      "duration": 2
+    },
+    {
+      "title": "should accept a property string and use the matching property as the sorting criteria",
+      "fullTitle": "URICollection sortBy should accept a property string and use the matching property as the sorting criteria",
+      "duration": 1
+    },
+    {
+      "title": "should accept a function and use it to create the sorting criteria",
+      "fullTitle": "URICollection sortBy should accept a function and use it to create the sorting criteria",
+      "duration": 0
+    },
+    {
+      "title": "should return an instance of URICollection",
+      "fullTitle": "URICollection sortBy should return an instance of URICollection",
+      "duration": 0
+    },
+    {
+      "title": "should return a collection with the same number of elements as the original.",
+      "fullTitle": "URICollection sortBy should return a collection with the same number of elements as the original.",
+      "duration": 0
+    },
+    {
+      "title": "should return an instance of URICollection",
+      "fullTitle": "URICollection shuffle should return an instance of URICollection",
+      "duration": 0
+    },
+    {
+      "title": "should return a collection with the same number of elements as the original",
+      "fullTitle": "URICollection shuffle should return a collection with the same number of elements as the original",
+      "duration": 0
+    },
+    {
+      "title": "should return a collection with elements in a different order",
+      "fullTitle": "URICollection shuffle should return a collection with elements in a different order",
+      "duration": 1
+    }
+  ],
+  "failures": [],
+  "passes": [
+    {
+      "title": "should accept a single URL string.",
+      "fullTitle": "URICollection construction should accept a single URL string.",
+      "duration": 2
+    },
+    {
+      "title": "should accept multiple URL strings.",
+      "fullTitle": "URICollection construction should accept multiple URL strings.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array of multiple URL strings.",
+      "fullTitle": "URICollection construction should accept an array of multiple URL strings.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array with a single URL string.",
+      "fullTitle": "URICollection construction should accept an array with a single URL string.",
+      "duration": 0
+    },
+    {
+      "title": "should accept a single URIjs instance.",
+      "fullTitle": "URICollection construction should accept a single URIjs instance.",
+      "duration": 0
+    },
+    {
+      "title": "should accept multiple URIjs instances.",
+      "fullTitle": "URICollection construction should accept multiple URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array of multiple URIjs instances.",
+      "fullTitle": "URICollection construction should accept an array of multiple URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "should accept an array with a single URIjs instance.",
+      "fullTitle": "URICollection construction should accept an array with a single URIjs instance.",
+      "duration": 0
+    },
+    {
+      "title": "should return true for URI instances.",
+      "fullTitle": "isURI should return true for URI instances.",
+      "duration": 0
+    },
+    {
+      "title": "should not return true for strings.",
+      "fullTitle": "isURI should not return true for strings.",
+      "duration": 0
+    },
+    {
+      "title": "should not return true for other constructed objects.",
+      "fullTitle": "isURI should not return true for other constructed objects.",
+      "duration": 0
+    },
+    {
+      "title": "should return a new URICollection when a map operation returns URIjs instances.",
+      "fullTitle": "URICollection map should return a new URICollection when a map operation returns URIjs instances.",
+      "duration": 9
+    },
+    {
+      "title": "should return a vanilla array when a map operation returns results other than URIjs instances.",
+      "fullTitle": "URICollection map should return a vanilla array when a map operation returns results other than URIjs instances.",
+      "duration": 1
+    },
+    {
+      "title": "should not mutate URIjs instances in the original collection",
+      "fullTitle": "URICollection map should not mutate URIjs instances in the original collection",
+      "duration": 1
+    },
+    {
+      "title": "should produce the same result as a series of individual URIjs instance manipulations.",
+      "fullTitle": "URICollection map should produce the same result as a series of individual URIjs instance manipulations.",
+      "duration": 1
+    },
+    {
+      "title": "should return a vanilla javascript array",
+      "fullTitle": "URICollection toArray should return a vanilla javascript array",
+      "duration": 0
+    },
+    {
+      "title": "should return *clones* of its internal URIjs instances",
+      "fullTitle": "URICollection toArray should return *clones* of its internal URIjs instances",
+      "duration": 1
+    },
+    {
+      "title": "should return a new URICollection instance",
+      "fullTitle": "URICollection clone should return a new URICollection instance",
+      "duration": 1
+    },
+    {
+      "title": "should create a copy with the same number of elements",
+      "fullTitle": "URICollection clone should create a copy with the same number of elements",
+      "duration": 0
+    },
+    {
+      "title": "should create a copy with individual URIjs elements cloned themselves",
+      "fullTitle": "URICollection clone should create a copy with individual URIjs elements cloned themselves",
+      "duration": 0
+    },
+    {
+      "title": "should create a copy with DEEP-equal elements",
+      "fullTitle": "URICollection clone should create a copy with DEEP-equal elements",
+      "duration": 0
+    },
+    {
+      "title": "should return a new URI collection, even without an iterator return value",
+      "fullTitle": "URICollection each should return a new URI collection, even without an iterator return value",
+      "duration": 0
+    },
+    {
+      "title": "should not mutate URIjs instances in the original collection",
+      "fullTitle": "URICollection each should not mutate URIjs instances in the original collection",
+      "duration": 0
+    },
+    {
+      "title": "should produce the same result as a series of individual URIjs instance manipulations.",
+      "fullTitle": "URICollection each should produce the same result as a series of individual URIjs instance manipulations.",
+      "duration": 1
+    },
+    {
+      "title": "should extract the given property from each URI instance.",
+      "fullTitle": "URICollection pluck should extract the given property from each URI instance.",
+      "duration": 1
+    },
+    {
+      "title": "should return an array with length equal to that of the collection.",
+      "fullTitle": "URICollection pluck should return an array with length equal to that of the collection.",
+      "duration": 0
+    },
+    {
+      "title": "should return the same number of results as there are elements in the original collection.",
+      "fullTitle": "URICollection invoke should return the same number of results as there are elements in the original collection.",
+      "duration": 0
+    },
+    {
+      "title": "should return a vanilla array when passed a method name but no additional parameters.",
+      "fullTitle": "URICollection invoke should return a vanilla array when passed a method name but no additional parameters.",
+      "duration": 0
+    },
+    {
+      "title": "should return a new URICollection when passed a method name and additional parameters.",
+      "fullTitle": "URICollection invoke should return a new URICollection when passed a method name and additional parameters.",
+      "duration": 0
+    },
+    {
+      "title": "when called with only a method name, should return the same array of results returned from manual iteration + no-arg invocation over a plain array of URIjs instances.",
+      "fullTitle": "URICollection invoke when called with only a method name, should return the same array of results returned from manual iteration + no-arg invocation over a plain array of URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "when called with a method and additional parameters, should return a collection of URIjs instances deep-equal to the manual-iteration equivalent.",
+      "fullTitle": "URICollection invoke when called with a method and additional parameters, should return a collection of URIjs instances deep-equal to the manual-iteration equivalent.",
+      "duration": 1
+    },
+    {
+      "title": "should return true if any collection elements pass the truth test",
+      "fullTitle": "URICollection some should return true if any collection elements pass the truth test",
+      "duration": 0
+    },
+    {
+      "title": "should return false if zero collection elements pass the truth test",
+      "fullTitle": "URICollection some should return false if zero collection elements pass the truth test",
+      "duration": 1
+    },
+    {
+      "title": "should return true if all collection elements pass the truth test",
+      "fullTitle": "URICollection every should return true if all collection elements pass the truth test",
+      "duration": 1
+    },
+    {
+      "title": "should return false if any collection elements fail the truth test",
+      "fullTitle": "URICollection every should return false if any collection elements fail the truth test",
+      "duration": 0
+    },
+    {
+      "title": "when passed a string, returns true if the string is equal to the `.toString()` result of any element.",
+      "fullTitle": "URICollection contains when passed a string, returns true if the string is equal to the `.toString()` result of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a string, returns false if the string is not equal to the `.toString()` result of any element.",
+      "fullTitle": "URICollection contains when passed a string, returns false if the string is not equal to the `.toString()` result of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a URLjs instance, returns true if the `.toString()` of that instance equals the `.toString()` of any element.",
+      "fullTitle": "URICollection contains when passed a URLjs instance, returns true if the `.toString()` of that instance equals the `.toString()` of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a URLjs instance, returns false if the `.toString()` of that instance does not equal the `.toString()` of any element.",
+      "fullTitle": "URICollection contains when passed a URLjs instance, returns false if the `.toString()` of that instance does not equal the `.toString()` of any element.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a RegExp instance, returns true if calling that RegExp's `#test()` with any element's `.toString()` value returns true.",
+      "fullTitle": "URICollection contains when passed a RegExp instance, returns true if calling that RegExp's `#test()` with any element's `.toString()` value returns true.",
+      "duration": 0
+    },
+    {
+      "title": "when passed a RegExp instance, returns false if calling that RegExp's `#test()` with every element's `.toString()` value returns false.",
+      "fullTitle": "URICollection contains when passed a RegExp instance, returns false if calling that RegExp's `#test()` with every element's `.toString()` value returns false.",
+      "duration": 0
+    },
+    {
+      "title": "should not wrap its output in a URICollection.",
+      "fullTitle": "URICollection reduce should not wrap its output in a URICollection.",
+      "duration": 0
+    },
+    {
+      "title": "should return the same result as iteration over a plain array of the same URIs.",
+      "fullTitle": "URICollection reduce should return the same result as iteration over a plain array of the same URIs.",
+      "duration": 0
+    },
+    {
+      "title": "should return correct results.",
+      "fullTitle": "URICollection reduce should return correct results.",
+      "duration": 0
+    },
+    {
+      "title": "should not wrap its output in a URICollection.",
+      "fullTitle": "URICollection reduceRight should not wrap its output in a URICollection.",
+      "duration": 1
+    },
+    {
+      "title": "should return the same result as iteration over a plain array of the same URIs.",
+      "fullTitle": "URICollection reduceRight should return the same result as iteration over a plain array of the same URIs.",
+      "duration": 0
+    },
+    {
+      "title": "should return correct results.",
+      "fullTitle": "URICollection reduceRight should return correct results.",
+      "duration": 1
+    },
+    {
+      "title": "should return different results than `reduce` when operation is non-associative",
+      "fullTitle": "URICollection reduceRight should return different results than `reduce` when operation is non-associative",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance.",
+      "fullTitle": "URICollection find should return a URIjs instance.",
+      "duration": 1
+    },
+    {
+      "title": "should return the first matching instance",
+      "fullTitle": "URICollection find should return the first matching instance",
+      "duration": 0
+    },
+    {
+      "title": "should return null if no match is found",
+      "fullTitle": "URICollection find should return null if no match is found",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance.",
+      "fullTitle": "URICollection findWhere should return a URIjs instance.",
+      "duration": 1
+    },
+    {
+      "title": "should convert a key-val query into a function invoking the correct instance method",
+      "fullTitle": "URICollection findWhere should convert a key-val query into a function invoking the correct instance method",
+      "duration": 0
+    },
+    {
+      "title": "should return the first matching instance",
+      "fullTitle": "URICollection findWhere should return the first matching instance",
+      "duration": 1
+    },
+    {
+      "title": "should return null if no match is found",
+      "fullTitle": "URICollection findWhere should return null if no match is found",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance.",
+      "fullTitle": "URICollection where should return a URICollection instance.",
+      "duration": 1
+    },
+    {
+      "title": "should convert a key-val query into a function invoking the correct instance method",
+      "fullTitle": "URICollection where should convert a key-val query into a function invoking the correct instance method",
+      "duration": 0
+    },
+    {
+      "title": "should return _every_ matching URIjs instance.",
+      "fullTitle": "URICollection where should return _every_ matching URIjs instance.",
+      "duration": 0
+    },
+    {
+      "title": "should return _only_ matching URIjs instances.",
+      "fullTitle": "URICollection where should return _only_ matching URIjs instances.",
+      "duration": 0
+    },
+    {
+      "title": "should return an empty URICollection instance if no matches are found.",
+      "fullTitle": "URICollection where should return an empty URICollection instance if no matches are found.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance when called with no parameters or with n == 1.",
+      "fullTitle": "URICollection sample should return a URIjs instance when called with no parameters or with n == 1.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance when called with n > 1.",
+      "fullTitle": "URICollection sample should return a URICollection instance when called with n > 1.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection with size == n when n > 1.",
+      "fullTitle": "URICollection sample should return a URICollection with size == n when n > 1.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance.",
+      "fullTitle": "URICollection filter should return a URICollection instance.",
+      "duration": 1
+    },
+    {
+      "title": "should return all matches from the collection",
+      "fullTitle": "URICollection filter should return all matches from the collection",
+      "duration": 0
+    },
+    {
+      "title": "should return the same result (count + deep-equal) as manual iteration over a plain array of the same URIs",
+      "fullTitle": "URICollection filter should return the same result (count + deep-equal) as manual iteration over a plain array of the same URIs",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance.",
+      "fullTitle": "URICollection reject should return a URICollection instance.",
+      "duration": 0
+    },
+    {
+      "title": "should return all matches from the collection",
+      "fullTitle": "URICollection reject should return all matches from the collection",
+      "duration": 0
+    },
+    {
+      "title": "should return the same result (count + deep-equal) as iteration over a plain array of the same URIs",
+      "fullTitle": "URICollection reject should return the same result (count + deep-equal) as iteration over a plain array of the same URIs",
+      "duration": 1
+    },
+    {
+      "title": "should return a URIjs instance",
+      "fullTitle": "URICollection at should return a URIjs instance",
+      "duration": 0
+    },
+    {
+      "title": "should return a URIjs instance with a `.toString()` value equal to the string value at index `i` of the collection's `.toArray()` output.",
+      "fullTitle": "URICollection at should return a URIjs instance with a `.toString()` value equal to the string value at index `i` of the collection's `.toArray()` output.",
+      "duration": 1
+    },
+    {
+      "title": "should return null if there is no URL instance at that index.",
+      "fullTitle": "URICollection at should return null if there is no URL instance at that index.",
+      "duration": 0
+    },
+    {
+      "title": "should return the (N - 1)th from the last element if a negative index is passed.",
+      "fullTitle": "URICollection at should return the (N - 1)th from the last element if a negative index is passed.",
+      "duration": 0
+    },
+    {
+      "title": "if N==null or N==1, should return a URIjs instance",
+      "fullTitle": "URICollection first if N==null or N==1, should return a URIjs instance",
+      "duration": 1
+    },
+    {
+      "title": "if N>1, should return a URICollection instance.",
+      "fullTitle": "URICollection first if N>1, should return a URICollection instance.",
+      "duration": 0
+    },
+    {
+      "title": "if N>1, should return a collection with N elements.",
+      "fullTitle": "URICollection first if N>1, should return a collection with N elements.",
+      "duration": 0
+    },
+    {
+      "title": "should return the first N elements",
+      "fullTitle": "URICollection first should return the first N elements",
+      "duration": 1
+    },
+    {
+      "title": "if N==null or N==1, should return a URIjs instance",
+      "fullTitle": "URICollection last if N==null or N==1, should return a URIjs instance",
+      "duration": 0
+    },
+    {
+      "title": "if N>1, should return a URICollection instance.",
+      "fullTitle": "URICollection last if N>1, should return a URICollection instance.",
+      "duration": 0
+    },
+    {
+      "title": "if N>1, should return a collection with N elements.",
+      "fullTitle": "URICollection last if N>1, should return a collection with N elements.",
+      "duration": 0
+    },
+    {
+      "title": "should return the last N elements",
+      "fullTitle": "URICollection last should return the last N elements",
+      "duration": 1
+    },
+    {
+      "title": "should return a URICollection instance for any N, including null",
+      "fullTitle": "URICollection rest should return a URICollection instance for any N, including null",
+      "duration": 0
+    },
+    {
+      "title": "if n is null, should return a number of elements equal to `size() - 1`",
+      "fullTitle": "URICollection rest if n is null, should return a number of elements equal to `size() - 1`",
+      "duration": 0
+    },
+    {
+      "title": "if n is NOT null, should return a number of elements equal to `size() - n`",
+      "fullTitle": "URICollection rest if n is NOT null, should return a number of elements equal to `size() - n`",
+      "duration": 0
+    },
+    {
+      "title": "should return the elements from index N to the end.",
+      "fullTitle": "URICollection rest should return the elements from index N to the end.",
+      "duration": 0
+    },
+    {
+      "title": "should return a URICollection instance for any N, including null.",
+      "fullTitle": "URICollection initial should return a URICollection instance for any N, including null.",
+      "duration": 0
+    },
+    {
+      "title": "if n is null, should return a number of elements equal to `size() - 1`",
+      "fullTitle": "URICollection initial if n is null, should return a number of elements equal to `size() - 1`",
+      "duration": 0
+    },
+    {
+      "title": "if n is NOT null, should return a number of elements equal to `size() - n`",
+      "fullTitle": "URICollection initial if n is NOT null, should return a number of elements equal to `size() - n`",
+      "duration": 1
+    },
+    {
+      "title": "should return the elements from index 0 to (size - (n+1)).",
+      "fullTitle": "URICollection initial should return the elements from index 0 to (size - (n+1)).",
+      "duration": 0
+    },
+    {
+      "title": "should accept a property string and use the matching property as the counting criteria",
+      "fullTitle": "URICollection countBy should accept a property string and use the matching property as the counting criteria",
+      "duration": 1
+    },
+    {
+      "title": "should accept a function and use it to create the counting criteria",
+      "fullTitle": "URICollection countBy should accept a function and use it to create the counting criteria",
+      "duration": 0
+    },
+    {
+      "title": "should return a total count equal to the number of instances in the collection",
+      "fullTitle": "URICollection countBy should return a total count equal to the number of instances in the collection",
+      "duration": 2
+    },
+    {
+      "title": "should accept a property string and use the matching property as the grouping criteria",
+      "fullTitle": "URICollection groupBy should accept a property string and use the matching property as the grouping criteria",
+      "duration": 1
+    },
+    {
+      "title": "should accept a function and use it to create the grouping criteria",
+      "fullTitle": "URICollection groupBy should accept a function and use it to create the grouping criteria",
+      "duration": 1
+    },
+    {
+      "title": "should have the same number of keys as the number of unique results for the grouping function over a plain array of the collection's elements.",
+      "fullTitle": "URICollection groupBy should have the same number of keys as the number of unique results for the grouping function over a plain array of the collection's elements.",
+      "duration": 0
+    },
+    {
+      "title": "should have the same total number of URIs as the original collection",
+      "fullTitle": "URICollection groupBy should have the same total number of URIs as the original collection",
+      "duration": 2
+    },
+    {
+      "title": "should accept a property string and use the matching property as the sorting criteria",
+      "fullTitle": "URICollection sortBy should accept a property string and use the matching property as the sorting criteria",
+      "duration": 1
+    },
+    {
+      "title": "should accept a function and use it to create the sorting criteria",
+      "fullTitle": "URICollection sortBy should accept a function and use it to create the sorting criteria",
+      "duration": 0
+    },
+    {
+      "title": "should return an instance of URICollection",
+      "fullTitle": "URICollection sortBy should return an instance of URICollection",
+      "duration": 0
+    },
+    {
+      "title": "should return a collection with the same number of elements as the original.",
+      "fullTitle": "URICollection sortBy should return a collection with the same number of elements as the original.",
+      "duration": 0
+    },
+    {
+      "title": "should return an instance of URICollection",
+      "fullTitle": "URICollection shuffle should return an instance of URICollection",
+      "duration": 0
+    },
+    {
+      "title": "should return a collection with the same number of elements as the original",
+      "fullTitle": "URICollection shuffle should return a collection with the same number of elements as the original",
+      "duration": 0
+    },
+    {
+      "title": "should return a collection with elements in a different order",
+      "fullTitle": "URICollection shuffle should return a collection with elements in a different order",
+      "duration": 1
+    }
+  ]
+}

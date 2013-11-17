@@ -1,0 +1,617 @@
+
+<div class="spec-report">
+	<span class="spec-report-title">Test Results</span>
+	<ul class="spec-stats">
+		<li><span class="stat-name">Tests: </span>103</li>
+		<li><span class="stat-name">Passing: </span>103 / 103</li>
+	</ul>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">construction</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should accept a single URL string.
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept multiple URL strings.
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept an array of multiple URL strings.
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept an array with a single URL string.
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept a single URIjs instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept multiple URIjs instances.
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept an array of multiple URIjs instances.
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept an array with a single URIjs instance.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">should</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return true for URI instances.
+			</li>
+			
+			<li class="spec-suite-item">
+				should not return true for strings.
+			</li>
+			
+			<li class="spec-suite-item">
+				should not return true for other constructed objects.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">map</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a new URICollection when a map operation returns URIjs instances.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a vanilla array when a map operation returns results other than URIjs instances.
+			</li>
+			
+			<li class="spec-suite-item">
+				should not mutate URIjs instances in the original collection
+			</li>
+			
+			<li class="spec-suite-item">
+				should produce the same result as a series of individual URIjs instance manipulations.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">toArray</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a vanilla javascript array
+			</li>
+			
+			<li class="spec-suite-item">
+				should return *clones* of its internal URIjs instances
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">clone</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a new URICollection instance
+			</li>
+			
+			<li class="spec-suite-item">
+				should create a copy with the same number of elements
+			</li>
+			
+			<li class="spec-suite-item">
+				should create a copy with individual URIjs elements cloned themselves
+			</li>
+			
+			<li class="spec-suite-item">
+				should create a copy with DEEP-equal elements
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">each</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a new URI collection, even without an iterator return value
+			</li>
+			
+			<li class="spec-suite-item">
+				should not mutate URIjs instances in the original collection
+			</li>
+			
+			<li class="spec-suite-item">
+				should produce the same result as a series of individual URIjs instance manipulations.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">pluck</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should extract the given property from each URI instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return an array with length equal to that of the collection.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">invoke</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return the same number of results as there are elements in the original collection.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a vanilla array when passed a method name but no additional parameters.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a new URICollection when passed a method name and additional parameters.
+			</li>
+			
+			<li class="spec-suite-item">
+				when called with only a method name, should return the same array of results returned from manual iteration + no-arg invocation over a plain array of URIjs instances.
+			</li>
+			
+			<li class="spec-suite-item">
+				when called with a method and additional parameters, should return a collection of URIjs instances deep-equal to the manual-iteration equivalent.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">some</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return true if any collection elements pass the truth test
+			</li>
+			
+			<li class="spec-suite-item">
+				should return false if zero collection elements pass the truth test
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">every</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return true if all collection elements pass the truth test
+			</li>
+			
+			<li class="spec-suite-item">
+				should return false if any collection elements fail the truth test
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">contains</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				when passed a string, returns true if the string is equal to the &#x60;.toString()&#x60; result of any element.
+			</li>
+			
+			<li class="spec-suite-item">
+				when passed a string, returns false if the string is not equal to the &#x60;.toString()&#x60; result of any element.
+			</li>
+			
+			<li class="spec-suite-item">
+				when passed a URLjs instance, returns true if the &#x60;.toString()&#x60; of that instance equals the &#x60;.toString()&#x60; of any element.
+			</li>
+			
+			<li class="spec-suite-item">
+				when passed a URLjs instance, returns false if the &#x60;.toString()&#x60; of that instance does not equal the &#x60;.toString()&#x60; of any element.
+			</li>
+			
+			<li class="spec-suite-item">
+				when passed a RegExp instance, returns true if calling that RegExp&#x27;s &#x60;#test()&#x60; with any element&#x27;s &#x60;.toString()&#x60; value returns true.
+			</li>
+			
+			<li class="spec-suite-item">
+				when passed a RegExp instance, returns false if calling that RegExp&#x27;s &#x60;#test()&#x60; with every element&#x27;s &#x60;.toString()&#x60; value returns false.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">reduce</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should not wrap its output in a URICollection.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the same result as iteration over a plain array of the same URIs.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return correct results.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">reduceRight</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should not wrap its output in a URICollection.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the same result as iteration over a plain array of the same URIs.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return correct results.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return different results than &#x60;reduce&#x60; when operation is non-associative
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">find</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URIjs instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the first matching instance
+			</li>
+			
+			<li class="spec-suite-item">
+				should return null if no match is found
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">findWhere</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URIjs instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should convert a key-val query into a function invoking the correct instance method
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the first matching instance
+			</li>
+			
+			<li class="spec-suite-item">
+				should return null if no match is found
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">where</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URICollection instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should convert a key-val query into a function invoking the correct instance method
+			</li>
+			
+			<li class="spec-suite-item">
+				should return _every_ matching URIjs instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return _only_ matching URIjs instances.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return an empty URICollection instance if no matches are found.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">sample</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URIjs instance when called with no parameters or with n == 1.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a URICollection instance when called with n &gt; 1.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a URICollection with size == n when n &gt; 1.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">filter</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URICollection instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return all matches from the collection
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the same result (count + deep-equal) as manual iteration over a plain array of the same URIs
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">reject</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URICollection instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return all matches from the collection
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the same result (count + deep-equal) as iteration over a plain array of the same URIs
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">at</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URIjs instance
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a URIjs instance with a &#x60;.toString()&#x60; value equal to the string value at index &#x60;i&#x60; of the collection&#x27;s &#x60;.toArray()&#x60; output.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return null if there is no URL instance at that index.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the (N - 1)th from the last element if a negative index is passed.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">first</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				if N==null or N==1, should return a URIjs instance
+			</li>
+			
+			<li class="spec-suite-item">
+				if N&gt;1, should return a URICollection instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				if N&gt;1, should return a collection with N elements.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the first N elements
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">last</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				if N==null or N==1, should return a URIjs instance
+			</li>
+			
+			<li class="spec-suite-item">
+				if N&gt;1, should return a URICollection instance.
+			</li>
+			
+			<li class="spec-suite-item">
+				if N&gt;1, should return a collection with N elements.
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the last N elements
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">rest</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URICollection instance for any N, including null
+			</li>
+			
+			<li class="spec-suite-item">
+				if n is null, should return a number of elements equal to &#x60;size() - 1&#x60;
+			</li>
+			
+			<li class="spec-suite-item">
+				if n is NOT null, should return a number of elements equal to &#x60;size() - n&#x60;
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the elements from index N to the end.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">initial</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return a URICollection instance for any N, including null.
+			</li>
+			
+			<li class="spec-suite-item">
+				if n is null, should return a number of elements equal to &#x60;size() - 1&#x60;
+			</li>
+			
+			<li class="spec-suite-item">
+				if n is NOT null, should return a number of elements equal to &#x60;size() - n&#x60;
+			</li>
+			
+			<li class="spec-suite-item">
+				should return the elements from index 0 to (size - (n+1)).
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">countBy</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should accept a property string and use the matching property as the counting criteria
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept a function and use it to create the counting criteria
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a total count equal to the number of instances in the collection
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">groupBy</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should accept a property string and use the matching property as the grouping criteria
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept a function and use it to create the grouping criteria
+			</li>
+			
+			<li class="spec-suite-item">
+				should have the same number of keys as the number of unique results for the grouping function over a plain array of the collection&#x27;s elements.
+			</li>
+			
+			<li class="spec-suite-item">
+				should have the same total number of URIs as the original collection
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">sortBy</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should accept a property string and use the matching property as the sorting criteria
+			</li>
+			
+			<li class="spec-suite-item">
+				should accept a function and use it to create the sorting criteria
+			</li>
+			
+			<li class="spec-suite-item">
+				should return an instance of URICollection
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a collection with the same number of elements as the original.
+			</li>
+			
+		</ul>
+	</div>
+	
+	<div class="spec-suite">
+		<span class="spec-suite-title">shuffle</span>
+		<ul class="spec-suite-item-list">
+			
+			<li class="spec-suite-item">
+				should return an instance of URICollection
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a collection with the same number of elements as the original
+			</li>
+			
+			<li class="spec-suite-item">
+				should return a collection with elements in a different order
+			</li>
+			
+		</ul>
+	</div>
+	
+</div>
