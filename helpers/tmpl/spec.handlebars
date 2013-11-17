@@ -1,13 +1,13 @@
 
 <div class="spec-report">
-	<span class="spec-report-title">{{title}}</span>
+	<h2 class="spec-report-title">{{title}}</h2>
 	<ul class="spec-stats">
 		<li><span class="stat-name">Tests: </span>{{stats.total}}</li>
 		<li><span class="stat-name">Passing: </span>{{stats.passes}} / {{stats.total}}</li>
 	</ul>
 	{{#each testSuites}}
 	<div class="spec-suite">
-		<span class="spec-suite-title">{{suite}}</span>
+		<h4 class="spec-suite-title">{{suite}}</h4>
 		<ul class="spec-suite-item-list">
 			{{#each tests}}
 			<li class="spec-suite-item">

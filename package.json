@@ -16,9 +16,11 @@
     "url": "https://github.com/scivey/uri-collection/issues"
   },
   "devDependencies": {
-    "handlebars": "~1.1.2"
+    "handlebars": "~1.1.2",
+    "marked": "~0.2.10"
   },
   "dependencies": {
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "underscore.string": "~2.3.3"
   }
 }

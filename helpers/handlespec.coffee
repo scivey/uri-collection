@@ -40,15 +40,14 @@ readJSON indir("spec.json"), (err, data) ->
 		.value()
 
 	toRender =
-		title: "Test Results"
+		title: "Unit Tests"
 		stats:
 			total: data.stats.tests
 			passes: data.stats.passes
 		testSuites: mapped
 
 	#console.log mapped[0]
-
-	loadHandle indir("tmpl/spec.handlebars"), (err, tmpl) ->
-		html = tmpl(toRender)
+	musty = require indir("superstache.coffee")
+	musty.render "spec", toRender, (err, html) ->
 		fs.writeFile indir("../spec.html"), html, (err) ->
 			console.log "done"

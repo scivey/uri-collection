@@ -1,131 +1,4 @@
-<style type="text/css">
-	.api-list-item {
-		//border: 1px solid #888;
-		border-radius: 4px;
-		padding-left: 2.0em;
-		padding-right: 1.0em;
-		box-sizing: border-box;
-		padding-bottom: 1.0em;
-		width: 80%;
-		margin: 0 auto;
-		font-size: 1.1em;
-		line-height: 1.5;
-}
-	.api-list-index {
-		width: 15%;
-		font-size: 1.1em;
-		line-height: 1.5;
-		vertical-align: top;
-		//border: 1px solid #900;
-		list-style-type: none;
-		text-decoration: none;
-		box-sizing: border-box;
-		padding-top: 5.0em;
-}
 
-	.api-list-index {
-		//border: 1px solid green;
-}
-	.api-list-index ul {
-		box-sizing: border-box;
-		margin-top: 0;
-		margin: 0 auto;
-		padding-top: 0;
-		list-style-type: none;
-	}
-
-	.api-list-index ul li:first-child {
-		padding-top: 0;
-		margin-top: 0;
-	}
-
-	.api-list-index a {
-		text-decoration: none;
-		color: rgba(160, 0, 0, 1.0);
-	}
-
-	.api-list-index a:hover {
-		text-decoration: underline;
-		color: rgba(200,0,0,1.0);
-}
-	.api-list-index a:visited {
-		color: rgba(160, 0, 0, 1.0);
-}
-
-	code {
-		margin-left: 0.05em;
-		margin-right: 0.05em;
-		padding-left: 0.15em;
-		padding-right: 0.15em;
-}
-
-	.api-list {
-		width: 80%;
-		//border: 1px solid #888;
-		box-sizing: border-box;
-		margin-top: 0px;
-		padding-top: 0px;
-
-}
-
-	.api-list-item + .api-list-item {
-		margin-top: 2.0em;
-}
-
-	body {
-		font-size: 112.5%;
-	}
-
-	code {
-		background: #cecece;
-		font-family: "Monospace";
-	}
-
-	.api-list-item-body {
-		padding-left: 2.0em;
-		padding-right: 2.0em;
-		//border: 1px solid #090;
-		width: 95%;
-		box-sizing: border-box;
-		font-size: 1.1em;
-}
-	.api-list-title {
-		margin: 0 auto;
-		padding-top: 1.0em;
-		text-align: center;
-		box-sizing: border-box;
-		height: 3.0em;
-}
-
-	.api-item-list {
-		padding-left: 2.0em;
-}
-
-	.api-item-title {
-		border-color: #444;
-		border-width: 1px 0px 1px 0px;
-		border-style: solid;
-		padding: 0px;
-		padding-left: 1.0em;
-	}
-
-	.api-item-title * {
-		display: inline-block;
-		margin: 0 0;
-	}
-	.api-item-description {
-		text-indent: 2.0em;
-}
-	.api-frame > div {
-		display: inline-block;
-	}
-
-	.api-frame {
-		margin-bottom: 8.0em;
-}
-
-
-</style>
 <div class="api-frame">
 <div class="api-list-index">
 		<ul>
@@ -146,24 +19,25 @@
 		<div class="api-item-title">
 		<a name="{{ident.name}}">
 				
-			<h2>{{ident.name}}({{#if params}}{{paramList params}}{{/if}})
-			</h2>
+			<h3>{{ident.name}}({{#if params}}{{paramList params}}{{/if}})
+			</h3>
 
 		</a>
 		</div>
 		<div class="api-list-item-body">
-			<p class="api-item-description">
+			<div class="api-item-description">
 				{{{description}}}
-			</p>
-			<h3 class="api-item-subtitle">Parameters</h3>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
 			<ul class="api-item-list api-item-params">
 				{{#if params}}
 					{{#each params}}
 					<li>
 						<code>{{name}}</code>: 
 						{{commaList types}}
-						<br/>
+						<p>
 						{{{description}}}
+						</p>
 					</li>
 					{{/each}}
 				{{else}}
@@ -172,13 +46,11 @@
 					</li>
 				{{/if}}
 			</ul>
-			<h3 class="api-item-subtitle">Returns</h3>
+			<h5 class="api-item-subtitle">Returns</h5>
 			<ul class="api-item-list api-item-returns">
 				<li>
 					{{#with retval}}
-						{{#each types}}
-						{{this}}<br/>
-						{{/each}}
+						{{commaList types}}
 						<p>
 							{{{description}}}
 						</p>

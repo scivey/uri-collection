@@ -63,9 +63,8 @@ readJSON indir("doxed.json"), (err, data) ->
 		title: "URICollection API"
 
 	#console.log mapped3
-
-	loadHandle indir("tmpl/dox.handlebars"), (err, tmpl) ->
-		html = tmpl(toRender)
+	musty = require indir("superstache.coffee")
+	musty.render "dox", toRender, (err, html) ->
 		fs.writeFile indir("../api.html"), html, (err) ->
 			console.log "done"
 
