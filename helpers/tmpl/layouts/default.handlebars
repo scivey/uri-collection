@@ -1,11 +1,33 @@
 <html>
 <head>
-	<title>{{#if title}}{{title}}{{else}}Default Title{{/if}}</title>
+	<title>{{windowTitle}}</title>
 <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body>
-	<div id="body-frame">
-		{{{contents}}}
+	<div id="page-frame">
+		<div id="site-header">
+			<h1>uri-collection</h1>
+			<div class="header-links">
+				<span class="link-wrapper-span">
+				{{#each headLinks}}
+					{{#if class}}
+						<a class="{{class}}" href="{{href}}">{{name}}</a>
+					{{else}}
+						<a href="{{href}}">{{name}}</a>
+					{{/if}}
+
+				{{/each}}
+				</span>
+			</div>
+		</div>
+		<div id="body-frame">
+			{{#if title}}
+				<h2>{{title}}</h2>
+			{{else}}
+				<span class="no-title-span"></span>
+			{{/if}}
+			{{{contents}}}
+		</div>
 	</div>
 </body>
 </html>

@@ -40,10 +40,11 @@ readJSON indir("spec.json"), (err, data) ->
 		.value()
 
 	toRender =
-		title: "Unit Tests"
+		title: "Specs"
 		stats:
 			total: data.stats.tests
 			passes: data.stats.passes
+		linkName: "Specs"
 		testSuites: mapped
 
 	#console.log mapped[0]

@@ -60,7 +60,8 @@ readJSON indir("doxed.json"), (err, data) ->
 	mapped3 = _.sortBy mapped3, (el) -> el.ident.name
 	toRender =
 		items: mapped3
-		title: "URICollection API"
+		title: "API"
+		linkName: "API"
 
 	#console.log mapped3
 	musty = require indir("superstache.coffee")

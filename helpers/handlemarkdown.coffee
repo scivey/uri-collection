@@ -20,8 +20,25 @@ writeJSON = (fName, obj, cb) ->
 marked = require indir("handlers/mdown.coffee")
 stache = require indir("superstache.coffee")
 
-fs.readFile indir("../README.md"), "utf8", (err, res) ->
+fs.readFile indir("../mdsrc/intro.md"), "utf8", (err, res) ->
 	marked res, (err, html) ->
-		stache.render "straight", {pageContents: html, title: "Overview"}, (err, rendered) ->
+		windowTitle = "uri-collection"
+		title = false
+		if title
+			windowtitle = title + " | " + windowTitle
+		stache.render "straight", {linkName: "Home", pageContents: html, windowTitle: windowTitle, title: title}, (err, rendered) ->
 			fs.writeFile indir("../index.html"), rendered, (err) ->
 				console.log "done"
+
+fs.readFile indir("../mdsrc/overview.md"), "utf8", (err, res) ->
+	marked res, (err, html) ->
+		#console.log html
+		title = "Overview"
+		windowTitle = "uri-collection"
+		if title?
+			windowtitle = title + " | " + windowTitle
+		stache.render "straight", {linkName: "Overview", pageContents: html, windowTitle: windowTitle, title: title}, (err, rendered) ->
+			#console.log rendered
+			fs.writeFile indir("../overview.html"), rendered, (err) ->
+				console.log "done"
+

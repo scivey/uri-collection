@@ -579,6 +579,9 @@ h4 {
 h5 {
   font-size: 1.16em; }
 
+.no-title-span {
+  font-size: 2.667em; }
+
 span.bibref {
   font-size: 0.6em;
   position: relative;
@@ -682,13 +685,16 @@ body {
       font-size: 100%; } }
   @media all and (min-width: 500px) {
     body {
-      font-size: 112.5%; } }
+      font-size: 105.5%; } }
   @media all and (min-width: 600px) {
     body {
-      font-size: 117.5%; } }
+      font-size: 107.5%; } }
   @media all and (min-width: 840px) {
     body {
-      font-size: 125%; } }
+      font-size: 115%; } }
+  @media all and (min-width: 980px) {
+    body {
+      font-size: 120%; } }
   @media all and (min-width: 340px) {
     body {
       line-height: 1.5; } }
@@ -701,6 +707,9 @@ body {
   @media all and (min-width: 840px) {
     body {
       line-height: 1.6; } }
+  @media all and (min-width: 900px) {
+    body {
+      line-height: 1.7; } }
   body #content-frame {
     margin-left: 10.75%;
     width: 80.875%;
@@ -905,37 +914,57 @@ body {
   border-radius: 10px;
   border-color: #666666; }
 
-.api-list-item {
-  border-radius: 4px;
-  padding-left: 2.0em;
-  padding-right: 1.0em;
-  box-sizing: border-box;
-  padding-bottom: 1.0em;
-  width: 80%;
-  margin: 0 auto; }
-
 .api-list-index {
-  width: 15%;
   vertical-align: top;
   list-style-type: none;
   text-decoration: none;
   box-sizing: border-box;
   padding-top: 5.0em; }
 
+.api-list-index {
+  padding: 1.0em 0.5em 1.0em 0em; }
+
 .api-list-index ul {
   box-sizing: border-box;
-  margin-top: 0;
+  vertical-align: top;
+  margin-top: 0px;
+  padding-top: 0px;
+  display: block;
   margin: 0 auto;
   padding-top: 0;
   list-style-type: none; }
+  .api-list-index ul li + li {
+    margin-top: 0.5em; }
 
 .api-list-index ul li:first-child {
   padding-top: 0;
   margin-top: 0; }
 
+.api-list-index li {
+  border: 3px solid #c74343;
+  font-family: "Oswald", Verdana, Geneva, sans-serif;
+  text-decoration: none;
+  color: #eee;
+  background: #c74343;
+  text-align: right;
+  padding-right: 0.5em;
+  border-radius: 4px; }
+  .api-list-index li a {
+    text-decoration: none;
+    color: #eee; }
+  .api-list-index li a:visited {
+    text-decoration: none;
+    color: #eee; }
+  .api-list-index li:hover {
+    background: #eee; }
+  .api-list-index li:hover a {
+    text-decoration: underline;
+    color: #c74343; }
+
 .api-list-index a {
   text-decoration: none;
-  color: #a00000; }
+  color: #a00000;
+  color: #eee; }
 
 .api-list-index a:hover {
   text-decoration: underline;
@@ -951,10 +980,12 @@ code {
   padding-right: 0.15em; }
 
 .api-list {
-  width: 80%;
-  box-sizing: border-box;
+  width: 83%;
   margin-top: 0px;
   padding-top: 0px; }
+
+.api-list-index {
+  width: 15%; }
 
 .api-list-item + .api-list-item {
   margin-top: 2.0em; }
@@ -1008,10 +1039,30 @@ code {
 .api-frame {
   margin-bottom: 8.0em; }
 
-#body-frame {
-  width: 80%;
-  margin: 0 auto; }
+.api-list-item {
+  border-radius: 4px;
+  padding-left: 2.0em;
+  padding-right: 1.0em;
+  box-sizing: border-box;
+  padding-bottom: 1em; }
 
+.api-list-item-body .api-item-description {
+  max-width: 27.0em; }
+.api-list-item-body .api-item-list {
+  max-width: 27.0em; }
+
+@media all and (max-width: 900px) {
+  .api-list-index, .api-list-index * {
+    display: none; }
+
+  .api-list {
+    width: 95%; }
+
+  .api-list-item-body {
+    padding-left: 1.0em;
+    padding-right: 1.0em;
+    width: 100%;
+    box-sizing: border-box; } }
 body {
   font-family: "Libre Baskerville", Georgia, Cambria, "Times New Roman", Times, serif;
   font-weight: normal; }
@@ -1037,12 +1088,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
   text-align: center; }
 
-@media all and (max-width: 600px) {
-  .api-list-index, .api-list-index * {
-    display: none; }
-
-  .api-list {
-    width: 100%; } }
 .spec-stats {
   margin-left: 2.0em;
   margin-top: 2.0em;
@@ -1055,5 +1100,69 @@ h1, h2, h3, h4, h5, h6 {
 pre code {
   line-height: 1.3; }
 
+#page-frame {
+  margin-top: 0;
+  width: 80%;
+  margin: 0 auto; }
+  #page-frame #site-header {
+    margin-top: 0; }
+    #page-frame #site-header h1, #page-frame #site-header h2, #page-frame #site-header h3, #page-frame #site-header h4, #page-frame #site-header h5, #page-frame #site-header h6 {
+      margin: 0 auto;
+      text-align: center; }
+    #page-frame #site-header .header-links {
+      padding-top: 0.25em;
+      margin: 0 auto;
+      text-align: center; }
+      #page-frame #site-header .header-links .link-wrapper-span {
+        border: 3px solid #c74343;
+        border-radius: 4px;
+        background: #c74343;
+        *zoom: 1;
+        display: inline-block;
+        font-family: "Oswald", Verdana, Geneva, sans-serif; }
+        #page-frame #site-header .header-links .link-wrapper-span:before, #page-frame #site-header .header-links .link-wrapper-span:after {
+          content: " ";
+          display: table; }
+        #page-frame #site-header .header-links .link-wrapper-span:after {
+          clear: both; }
+      #page-frame #site-header .header-links a {
+        color: #fafafa;
+        border-radius: 4px;
+        width: 5.0em;
+        display: inline-block;
+        font-size: 1.1em;
+        text-decoration: none; }
+        #page-frame #site-header .header-links a:visited {
+          color: #fafafa; }
+        #page-frame #site-header .header-links a:hover {
+          background: #fafafa;
+          color: #c74343;
+          text-decoration: underline; }
+        #page-frame #site-header .header-links a.active-head-link {
+          background: #fafafa;
+          color: #c74343;
+          text-decoration: none; }
+  #page-frame #body-frame h2 {
+    margin-top: 1.0em;
+    margin-bottom: 0.5em;
+    text-align: center; }
+  #page-frame #body-frame h1 {
+    margin-top: 0;
+    text-align: center; }
+
+.no-title-span {
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+  height: 1px;
+  min-width: 1.0em;
+  display: block; }
+
+.basic-content-frame p ~ h1, .basic-content-frame p ~ h2, .basic-content-frame p ~ h3, .basic-content-frame p ~ h4, .basic-content-frame p ~ h5, .basic-content-frame p ~ h6 {
+  margin-top: 1.0em;
+  margin-bottom: 0.5em; }
+
 .spec-report ul {
   list-style-type: square; }
+
+pre {
+  overflow: scroll; }

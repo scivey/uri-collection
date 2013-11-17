@@ -1,17 +1,4 @@
 
-uri-collection
-=================
-
-An immutable list container for URIs, with chaining methods for filtering and manipulation.  Built for Node.js on top of URIjs and Underscore.
-
-All operations return new collections, leaving the original collections and their elements intact.  Filter and search operations like `findWhere` are modified to accomodate URIjs' interface, e.g. comparing against methods instead of properties where appropriate.
-
-The public API is well-documented, and each method is covered by its own test suite.  Each includes tests to verify immutability of existing collections.
-
-
-Overview
----------
-
 URICollections have methods matching most of the Underscore Collection and Array APIs.  Most of these methods proxy to the corresponding Underscore functions at some point, with additional logic to ensure immutability, produce sensible return types, and convert list/collection convenience functions into forms that are reasonable for URIjs' interface.
 
 ####Immutability

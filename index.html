@@ -1,116 +1,65 @@
 <html>
 <head>
-	<title>Overview</title>
+	<title></title>
 <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body>
-	<div id="body-frame">
-		<div class="basic-content-frame">
-<h1 id="node-js-uri-collection">Node.js: uri-collection</h1>
-<p>Scott Ivey -&gt; <a href="http://www.scivey.net">http://www.scivey.net</a></p>
-<p>An immutable list container for URIs, with chaining methods for filtering and manipulation.  Built on top of URIjs and Underscore.</p>
-<p>All operations return new collections, leaving the original collections and their elements intact.  Filter and search operations like <code>findWhere</code> are modified to accomodate URIjs&#39; interface, e.g. comparing against methods instead of properties where appropriate.</p>
-<p>The public API is well-documented, and each method is covered by its own test suite.  Each includes tests to verify immutability of existing collections.</p>
-<h2 id="overview">Overview</h2>
-<p>URICollections have methods matching most of the Underscore Collection and Array APIs.  Most of these methods proxy to the corresponding Underscore functions at some point, with additional logic to ensure immutability, produce sensible return types, and convert list/collection convenience functions into forms that are reasonable for URIjs&#39; interface.</p>
-<h4 id="immutability">Immutability</h4>
-<p>All collections are immutable, even when normally mutating methods are used while iterating over collection elements.  This is achieved by cloning the collection elements behind the scenes before they&#39;re passed to the iterating function.</p>
+	<div id="page-frame">
+		<div id="site-header">
+			<h1>uri-collection</h1>
+			<div class="header-links">
+				<span class="link-wrapper-span">
+				
+					
+						<a class="active-head-link" href="index.html">Home</a>
+					
+
+				
+					
+						<a href="overview.html">Overview</a>
+					
+
+				
+					
+						<a href="api.html">API</a>
+					
+
+				
+					
+						<a href="spec.html">Specs</a>
+					
+
+				
+				</span>
+			</div>
+		</div>
+		<div id="body-frame">
+			
+				<span class="no-title-span"></span>
+			
+			<div class="basic-content-frame">
+<p>An immutable list container for URIs, with chaining methods for filtering and manipulation.  Built for Node.js on top of <a href="http://medialize.github.io/URI.js/">URIjs</a> and <a href="http://underscorejs.org/">Underscore</a>.</p>
 <pre><code class="lang-javascript"><span class="keyword">var</span> URICollection <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">"uri-collection"</span>);
 <span class="keyword">var</span> urls <span class="keyword operator">=</span> [
     <span class="string">"http://www.justcats.net/fuzz"</span>,
+    <span class="string">"http://www.foxnews.com/fairandbalanced"</span>,
     <span class="string">"http://www.reddit.com/r/alsocats"</span>,
     <span class="string">"http://www.foxnews.com/nospinzone"</span>
 ];
 <span class="keyword">var</span> collection1 <span class="keyword operator">=</span> <span class="keyword">new</span> <span class="entity function">URICollection</span>(urls);
-<span class="keyword">var</span> collection2 <span class="keyword operator">=</span> collection1.<span class="function call">map</span>( <span class="keyword">function</span>(oneUrl) {
-    oneUrl.<span class="function call">domain</span>(<span class="string">"google.com"</span>);
-});
+
+<span class="keyword">var</span> collection2 <span class="keyword operator">=</span> collection1.<span class="function call">where</span>( { domain: <span class="string">"foxnews.com"</span> } );
 
 console.<span class="support method">log</span>( collection2.<span class="function call">toString</span>() );
-<span class="comment">// [ "http://www.google.com/fuzz",</span>
-<span class="comment">//    "http://www.google.com/r/alsocats",</span>
-<span class="comment">//    "http://www.google.com/nospinzone" ]</span>
-
-<span class="comment">// the first collection's elements aren't modified,</span>
-<span class="comment">// even though the operation was performed on object </span>
-<span class="comment">// references.</span>
-console.<span class="support method">log</span>( collection1.<span class="function call">toString</span>() );
-<span class="comment">//     [ "http://www.justcats.net/fuzz",</span>
-<span class="comment">//    "http://www.reddit.com/r/alsocats",</span>
+<span class="comment">// output: </span>
+<span class="comment">// [ "http://www.foxnews.com/fairandbalanced",</span>
 <span class="comment">//    "http://www.foxnews.com/nospinzone" ]</span></code></pre>
-<h4 id="sensible-return-types">Sensible Return Types</h4>
-<p>When the corresponding Underscore function always returns a single list element, a URICollection method will return a cloned URIjs instance.</p>
-<p>In cases where the Underscore method returns an array, the return type depends on the type of the first array element.  If the first element is a URIjs instance, the array is wrapped in a new URICollection before being returned.  If it&#39;s any other type, the raw array is returned.  This is in line with the results reasonably expected from the operations in question, e.g. :</p>
-<pre><code class="lang-javascript"><span class="keyword">var</span> URICollection <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">"uri-collection"</span>);
-<span class="keyword">var</span> assert <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">"assert"</span>);
-<span class="keyword">var</span> urls <span class="keyword operator">=</span> [
-    <span class="string">"http://www.thundercats.org/nostalgia"</span>,
-    <span class="string">"http://www.garmentdistrict.com/district/not.html"</span>,
-    <span class="string">"http://www.reddit.com/r/probablymorecats"</span>
-];
-<span class="keyword">var</span> collection1 <span class="keyword operator">=</span> <span class="keyword">new</span> <span class="entity function">URICollection</span>(urls);
-<span class="keyword">var</span> collection2 <span class="keyword operator">=</span> collection1.<span class="function call">map</span>( <span class="keyword">function</span>(oneUrl) {
-    oneUrl.<span class="function call">tld</span>(<span class="string">"net"</span>);
-    <span class="comment">// calling #tld("net") mutates a URI instance,</span>
-    <span class="comment">// changing its TLD to ".net"</span>
-});
-<span class="keyword">var</span> domainArray <span class="keyword operator">=</span> collection1.<span class="function call">map</span>( <span class="keyword">function</span>(oneUrl) {
-    oneUrl.<span class="function call">domain</span>();
-    <span class="comment">// calling #domain() without parameters returns</span>
-    <span class="comment">// the URI's domain as a string</span>
-});
-
-<span class="function call">assert</span>(collection2 instanceof URICollection); <span class="comment">// true</span>
-<span class="function call">assert</span>(domainArray instanceof <span class="keyword">Array</span>); <span class="comment">// true</span></code></pre>
-<p>Above, calling <code>URI#domain()</code> on each element returns a plain array because the #domain() method returns a string.  Calling <code>URI#tld(&quot;net&quot;)</code> on each element returns a new URICollection because the method returns a mutated URIjs instance.</p>
-<p>The <code>#first(n)</code> and <code>#last(n)</code> methods follow the convention of Underscore&#39;s matching functions: where <code>n</code> is 1 or <code>null</code>, a single element (URIjs instance) is returned, and where <code>n &gt;= 2</code>, a new URICollection is returned.</p>
-<h4 id="adaptations-for-urijs-interface">Adaptations for URIjs&#39; Interface</h4>
-<p>Many Underscore convenience methods are intended for plain Javascript objects or arrays - e.g. the object methods <code>#where()</code> and <code>#pluck()</code> are suited to handling properties from normal objects, but not to more complicated objects with data accessed via prototype methods.</p>
-<p>URIjs instances have methods where the names might suggest properties.  E.g. instead of a property, <code>uri.domain</code> is a getter/setter method which gets when called with no arguments and sets when called with a string.  The adapted methods on URICollection instances take this into account, so methods like <code>#pluck(propertyName)</code> work the same way:</p>
-<pre><code><span class="keyword">var</span> URICollection <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">"uri-collection"</span>);
-<span class="keyword">var</span> urls <span class="keyword operator">=</span> [
-    <span class="string">"http://www.PepsiLovesYourDemographic.com"</span>,
-    <span class="string">"http://www.burgerking.com/HealthyEatsAtThePalace"</span>,
-    <span class="string">"http://www.frogenthusiasts.net"</span>];
-<span class="keyword">var</span> collection <span class="keyword operator">=</span> <span class="keyword">new</span> <span class="function call">URICollection</span>(urls);
-<span class="keyword">var</span> domains <span class="keyword operator">=</span> collection.<span class="function call">pluck</span>(<span class="string">"domain"</span>);
-
-console.<span class="function call">log</span>(domains);
-<span class="comment">// ["PepsiLovesYourDemographic.com", "burgerking.com", "frogenthusiasts.net"]</span></code></pre>
-<p>This is also true of the <code>#where()</code> and <code>#findWhere()</code> methods, each of which take an object of key-value pairs to match in the collection.  The adapted URICollection methods know to use the named keys as methods of their elements, so this works:</p>
-<pre><code><span class="comment">// same collection as above</span>
-<span class="keyword">var</span> burgerLink <span class="keyword operator">=</span> collection.<span class="function call">findWhere</span>({domain: <span class="string">"burgerking.com"</span>});
-console.<span class="function call">log</span>( burgerLink.<span class="function call">toString</span>() );
-<span class="comment">// "http://www.burgerking.com/HealthyEatsAtThePalace"</span></code></pre>
-<p>These and the other methods are fully documented on the API page.</p>
-<h2 id="installation">Installation</h2>
-<pre><code>npm install uri<span class="keyword operator">-</span>collection</code></pre>
-<h2 id="github">GitHub</h2>
-<p><a href="https://github.com/scivey/uri-collection">https://github.com/scivey/uri-collection</a></p>
-<h2 id="contact">Contact</h2>
-<p><a href="https://github.com/scivey">https://github.com/scivey</a></p>
-<p><a href="http://www.scivey.net">http://www.scivey.net</a></p>
-<p>scott.ivey@gmail.com</p>
-<h2 id="license">License</h2>
-<p>MIT License (MIT)</p>
-<p>Copyright (c) 2013 Scott Ivey, <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#115;&#x63;&#111;&#116;&#x74;&#46;&#105;&#x76;&#101;&#121;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#115;&#x63;&#111;&#116;&#x74;&#46;&#105;&#x76;&#101;&#121;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a></p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the &quot;Software&quot;), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.</p>
+<p>All operations return new collections, leaving the original collections and their elements intact.  Filter and search operations like <code>findWhere</code> are modified to accomodate URIjs&#39; interface, and compare against methods instead of properties where appropriate.</p>
+<p>The <a href="./api.html">public API is well-documented</a>, and each method is covered by its own <a href="./spec.html">test suite</a>.  Each includes tests to verify immutability of existing collections.</p>
+<p><a href="./overview.html"> Read the overview -&gt; </a></p>
 
 </div>
+		</div>
 	</div>
 </body>
 </html>

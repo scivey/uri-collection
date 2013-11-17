@@ -118,6 +118,10 @@ $base-heading-sizes: 3.33em 2.667em 2em 1.333em 1.16em 1em;
 	}
 }
 
+.no-title-span {
+	font-size: nth($base-heading-sizes, 2);
+}
+
 
 
 span.bibref {
@@ -297,7 +301,7 @@ pre {
 body {
 	padding-top: 2.0em;
 	padding-bottom: 12.0em;
-	$screen-sizes: 380px 100%, 500px 112.5%, 600px 117.5%, 840px 125%;
+	$screen-sizes: 380px 100%, 500px 105.5%, 600px 107.5%, 840px 115%, 980px 120%;
 	font-size: 85%;
 	@include trans;
 	@each $pair in $screen-sizes {
@@ -307,7 +311,7 @@ body {
 	}
 
 
-	$line-heights: 340px 1.5, 500px 1.6, 600px 1.6, 840px 1.6;
+	$line-heights: 340px 1.5, 500px 1.6, 600px 1.6, 840px 1.6, 900px 1.7;
 	line-height: 1.6;
 	@each $pair in $line-heights {
 		@media all and (min-width: nth($pair, 1)) {
@@ -524,21 +528,10 @@ body {
 }
 
 
-
-	.api-list-item {
-		//border: 1px solid #888;
-		border-radius: 4px;
-		padding-left: 2.0em;
-		padding-right: 1.0em;
-		box-sizing: border-box;
-		padding-bottom: 1.0em;
-		width: 80%;
-		margin: 0 auto;
-		//font-size: 1.1em;
-		//line-height: 1.5;
-}
 	.api-list-index {
-		width: 15%;
+		//max-width: 9.0em;
+		//min-width: 7.0em;
+		//border: 1px solid #999;
 		//font-size: 1.1em;
 		//line-height: 1.5;
 		vertical-align: top;
@@ -551,13 +544,22 @@ body {
 
 	.api-list-index {
 		//border: 1px solid green;
+		padding: 1.0em 0.5em 1.0em 0em;
 }
 	.api-list-index ul {
 		box-sizing: border-box;
-		margin-top: 0;
+		vertical-align: top;
+		margin-top: 0px;
+		padding-top: 0px;
+		//border: 1px solid #060;
+		display: block;
 		margin: 0 auto;
 		padding-top: 0;
 		list-style-type: none;
+		li + li {
+			margin-top: 0.5em;
+		}
+
 	}
 
 	.api-list-index ul li:first-child {
@@ -565,9 +567,40 @@ body {
 		margin-top: 0;
 	}
 
+	.api-list-index li {
+		border: 3px solid $heading-color;
+		font-family: $heading-font-family;
+		text-decoration: none;
+		color: #eee;
+		background: $heading-color;
+		text-align: right;
+		a {
+			text-decoration: none;
+			color: #eee;
+		}
+
+		a:visited {
+			text-decoration: none;
+			color: #eee;
+		}
+
+		&:hover {
+			background: #eee;
+		}
+
+		&:hover a {
+			text-decoration: underline;
+			color: $heading-color; 
+		}
+		padding-right: 0.5em;
+		border-radius: 4px;
+
+	}
+
 	.api-list-index a {
 		text-decoration: none;
 		color: rgba(160, 0, 0, 1.0);
+		color: #eee;
 	}
 
 	.api-list-index a:hover {
@@ -586,14 +619,25 @@ body {
 }
 
 	.api-list {
-		width: 80%;
-		//border: 1px solid #888;
-		box-sizing: border-box;
-		margin-top: 0px;
-		padding-top: 0px;
 
+		//margin: 0 auto;
+		width: 83%;
+		//border: 1px solid #888;
+		//box-sizing: border-box;
+		margin-top: 0px;
+		//float: right;
+		//float: right;
+		padding-top: 0px;
+		//@include mk-col(12, 2);
+		//border: 1px solid green;
 }
 
+
+
+.api-list-index {
+	width: 15%;
+	//@include mk-col(2);
+}
 	.api-list-item + .api-list-item {
 		margin-top: 2.0em;
 }
@@ -611,6 +655,7 @@ body {
 		box-sizing: border-box;
 		//font-size: 1.1em;
 }
+
 	.api-list-title {
 		margin: 0 auto;
 		padding-top: 1.0em;
@@ -665,11 +710,45 @@ body {
 }
 
 
-#body-frame {
-	width: 80%; //s
-	margin: 0 auto;
+
+
+	.api-list-item {
+		//border: 1px solid #888;
+		border-radius: 4px;
+		padding-left: 2.0em;
+		padding-right: 1.0em;
+		box-sizing: border-box;
+		padding-bottom: 1.0em
+		//font-size: 1.1em;
+		//line-height: 1.5;
 }
 
+.api-list-item-body {
+	.api-item-description {
+		max-width: 27.0em;
+	}
+	.api-item-list {
+		max-width: 27.0em;
+	}
+}
+
+@media all and (max-width: 900px) {
+	.api-list-index, .api-list-index * {
+		display: none;
+	}
+	.api-list {
+		width: 95%;
+	}
+
+	.api-list-item-body {
+		padding-left: 1.0em;
+		padding-right: 1.0em;
+		//border: 1px solid #090;
+		width: 100%;
+		box-sizing: border-box;
+		//font-size: 1.1em;
+}
+}
 
 body {
 	font-family: $body-font-family;
@@ -680,6 +759,7 @@ body {
 		font-style: italic;
 	}
 }
+
 
 
 code {
@@ -705,14 +785,6 @@ code {
 	text-align: center;
 }
 
-@media all and (max-width: 600px) {
-	.api-list-index, .api-list-index * {
-		display: none;
-	}
-	.api-list {
-		width: 100%;
-	}
-}
 
 .spec-stats {	
 	margin-left: 2.0em;
@@ -729,8 +801,116 @@ pre code {
 	line-height: 1.3;
 }
 
+@mixin base-link-styles {
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&:visited {
+			text-decoration: none;
+		}
+	}
+}
+
+
+#page-frame {
+	margin-top: 0;
+	width: 80%; //s
+	margin: 0 auto;
+	#site-header {
+		margin-top: 0;
+		@include all-headings {
+			margin: 0 auto;
+			text-align: center;
+		}
+		.header-links {
+			.link-wrapper-span {
+				border: 3px solid $heading-color;
+				border-radius: 4px;
+				background: $heading-color;
+				@include clearfix;
+				display: inline-block;
+				font-family: $heading-font-family;
+
+			}
+
+			padding-top: 0.25em;
+			margin: 0 auto;
+
+			text-align: center;
+			a {
+				color: #fafafa;
+				border-radius: 4px;
+				width: 5.0em;
+				display: inline-block;
+				font-size: 1.1em;
+				text-decoration: none;
+				&:visited {
+					color: #fafafa;
+				}
+				&:hover {
+					background: #fafafa;
+					color: $heading-color;
+					text-decoration: underline;
+				}
+				&.active-head-link {
+					background: #fafafa;
+					color: $heading-color;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+	#body-frame {
+		h2 {
+			margin-top: 1.0em;
+			margin-bottom: 0.5em;
+			text-align: center;
+		}	h1 {
+			margin-top: 0;
+			text-align: center;
+		}
+	}
+
+}
+
+.no-title-span {
+	margin-top: 1.0em;
+	margin-bottom: 0.5em;
+	//height: 1.0em;
+	height: 1px;
+	min-width: 1.0em;
+	display: block;
+}
+
+.basic-content-frame {
+	p {
+		&~p {
+			//margin-bottom: 0.5em;
+		}
+		&+p {
+			//margin-top: 0;
+		}
+	}
+
+	p ~ {
+		@include all-headings {
+		margin-top: 1.0em;
+		margin-bottom: 0.5em;
+	}
+	}
+
+}
+
 .spec-report ul {
 	list-style-type: square;
 }
 
 
+
+pre {
+	overflow: scroll;
+}
