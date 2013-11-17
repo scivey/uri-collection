@@ -1,0 +1,49 @@
+$cols: 16;
+$gutter: 2%;
+ 
+$one_col: (100% - ($gutter * ($cols - 1))) / $cols;
+
+@function col-width($num) {
+	$ret-width: ($one-col * $num) + ($gutter * ($num - 1));
+	@return $ret-width;
+}
+
+@mixin cols($num) {
+	width: ($one_col * $num) + ($gutter * ($num - 1));
+}
+ 
+@mixin sub_cols($num_child, $num_parent) {
+	$parent_size: ($one_col * $num_parent) + ($gutter * ($num_parent - 1));
+	$child_size: ($one_col * $num_child) + ($gutter * ($num_child - 1));
+	margin-left: ($gutter / $parent_size) * 100%;
+	width: ($child_size / $parent_size) * 100%;
+}
+
+.col-base {
+	float: left;
+
+}
+
+@mixin mk-row {
+	@include clearfix;
+}
+
+@mixin mk-omega {
+	@include clearfix;
+}
+
+@mixin mk-col($span, $offset: 0) {
+
+	@if $offset == 0 {
+		margin-left: $gutter;
+	} @else {
+		margin-left: col-width($offset);
+	}
+
+	$w: col-width($span);
+	width: $w;
+	min-width: $w;
+	float: left;
+	display: inline-block;
+
+}

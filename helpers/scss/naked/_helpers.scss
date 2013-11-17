@@ -1,0 +1,42 @@
+@mixin all-headings {
+	h1, h2, h3, h4, h5, h6 {
+		@content;
+	}
+}
+
+// $Mixin $Hypens
+// -------------------------------------//
+//http://trentwalton.com/2011/09/07/css-hyphenation
+
+@mixin css-hyphens($val) {
+	// Accepted values: [ none | manual | auto ]
+	-webkit-hyphens: $val; // Safari 5.1 thru 6, iOS 4.2 thru 6
+	-moz-hyphens: $val; // Firefox 16 thru 20
+	-ms-hyphens: $val; // IE10
+	-o-hyphens: $val; // PRESTO...haha LOL
+	hyphens: $val; // W3C standard
+}
+
+%breakword {
+	word-wrap: break-word;
+}
+
+%normal-wrap {
+	word-wrap: normal;
+}
+
+%inherit-wrap {
+	word-wrap: auto;
+}
+
+// $Mixin $Codeblocks
+// -------------------------------------//
+
+@mixin white-space($wrap-space) {
+	@if $wrap-space == 'pre-wrap' {
+		white-space: #{-moz-}$wrap-space; // Firefox 1.0-2.0
+		white-space: $wrap-space;       // current browsers
+	} @else {
+		white-space: $wrap-space;
+	}
+}

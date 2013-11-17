@@ -1,0 +1,736 @@
+
+@import "bourbon/bourbon";
+
+
+@import "res/_blend-modes";
+
+
+/*
+		RESET
+
+*/
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*
+		END RESET
+
+*/
+
+
+
+
+@import "naked/_grid2";
+@import "naked/_fonts";
+@import "naked/_helpers";
+@import "naked/_iconic";
+
+//$body-font-family: "Ubuntu";
+$body-font-family: "Libre Baskerville", $georgia;
+$code-font-family: "Droid Sans Mono", $monospace;
+$body-font-family-emph: "Libre Baskerville Italic", $body-font-family;
+$heading-font-family: "Oswald", $verdana;
+
+$base-line-height: 1.6;
+$base-font-percent: 85;
+$base-font-size: 14.4;
+$desktop-font-size: 18;
+
+
+body {
+	font-family: $body-font-family;
+	font-weight: normal;
+
+	p em {
+		font-family: $body-font-family-emph;
+		font-style: italic;
+	}
+}
+
+
+code {
+	font-family: $code-font-family;
+}
+
+@include all-headings {
+	font-family: $heading-font-family;
+	font-weight: 400;
+
+	text-rendering: optimizeLegibility; // voodoo to enable ligatures and kerning
+	line-height: 1; // this fixes huge spaces when a heading wraps onto two lines
+	margin-top: 0;
+}
+
+$base-heading-sizes: 3.33em 2.667em 2em 1.333em 1.16em 1em;
+@for $i from 1 to 6 {
+	h#{$i} {
+		$sz: nth($base-heading-sizes, $i);
+		font-size: 	$sz;
+	}
+}
+
+
+
+span.bibref {
+	font-size: 0.6em;
+	position: relative;
+	top: -0.5em;
+}
+
+
+
+
+
+/* DIAGRAM STYLES */
+
+
+
+
+
+.block-diagram {
+
+	//margin-top: 50px;
+	//margin-bottom: 50px;
+	//margin-left: 2.0rem;
+	//margin-right: 2.0rem;
+	//box-sizing: border-box;
+	margin: 0px auto;
+	display: block;
+	max-width: 80%;
+	margin-bottom: 1.0em;
+
+	&.block-diagram-pic {
+
+		border: 6px solid rgba(200,200,200,0.5);
+		border-radius: 5px;
+		padding-top: 1.0em;
+		padding-bottom: 1.0em;
+
+		img {
+			max-width: 90%; 
+		}
+
+	}
+
+
+	.block-diagram-caption {
+		display: block;
+		margin: 0px auto;
+		> p {
+			display: block;
+			margin: 0px auto;
+			width: 50%;
+			color: #555;
+			text-align: center;
+			font-size: 0.7em;
+		}
+	}
+	.block-diagram-title > * {
+		display: block;
+		margin: 0px auto;
+		text-align: center;
+	}
+	img {
+		display: block;
+		max-height: 15.0em;
+		margin-top: 1.0em;
+		margin-bottom: 1.0em;
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+}
+
+
+p ~ .block-diagram-pic, .block-diagram-pic ~ p,
+	p ~ pre, pre ~ p {
+	margin-bottom: 2.0em;
+}
+
+.block-diagram-math {
+	//margin-left: 0px auto;
+	border: 0.5px solid #dedede;
+	max-width: 80%;
+	text-align: left;
+	margin-left: 0px auto;
+}
+
+
+
+@mixin trans {
+	@include transition (width 0.2s ease-in-out);
+}
+
+
+
+
+
+
+/* END DIAGRAMS */
+
+/* LIST STYLES */
+
+//ul > li {
+//	list-style-type: circle;
+//}
+
+/* END LIST STYLES */
+
+/* SPECIFIC ELEMENT STYLES */
+
+
+
+
+
+/* END SPECIFIC ELEMENT STYLES */
+
+$section-head-top-margin: 2.0em;
+
+@include all-headings {
+	& + p {
+		margin-top: 0.5em;
+	}
+	& + pre {
+		margin-top: 1.0em;
+	}
+}
+
+pre {
+	& + h5 {
+		margin-top: $section-head-top-margin;
+	}
+}
+
+
+p {
+	$indent-val: 1.5em;
+	margin: auto auto $indent-val;
+
+	& + h5 {
+		margin-top: $section-head-top-margin;
+	}
+	& + p {
+		//siblings indentation
+		text-indent: $indent-val;
+		//margin-top: -$indent-val;
+	}
+	
+	> code {
+		$side-pad: 0.1em;
+		padding: 0 $side-pad 0 $side-pad;
+		margin: 0 $side-pad 0 $side-pad;
+		@extend %normal-wrap;
+	}
+	margin-bottom: 1.0em;
+}
+
+code {
+	@include white-space(pre);
+}
+
+pre {
+	padding: 1.0em;
+	line-height: 1.1;
+	border-radius: 4px;
+    @include white-space(pre);
+    margin-left: 1.0em;
+    margin-right: 1.0em;
+	code {
+		font-size: 0.8em;
+    	@extend %normal-wrap;
+    	@include white-space(pre-wrap);
+	}
+
+}
+
+
+body {
+	padding-top: 2.0em;
+	padding-bottom: 12.0em;
+	$screen-sizes: 380px 100%, 500px 112.5%, 600px 117.5%, 840px 125%;
+	font-size: 85%;
+	@include trans;
+	@each $pair in $screen-sizes {
+		@media all and (min-width: nth($pair, 1)) {
+			font-size: nth($pair, 2);
+		}
+	}
+
+
+	$line-heights: 340px 1.5, 500px 1.6, 600px 1.6, 840px 1.6;
+	line-height: 1.6;
+	@each $pair in $line-heights {
+		@media all and (min-width: nth($pair, 1)) {
+			line-height: nth($pair, 2);
+		}
+	}
+
+	#content-frame {
+		@include mk-col(13,2);
+		$col-sizes: 340px 13 2, 500px 13 2, 600px 12 2, 840px 10 2, 1000px 9 3;
+		//$col-sizes: 340px 13 2, 500px 13 2, 600px 11 2, 840px 11 2, 1000px 11 3;
+		@include trans;
+		@each $pair in $col-sizes {
+			@media all and (min-width: nth($pair, 1)) {
+				$col-c: nth($pair, 2);
+				$col-o: nth($pair, 3);
+				@include mk-col($col-c, $col-o);
+			}
+		}
+
+	}
+
+
+}
+
+
+#article-list-head {
+	margin-bottom: 2.0em;
+}
+
+.article-header-text {
+	* {
+	max-width: 12.0em;
+	}
+}
+
+
+#content-frame {
+
+
+}
+
+html {
+	overflow-x: hidden;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+
+
+
+
+
+/* COLORING */
+
+pre {
+    background: #22282A;
+    color: #F1F2F3;
+
+	code {
+    	background: #22282A;
+
+	}
+	margin-bottom: 1.0em;
+}
+
+code {
+	@include white-space(pre);
+}
+
+$body-font-color: #333333;
+
+body {
+	background: #fdfdfd;
+	color: $body-font-color;
+}
+
+p > code {
+		background: #dddddd;
+}
+
+code {
+	background: #dddddd;
+	//font-family: "Monospace";
+}
+
+
+$heading-color: #C74343;
+
+@include all-headings {
+	//color: shade(red, 10%);
+	color: $heading-color;
+}
+
+p > a {
+	$comp: complement($heading-color);
+	$darker: shade($comp, 25%);
+	color: $darker;
+	text-decoration: none;
+	font-weight: 500;
+
+	&:hover {
+		color: shade($comp,5%);
+		text-decoration: underline;
+	}
+}
+
+#article-list {
+	a {
+		text-decoration: none;
+		h3, h4, h5 {
+			text-decoration: underline;
+			&:hover {
+				color: lighten($heading-color, 10%);
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+span.bibref {
+	color: $heading-color;
+}
+
+span.si-icon {
+	color: $heading-color;
+}
+span.si-icon-lg {
+	font-size: 1.8em;
+}
+span.si-icon-md {
+	font-size: 1.3em;
+}
+.page-hr {
+}
+.base-page-head {
+	margin-right: 0;
+	margin-left: auto;
+	.base-page-title {
+		margin-right: 0;
+		margin-left: auto;
+		text-align: right;
+	}
+
+	.base-page-scivey {
+		color: #333333
+	}
+
+	.base-page-sep {
+		color: #333333;
+		font-weight: 200;
+	}
+
+	* {
+		display: inline-block;
+	}
+}
+
+
+#name-block {
+	float: right;
+}
+
+
+.scivey-span {
+	margin: 0px;
+	margin-left: 0 auto;
+	//display: block;
+	.base-page-scivey {
+		display: inline-block;
+	}
+	.base-sep {
+		margin-left: 0.5em;
+		margin-right: 0.5em;
+		* {
+			margin: 0;
+		}
+	}
+
+}
+
+.base-page-head {
+	text-align: right;
+}
+
+.base-scivey-half {
+	padding-left: 5px;
+	border-left: 5px solid $heading-color;
+	font-size: 1.1em;
+	vertical-align: top;
+}
+
+.base-title-half {
+	padding-right: 5px;
+	border-right: 5px solid $body-font-color;
+}
+
+.base-page-scivey {
+	color: $body-font-color;
+}
+
+@import "naked/_code_colors";
+
+
+body {
+	border-right-style: solid;
+	//border-right-width: 0.5em;
+	border-top-style: solid;
+	//border-top-width: 0.5em;
+	border-radius: 10px;
+	border-color: #666666;
+}
+
+
+
+	.api-list-item {
+		//border: 1px solid #888;
+		border-radius: 4px;
+		padding-left: 2.0em;
+		padding-right: 1.0em;
+		box-sizing: border-box;
+		padding-bottom: 1.0em;
+		width: 80%;
+		margin: 0 auto;
+		//font-size: 1.1em;
+		//line-height: 1.5;
+}
+	.api-list-index {
+		width: 15%;
+		//font-size: 1.1em;
+		//line-height: 1.5;
+		vertical-align: top;
+		//border: 1px solid #900;
+		list-style-type: none;
+		text-decoration: none;
+		box-sizing: border-box;
+		padding-top: 5.0em;
+}
+
+	.api-list-index {
+		//border: 1px solid green;
+}
+	.api-list-index ul {
+		box-sizing: border-box;
+		margin-top: 0;
+		margin: 0 auto;
+		padding-top: 0;
+		list-style-type: none;
+	}
+
+	.api-list-index ul li:first-child {
+		padding-top: 0;
+		margin-top: 0;
+	}
+
+	.api-list-index a {
+		text-decoration: none;
+		color: rgba(160, 0, 0, 1.0);
+	}
+
+	.api-list-index a:hover {
+		text-decoration: underline;
+		color: rgba(200,0,0,1.0);
+}
+	.api-list-index a:visited {
+		color: rgba(160, 0, 0, 1.0);
+}
+
+	code {
+		margin-left: 0.05em;
+		margin-right: 0.05em;
+		padding-left: 0.15em;
+		padding-right: 0.15em;
+}
+
+	.api-list {
+		width: 80%;
+		//border: 1px solid #888;
+		box-sizing: border-box;
+		margin-top: 0px;
+		padding-top: 0px;
+
+}
+
+	.api-list-item + .api-list-item {
+		margin-top: 2.0em;
+}
+
+	body {
+		//font-size: 112.5%;
+	}
+
+
+	.api-list-item-body {
+		padding-left: 2.0em;
+		padding-right: 2.0em;
+		//border: 1px solid #090;
+		width: 95%;
+		box-sizing: border-box;
+		//font-size: 1.1em;
+}
+	.api-list-title {
+		margin: 0 auto;
+		padding-top: 1.0em;
+		text-align: center;
+		box-sizing: border-box;
+		height: 3.0em;
+}
+
+	.api-item-list {
+		padding-left: 2.0em;
+		li + li {
+			margin-top: 0.5em;
+		}
+		li p:first-of-type {
+			margin-top:0.25em;
+		}
+		p {
+			margin: 0 0;
+			padding-left: 1.0em;
+		}
+}
+
+	.api-item-title {
+		border-color: #444;
+		border-width: 1px 0px 1px 0px;
+		border-style: solid;
+		padding: 0px;
+		padding-left: 1.0em;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+	}
+
+	.api-item-title * {
+		display: inline-block;
+		margin: 0 0;
+
+	}
+	.api-item-subtitle {
+		margin-top: 1.0em;
+		margin-bottom: 0.5em;
+	}
+	.api-item-description {
+		//text-indent: 2.0em;
+		padding-top: 1.0em;
+}
+	.api-frame > div {
+		display: inline-block;
+	}
+
+	.api-frame {
+		margin-bottom: 8.0em;
+}
+
+
+#body-frame {
+	width: 80%; //s
+	margin: 0 auto;
+}
+
+
+body {
+	font-family: $body-font-family;
+	font-weight: normal;
+
+	p em {
+		font-family: $body-font-family-emph;
+		font-style: italic;
+	}
+}
+
+
+code {
+	font-family: $code-font-family;
+}
+
+@include all-headings {
+	font-family: $heading-font-family;
+	font-weight: 400;
+
+	text-rendering: optimizeLegibility; // voodoo  to enable ligatures and kerning
+	line-height: 1; // this fixes huge spaces when a heading wraps onto two lines
+	margin-top: 0;
+}
+
+.spec-suite-item-list {
+	margin-left: 2.0em;
+	margin-bottom: 1.0em;
+}
+
+.spec-report-title {
+	margin: 0 auto;
+	text-align: center;
+}
+
+@media all and (max-width: 600px) {
+	.api-list-index, .api-list-index * {
+		display: none;
+	}
+	.api-list {
+		width: 100%;
+	}
+}
+
+.spec-stats {	
+	margin-left: 2.0em;
+	margin-top: 2.0em;
+	margin-bottom: 2.0em;
+}
+
+.basic-content-frame {
+	width: 75%;
+	margin: 0 auto;
+}
+
+pre code {
+	line-height: 1.3;
+}
+
+.spec-report ul {
+	list-style-type: square;
+}
+
+

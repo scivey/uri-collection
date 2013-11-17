@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Droid Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/droidSansMono.woff) format('woff'),
+      url(/fonts/droidSansMono.eot) format('embedded-opentype'),
+      url(/fonts/droidSansMono.svg) format('svg'),
+      url(/fonts/droidSansMono.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  src:  url(/fonts/libreBaskerville.woff) format('woff'),
+      url(/fonts/libreBaskerville.eot) format('embedded-opentype'),
+      url(/fonts/libreBaskerville.svg) format('svg'),
+      url(/fonts/libreBaskerville.ttf) format('truetype');
+}
+
+
+@font-face {
+  font-family: 'Libre Baskerville Italic';
+  font-style: italic;
+  font-weight: 400;
+  src: url(/fonts/libreBaskerville_Italic.woff) format('woff'),
+      url(/fonts/libreBaskerville_Italic.eot) format('embedded-opentype'),
+      url(/fonts/libreBaskerville_Italic.svg) format('svg'),
+      url(/fonts/libreBaskerville_Italic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/oswald.woff) format('woff'),
+      url(/fonts/oswald.eot) format('embedded-opentype'),
+      url(/fonts/oswald.svg) format('svg'),
+      url(/fonts/oswald.ttf) format('truetype');
+}
