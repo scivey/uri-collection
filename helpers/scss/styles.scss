@@ -301,7 +301,7 @@ pre {
 body {
 	padding-top: 2.0em;
 	padding-bottom: 12.0em;
-	$screen-sizes: 380px 100%, 500px 105.5%, 600px 107.5%, 840px 115%, 980px 120%;
+	$screen-sizes: 340px 92.5%, 482px 100%, 600px 105%, 700 110%, 840px 112.5%, 980px 115%;
 	font-size: 85%;
 	@include trans;
 	@each $pair in $screen-sizes {
@@ -775,13 +775,36 @@ code {
 	margin-top: 0;
 }
 
+
+.spec-suite {
+	& ~ .spec-suite {
+		margin-bottom: 0;
+	}
+	& + .spec-suite {
+		margin-top: 0;
+	}
+	@include all-headings {
+		margin-top: 1.0em;
+		margin-bottom: 0.5em;
+	}
+}
+
 .spec-suite-item-list {
 	margin-left: 2.0em;
+	padding-left: 2.0em;
+	border-color: #888;
+	border-style: solid;
+	border-left-width: 2px;
 	margin-bottom: 1.0em;
+	li {
+		max-width: 35.0em;
+		margin-bottom: 0.5em;
+	}
 }
 
 .spec-report-title {
 	margin: 0 auto;
+	//margin-bottom: 1.0em;
 	text-align: center;
 }
 
@@ -896,6 +919,10 @@ pre code {
 		}
 	}
 
+	p {
+		//max-width: 28.0em;
+	}
+
 	p ~ {
 		@include all-headings {
 		margin-top: 1.0em;
@@ -905,6 +932,60 @@ pre code {
 
 }
 
+@media screen and (min-width: 1080px) {
+	.basic-content-frame {
+		max-width: 700px;
+		p {
+			//max-width: 30.0em;
+		}
+		@include all-headings {
+			//max-width: 30.0em;
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.basic-content-frame {
+		max-width: 90%;
+		width: 100%;
+	}
+	.page-frame {
+		max-width: 100%;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.basic-content-frame {
+		max-width: 100%;
+		width: 100%;
+	}
+	.page-frame {
+		max-width: 100%;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 980px) {
+
+	.basic-content-frame {
+		max-width: 90%;
+		width: 100%;
+	}
+	.page-frame {
+		max-width: 100%;
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 981px) {
+	.spec-suite {
+		max-width: 90%;
+	}
+}
+
+
+
 .spec-report ul {
 	list-style-type: square;
 }
@@ -912,5 +993,5 @@ pre code {
 
 
 pre {
-	overflow: scroll;
+	overflow: scroll
 }

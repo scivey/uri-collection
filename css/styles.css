@@ -680,21 +680,24 @@ body {
   -moz-transition: width 0.2s ease-in-out;
   transition: width 0.2s ease-in-out;
   line-height: 1.6; }
-  @media all and (min-width: 380px) {
+  @media all and (min-width: 340px) {
+    body {
+      font-size: 92.5%; } }
+  @media all and (min-width: 482px) {
     body {
       font-size: 100%; } }
-  @media all and (min-width: 500px) {
-    body {
-      font-size: 105.5%; } }
   @media all and (min-width: 600px) {
     body {
-      font-size: 107.5%; } }
+      font-size: 105%; } }
+  @media all and (min-width: 700) {
+    body {
+      font-size: 110%; } }
   @media all and (min-width: 840px) {
     body {
-      font-size: 115%; } }
+      font-size: 112.5%; } }
   @media all and (min-width: 980px) {
     body {
-      font-size: 120%; } }
+      font-size: 115%; } }
   @media all and (min-width: 340px) {
     body {
       line-height: 1.5; } }
@@ -1080,9 +1083,24 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
   margin-top: 0; }
 
+.spec-suite ~ .spec-suite {
+  margin-bottom: 0; }
+.spec-suite + .spec-suite {
+  margin-top: 0; }
+.spec-suite h1, .spec-suite h2, .spec-suite h3, .spec-suite h4, .spec-suite h5, .spec-suite h6 {
+  margin-top: 1.0em;
+  margin-bottom: 0.5em; }
+
 .spec-suite-item-list {
   margin-left: 2.0em;
+  padding-left: 2.0em;
+  border-color: #888;
+  border-style: solid;
+  border-left-width: 2px;
   margin-bottom: 1.0em; }
+  .spec-suite-item-list li {
+    max-width: 35.0em;
+    margin-bottom: 0.5em; }
 
 .spec-report-title {
   margin: 0 auto;
@@ -1161,6 +1179,36 @@ pre code {
   margin-top: 1.0em;
   margin-bottom: 0.5em; }
 
+@media screen and (min-width: 1080px) {
+  .basic-content-frame {
+    max-width: 700px; } }
+@media screen and (max-width: 480px) {
+  .basic-content-frame {
+    max-width: 90%;
+    width: 100%; }
+
+  .page-frame {
+    max-width: 100%;
+    width: 100%; } }
+@media screen and (max-width: 600px) {
+  .basic-content-frame {
+    max-width: 100%;
+    width: 100%; }
+
+  .page-frame {
+    max-width: 100%;
+    width: 100%; } }
+@media screen and (max-width: 980px) {
+  .basic-content-frame {
+    max-width: 90%;
+    width: 100%; }
+
+  .page-frame {
+    max-width: 100%;
+    width: 100%; } }
+@media screen and (min-width: 981px) {
+  .spec-suite {
+    max-width: 90%; } }
 .spec-report ul {
   list-style-type: square; }
 
