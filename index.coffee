@@ -152,40 +152,102 @@ URICollection.prototype.clone = ->
 	return new URICollection(_uris)
 
 
-
-
-
-_collectionReturningMethods = [
-	"filter"
-	"reject"
-	"shuffle"
-]
-
-_.each _collectionReturningMethods, (aMethod) ->
-	URICollection.prototype[aMethod] = (params...) ->
+makeCollectionReturningMethod = (methodName) ->
+	(params...) ->
 		_uris = cloneUris(@_uris)
 		params.unshift _uris
-		_result = _[aMethod].apply(null, params)
+		_result = _[methodName].apply(null, params)
 		return new URICollection(_result)
 
+###*
+ * Just like the Underscore `_.filter` method, but returns a new URICollection with cloned URI instances.
+ * 
+ * Accepts a predicate function `predicateFn` and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return true.
+ * 
+ * @param {Function} predicateFn A function which will be handed each collection element and should return `true` for all elements to be included in the new collection.
+ * @return {URICollection} A new URICollection instance containing the matching elements, regardless of the number of matches.
+###	
+URICollection.prototype.filter = makeCollectionReturningMethod("filter")
+
+###*
+ * Just like the Underscore `_.reject` method (the inverse of `_.filter`), but returns a new URICollection with cloned URI instances.
+ * 
+ * Accepts a predicate function `predicateFn` and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return false.
+ * 
+ * @param {Function} predicateFn A function which will be handed each collection element and should return `false` for all elements to be included in the new collection.
+ * @return {URICollection} A new URICollection instance containing the matching elements, regardless of the number of matches.
+###	
+URICollection.prototype.reject = makeCollectionReturningMethod("reject")
+
+###*
+ * Just like the Underscore `_.shuffle` method, but returns a new URICollection with cloned URI instances.
+ * 
+ * The new collection has its elements randomly shuffled.
+ * 
+ * @return {URICollection} A new URICollection instance containing clones of the shuffled elements.
+###	
+URICollection.prototype.shuffle = makeCollectionReturningMethod("shuffle")
 
 
 
-_nonCollectionReturningMethods = [
-	"reduce"
-	"reduceRight"
-	"some"
-	"every"
-	"size"
-]
-
-_.each _nonCollectionReturningMethods, (aMethod) ->
-	URICollection.prototype[aMethod] = (params...) ->
+makeNonCollectionReturningMethod = (methodName) ->
+	(params...) ->
 		_uris = cloneUris(@_uris)
 		params.unshift _uris
-		return _[aMethod].apply(null, params)
+		return _[methodName].apply(null, params)
+
+###*
+ * Returns the number of URI elements in the collection.
+ * 
+ * @return {Number} The size of the collection.
+###	
+URICollection.prototype.size = ->
+	@_uris.length
+
+###*
+ * Returns true if any element passes a truth test passed in as a callback.
+ * 
+ * Uses Underscore's `_.some`, but guarantees immutability.
+ *
+ * @param {Function} truthTest A function which is handed collection elements in sequence and should return true or false depending on the element's attributes.
+ * 
+ * @return {Boolean} True if any element passes the test; false if none of them do.
+###	
+URICollection.prototype.some = makeNonCollectionReturningMethod("some")
+
+###*
+ * Returns true if every element passes a truth test passed in as a callback.
+ * 
+ * Uses Underscore's `_.every`, but guarantees immutability.
+ *
+ * @param {Function} truthTest A function which is handed collection elements in sequence and should return true or false depending on the element's attributes.
+ * 
+ * @return {Boolean} True if every element passes the test; false if any element fails.
+###	
+URICollection.prototype.every = makeNonCollectionReturningMethod("every")
 
 
+###*
+ * Typical reduce operation, creating a single result by iterating over a list of elements from left to right.
+ *
+ * Proxies to Underscore's `_.reduce` with an added safety for immutability.
+ *
+ * @param {Function} iterator A function which takes `(soFar, elem)` as its arguments, where `soFar` is the value of the reduce operation up to that point and `elem` is the current collection element.  It receives collection elements in left to right order.
+ * @param {Any} initial Initial value to pass as `current` to the first cycle of the iterator function.
+ * @return {Any} Any value returned by the reduce operation.  There is no automatic wrapping in new URICollection instances.
+###	
+URICollection.prototype.reduce = makeNonCollectionReturningMethod("reduce")
+
+###*
+ * Typical reduce operation but reversed, creating a single result by iterating over a list of elements from right to left.
+ *
+ * Proxies to Underscore's `_.reduce` with an added safety for immutability.
+ *
+ * @param {Function} iterator A function which takes `(soFar, elem)` as its arguments, where `soFar` is the value of the reduce operation up to that point and `elem` is the current collection element.  It receives collection elements in right to left order.
+ * @param {Any} initial Initial value to pass as `current` to the first cycle of the iterator function.
+ * @return {Any} Any value returned by the reduce operation.  There is no automatic wrapping in new URICollection instances.
+###	
+URICollection.prototype.reduceRight = makeNonCollectionReturningMethod("reduceRight")
 
 ###*
  * Returns the first `n` list elements.
