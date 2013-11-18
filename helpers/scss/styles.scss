@@ -322,7 +322,7 @@ body {
 	font-size: 85%;
 	@include trans;
 	@each $pair in $screen-sizes {
-		@media all and (min-width: nth($pair, 1)) {
+		@media only screen and (min-width: nth($pair, 1)) {
 			font-size: nth($pair, 2);
 		}
 	}
@@ -331,7 +331,7 @@ body {
 	$line-heights: 340px 1.5, 500px 1.6, 600px 1.6, 840px 1.6, 900px 1.7;
 	line-height: 1.6;
 	@each $pair in $line-heights {
-		@media all and (min-width: nth($pair, 1)) {
+		@media only screen and (min-width: nth($pair, 1)) {
 			line-height: nth($pair, 2);
 		}
 	}
@@ -342,7 +342,7 @@ body {
 		//$col-sizes: 340px 13 2, 500px 13 2, 600px 11 2, 840px 11 2, 1000px 11 3;
 		@include trans;
 		@each $pair in $col-sizes {
-			@media all and (min-width: nth($pair, 1)) {
+			@media only screen and (min-width: nth($pair, 1)) {
 				$col-c: nth($pair, 2);
 				$col-o: nth($pair, 3);
 				@include mk-col($col-c, $col-o);
@@ -885,43 +885,7 @@ pre code {
 			margin: 0 auto;
 			text-align: center;
 		}
-		.header-links {
-			.link-wrapper-span {
-				border: 3px solid $heading-color;
-				border-radius: 4px;
-				background: $heading-color;
-				@include clearfix;
-				display: inline-block;
-				font-family: $heading-font-family;
 
-			}
-
-			padding-top: 0.25em;
-			margin: 0 auto;
-
-			text-align: center;
-			a {
-				color: #fafafa;
-				border-radius: 4px;
-				width: 5.0em;
-				display: inline-block;
-				font-size: 1.1em;
-				text-decoration: none;
-				&:visited {
-					color: #fafafa;
-				}
-				&:hover {
-					background: #fafafa;
-					color: $heading-color;
-					text-decoration: underline;
-				}
-				&.active-head-link {
-					background: #fafafa;
-					color: $heading-color;
-					text-decoration: none;
-				}
-			}
-		}
 	}
 	#body-frame {
 		h2 {
@@ -933,7 +897,51 @@ pre code {
 			text-align: center;
 		}
 	}
+}
 
+.header-links {
+	.link-wrapper-span {
+		border: 3px solid $heading-color;
+		border-radius: 4px;
+		background: $heading-color;
+		@include clearfix;
+		display: inline-block;
+		font-family: $heading-font-family;
+
+	}
+
+	padding-top: 0.25em;
+	margin: 0 auto;
+
+	text-align: center;
+	a {
+		color: #fafafa;
+		border-radius: 4px;
+		width: 5.0em;
+		display: inline-block;
+		font-size: 1.1em;
+		text-decoration: none;
+		&:visited {
+			color: #fafafa;
+		}
+		&:hover {
+			background: #fafafa;
+			color: $heading-color;
+			text-decoration: underline;
+		}
+		&.active-head-link {
+			background: #fafafa;
+			color: $heading-color;
+			text-decoration: none;
+		}
+	}
+}
+
+
+@media only screen and (max-width: 500px) {
+	.header-links a {
+		width: 45%;
+	}
 }
 
 .no-title-span {
@@ -968,7 +976,7 @@ pre code {
 
 }
 
-@media screen and (min-width: 1080px) {
+@media only screen and (min-width: 1080px) {
 	.basic-content-frame {
 		max-width: 700px;
 		p {
@@ -980,7 +988,7 @@ pre code {
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media only screen and (max-width: 480px) {
 	.basic-content-frame {
 		max-width: 90%;
 		width: 100%;
@@ -991,7 +999,7 @@ pre code {
 	}
 }
 
-@media screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
 	.basic-content-frame {
 		max-width: 100%;
 		width: 100%;
@@ -1002,7 +1010,7 @@ pre code {
 	}
 }
 
-@media screen and (max-width: 980px) {
+@media only screen and (max-width: 980px) {
 
 	.basic-content-frame {
 		max-width: 90%;
@@ -1014,7 +1022,7 @@ pre code {
 	}
 }
 
-@media screen and (min-width: 981px) {
+@media only screen and (min-width: 981px) {
 	.spec-suite {
 		max-width: 90%;
 	}
