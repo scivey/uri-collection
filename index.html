@@ -43,6 +43,7 @@
 <span class="keyword">var</span> urls <span class="keyword operator">=</span> [
     <span class="string">"http://www.justcats.net/fuzz"</span>,
     <span class="string">"http://www.foxnews.com/fairandbalanced"</span>,
+    <span class="string">"http://www.PepsiLovesYourDemographic.com"</span>,
     <span class="string">"http://www.reddit.com/r/alsocats"</span>,
     <span class="string">"http://www.foxnews.com/nospinzone"</span>
 ];
@@ -54,9 +55,9 @@ console.<span class="support method">log</span>( collection2.<span class="functi
 <span class="comment">// output: </span>
 <span class="comment">// [ "http://www.foxnews.com/fairandbalanced",</span>
 <span class="comment">//    "http://www.foxnews.com/nospinzone" ]</span></code></pre>
-<p>All operations return new collections, leaving the original collections and their elements intact.  Filter and search operations like <code>findWhere</code> are modified to accomodate URIjs&#39; interface, and compare against methods instead of properties where appropriate.</p>
-<p>The <a href="./api.html">public API is well-documented</a>, and each method is covered by its own <a href="./spec.html">test suite</a>.  Each includes tests to verify immutability of existing collections.</p>
-<p><a href="./overview.html"> Read the overview -&gt; </a></p>
+<p>All operations return new collections, leaving the original collections and their elements intact.  Filter and search operations like <code>findWhere</code> have been modified to accomodate the URIjs interface, and compare against the results of method invocation rather than raw property values where appropriate.</p>
+<p>The <a href="./api.html">public API is fully documented</a>.  Each method is covered by its own <a href="./spec.html">test suite</a>, and each suite includes tests to verify immutability of existing collections.</p>
+<p><a href="./overview.html"> Read the overview ==&gt;</a></span></p>
 
 </div>
 		</div>

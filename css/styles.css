@@ -637,6 +637,14 @@ p ~ pre, pre ~ p {
 /* LIST STYLES */
 /* END LIST STYLES */
 /* SPECIFIC ELEMENT STYLES */
+/* TRICK ICON STUFF */
+.arrow-right:before {
+  content: url(../img/arrow-right32.png);
+  position: relative;
+  left: -2px;
+  top: 10px; }
+
+/* END ICON STUFF */
 /* END SPECIFIC ELEMENT STYLES */
 h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
   margin-top: 0.5em; }

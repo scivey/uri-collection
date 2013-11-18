@@ -232,6 +232,23 @@ p ~ .block-diagram-pic, .block-diagram-pic ~ p,
 
 /* SPECIFIC ELEMENT STYLES */
 
+/* TRICK ICON STUFF */
+
+.arrow-right {
+	&:before {
+		content: url(../img/arrow-right32.png);
+		position: relative;
+		left: -2px;
+		top: 10px;
+	}
+//	border: 1px solid #999;
+}
+
+/* END ICON STUFF */
+
+
+
+
 
 
 
