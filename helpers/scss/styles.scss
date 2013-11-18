@@ -789,6 +789,25 @@ code {
 	}
 }
 
+a {
+	@include all-headings {
+		text-decoration: none;
+		color: $heading-color;
+	}
+
+	&:visited {
+		@include all-headings {
+			text-decoration: none;
+			color: $heading-color;
+		}
+	}
+}
+
+.gh-spec-link {
+	text-align: center;
+	text-decoration: none;
+}
+
 .spec-suite-item-list {
 	margin-left: 2.0em;
 	padding-left: 2.0em;
@@ -986,8 +1005,9 @@ pre code {
 
 
 
-.spec-report ul {
-	list-style-type: square;
+.spec-suite ul {
+	//list-style-type: square;
+	list-style-image: url('../img/check16.png');
 }
 
 

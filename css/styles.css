@@ -1091,6 +1091,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 1.0em;
   margin-bottom: 0.5em; }
 
+a h1, a h2, a h3, a h4, a h5, a h6 {
+  text-decoration: none;
+  color: #c74343; }
+a:visited h1, a:visited h2, a:visited h3, a:visited h4, a:visited h5, a:visited h6 {
+  text-decoration: none;
+  color: #c74343; }
+
+.gh-spec-link {
+  text-align: center;
+  text-decoration: none; }
+
 .spec-suite-item-list {
   margin-left: 2.0em;
   padding-left: 2.0em;
@@ -1209,8 +1220,8 @@ pre code {
 @media screen and (min-width: 981px) {
   .spec-suite {
     max-width: 90%; } }
-.spec-report ul {
-  list-style-type: square; }
+.spec-suite ul {
+  list-style-image: url("../img/check16.png"); }
 
 pre {
   overflow: scroll; }

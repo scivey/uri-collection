@@ -17,7 +17,8 @@
   },
   "devDependencies": {
     "handlebars": "~1.1.2",
-    "marked": "~0.2.10"
+    "marked": "~0.2.10",
+    "async": "~0.2.9"
   },
   "dependencies": {
     "underscore": "~1.5.2",
