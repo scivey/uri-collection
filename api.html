@@ -44,27 +44,127 @@
 		<ul>
 		
 		<li>
-			<a href="#get">get</a>
+			<a href="#add">add</a>
 		</li>
 		
 		<li>
-			<a href="#handle">handle</a>
+			<a href="#at">at</a>
 		</li>
 		
 		<li>
-			<a href="#inmedia">inmedia</a>
+			<a href="#clone">clone</a>
 		</li>
 		
 		<li>
-			<a href="#set">set</a>
+			<a href="#contains">contains</a>
 		</li>
 		
 		<li>
-			<a href="#useMiddleware">useMiddleware</a>
+			<a href="#countBy">countBy</a>
 		</li>
 		
 		<li>
-			<a href="#useRoute">useRoute</a>
+			<a href="#each">each</a>
+		</li>
+		
+		<li>
+			<a href="#every">every</a>
+		</li>
+		
+		<li>
+			<a href="#filter">filter</a>
+		</li>
+		
+		<li>
+			<a href="#find">find</a>
+		</li>
+		
+		<li>
+			<a href="#findWhere">findWhere</a>
+		</li>
+		
+		<li>
+			<a href="#first">first</a>
+		</li>
+		
+		<li>
+			<a href="#groupBy">groupBy</a>
+		</li>
+		
+		<li>
+			<a href="#initial">initial</a>
+		</li>
+		
+		<li>
+			<a href="#invoke">invoke</a>
+		</li>
+		
+		<li>
+			<a href="#last">last</a>
+		</li>
+		
+		<li>
+			<a href="#map">map</a>
+		</li>
+		
+		<li>
+			<a href="#pluck">pluck</a>
+		</li>
+		
+		<li>
+			<a href="#push">push</a>
+		</li>
+		
+		<li>
+			<a href="#reduce">reduce</a>
+		</li>
+		
+		<li>
+			<a href="#reduceRight">reduceRight</a>
+		</li>
+		
+		<li>
+			<a href="#reject">reject</a>
+		</li>
+		
+		<li>
+			<a href="#rest">rest</a>
+		</li>
+		
+		<li>
+			<a href="#sample">sample</a>
+		</li>
+		
+		<li>
+			<a href="#shuffle">shuffle</a>
+		</li>
+		
+		<li>
+			<a href="#size">size</a>
+		</li>
+		
+		<li>
+			<a href="#some">some</a>
+		</li>
+		
+		<li>
+			<a href="#sortBy">sortBy</a>
+		</li>
+		
+		<li>
+			<a href="#stringAt">stringAt</a>
+		</li>
+		
+		<li>
+			<a href="#toArray">toArray</a>
+		</li>
+		
+		<li>
+			<a href="#toString">toString</a>
+		</li>
+		
+		<li>
+			<a href="#where">where</a>
 		</li>
 		
 	</ul>
@@ -73,26 +173,26 @@
 	
 	<div class="api-list-item">
 		<div class="api-item-title">
-		<a name="get">
+		<a name="add">
 				
-			<h3>get(optName)
+			<h3>add(linkList)
 			</h3>
 
 		</a>
 		</div>
 		<div class="api-list-item-body">
 			<div class="api-item-description">
-				<p>Get the value of a router-wide option, if it's defined.</p>
+				<p>Add URIs to the collection.</p>
 			</div>
 			<h5 class="api-item-subtitle">Parameters</h5>
 			<ul class="api-item-list api-item-params">
 				
 					
 					<li>
-						<code>optName</code>: 
-						String
+						<code>linkList</code>: 
+						String, Object, Array
 						<p>
-						The parameter name.
+						A single link, multiple links, or an array of links. A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance.
 						</p>
 					</li>
 					
@@ -102,9 +202,9 @@
 			<ul class="api-item-list api-item-returns">
 				<li>
 					
-						Any, null
+						URICollection
 						<p>
-							Return type depends on the particular setting, and most settings will be defined by code layered on top of the router. `null` is returned if the option has not been defined.
+							A reference to the same URICollection (i.e. chained).
 						</p>
 					
 				</li>
@@ -115,26 +215,26 @@
 	
 	<div class="api-list-item">
 		<div class="api-item-title">
-		<a name="handle">
+		<a name="at">
 				
-			<h3>handle(elem1[,elem2...])
+			<h3>at(i)
 			</h3>
 
 		</a>
 		</div>
 		<div class="api-list-item-body">
 			<div class="api-item-description">
-				<p>Pass object(s) in for handling as pipeline elements.  Objects wil be filtered through middleware and then routed.  In Connect, this corresponds to the client's HTTP request being passed to Connect's middleware handling system. </p>
+				<p>Returns a clone of the URIjs instance at index <code>i</code>. </p>
 			</div>
 			<h5 class="api-item-subtitle">Parameters</h5>
 			<ul class="api-item-list api-item-params">
 				
 					
 					<li>
-						<code>elem1[,elem2...]</code>: 
-						Object(s)
+						<code>i</code>: 
+						Number
 						<p>
-						One or more objects to be passed through the middleware and routing systems. In Connect, these would be the `req` and `res` objects.
+						The index of the instance to clone.
 						</p>
 					</li>
 					
@@ -144,9 +244,9 @@
 			<ul class="api-item-list api-item-returns">
 				<li>
 					
-						Router
+						URI
 						<p>
-							The same router instance is returned (chained).
+							A clone of the corresponding URIjs instance from the collection.
 						</p>
 					
 				</li>
@@ -157,47 +257,122 @@
 	
 	<div class="api-list-item">
 		<div class="api-item-title">
-		<a name="inmedia">
+		<a name="clone">
 				
-			<h3>inmedia(options)
+			<h3>clone()
 			</h3>
 
 		</a>
 		</div>
 		<div class="api-list-item-body">
 			<div class="api-item-description">
-				<p>A factory function for constructing new routers.  It isn't a constructor function, so there's no need to call it with <code>new</code>.</p>
+				<p>Returns a new URICollection instance containing clones of the same URIs.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					<li>
+						None.
+					</li>
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A new URICollection.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
 
-<p>Options include: </p>
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="contains">
+				
+			<h3>contains(val)
+			</h3>
 
-<ul>
-<li><code>defaultRoute</code>: a route to use if no route predicate returns true.  The built-in <code>defaultRoute</code> throws an error.</li>
-<li><code>enforceArity</code>: limits middleware and routing handlers to the given arity, <em>plus one</em> for the <code>next</code> parameter.</li>
-</ul>
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Predicate function indicating whether the collection contains the passed URI, given as a string, <code>URIjs</code> instance, or <code>RegExp</code>.</p>
 
-<p>There is no default arity enforcement.  Internally, <code>next</code> is appended onto the array of passed parameters and they're all passed to a handler via <code>#apply</code>.</p>
+<p>The comparison is against the array of <code>#toString()</code> results of the collection's elements.</p>
+
+<p>If a URIjs instance is passed in as <code>val</code>, its own <code>#toString()</code> is used for comparison.</p>
+
+<p>If a RegExp instance is passed in as <code>val</code>, the result is determined by calling its <code>#.test()</code> method with each collection element's <code>#toString()</code>, short-circuiting when any returns true.</p>
 			</div>
 			<h5 class="api-item-subtitle">Parameters</h5>
 			<ul class="api-item-list api-item-params">
 				
 					
 					<li>
-						<code>options</code>: 
+						<code>val</code>: 
+						String, Object, RegExp
+						<p>
+						The value to search for.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Boolean
+						<p>
+							`true` if the collection contains the value; `false` otherwise.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="countBy">
+				
+			<h3>countBy(countingMethod)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a property name or a function and uses it to create a plain Javascript object keyed by the outputs of the counting function, with values equal to the number of times a given output was returned.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>countingMethod</code>: 
+						String, Function
+						<p>
+						A string representing a method to invoke on each element, counting by the output, or a function which is passed each element in sequence and calculates the correct result to count by.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
 						Object
 						<p>
-						A hash of options 
-						</p>
-					</li>
-					
-				
-			</ul>
-			<h5 class="api-item-subtitle">Returns</h5>
-			<ul class="api-item-list api-item-returns">
-				<li>
-					
-						Object
-						<p>
-							A new routing object with methods for adding middleware, adding routes, handling new pipeline elements, and getting and setting options.
+							An object with keys determined by the counting criteria, with `Number` values corresponding to the number of times a given key was returned.
 						</p>
 					
 				</li>
@@ -208,76 +383,30 @@
 	
 	<div class="api-list-item">
 		<div class="api-item-title">
-		<a name="set">
+		<a name="each">
 				
-			<h3>set(optName, newVal)
+			<h3>each(iterFn)
 			</h3>
 
 		</a>
 		</div>
 		<div class="api-list-item-body">
 			<div class="api-item-description">
-				<p>Set the value of a router-wide option, given as a key-val pair, or set the value of multiple options by passing in an object.</p>
+				<p>Accepts an iterator function and applies it to a cloned list of collection elements, returning a new <code>URICollection</code> instance with the results.</p>
+
+<p>This is distinct from <code>#map()</code> because this implementation of <code>#each()</code> <em>always</em> returns a new URICollection, even if <code>iterFn</code> doesn't have any return value.  <code>#map()</code> only returns a new URICollection if it results in an array of <code>URIjs</code> instances. </p>
+
+<p>No changes are made to the original collection elements.</p>
 			</div>
 			<h5 class="api-item-subtitle">Parameters</h5>
 			<ul class="api-item-list api-item-params">
 				
 					
 					<li>
-						<code>optName</code>: 
-						String, Object
-						<p>
-						The name of the option to be set, if given as a key-value pair. Alternately, an object with multiple options to be set.
-						</p>
-					</li>
-					
-					<li>
-						<code>newVal</code>: 
-						Any
-						<p>
-						The updated value of the option, if given as a key-value pair.
-						</p>
-					</li>
-					
-				
-			</ul>
-			<h5 class="api-item-subtitle">Returns</h5>
-			<ul class="api-item-list api-item-returns">
-				<li>
-					
-						Router
-						<p>
-							The same router instance is returned (chained).
-						</p>
-					
-				</li>
-			</ul>
-		</div>
-
-	</div>
-	
-	<div class="api-list-item">
-		<div class="api-item-title">
-		<a name="useMiddleware">
-				
-			<h3>useMiddleware(midwareFn)
-			</h3>
-
-		</a>
-		</div>
-		<div class="api-list-item-body">
-			<div class="api-item-description">
-				<p>Add a middleware function to the stack.  Middleware is a function with a <code>req, res, next</code>-type signature, as in Connect, but the number of parameters before <code>next</code> is allowed to vary for the sake of flexibility.  In practice this should be locked down with the global <code>enforceArity</code> option.</p>
-			</div>
-			<h5 class="api-item-subtitle">Parameters</h5>
-			<ul class="api-item-list api-item-params">
-				
-					
-					<li>
-						<code>midwareFn</code>: 
+						<code>iterFn</code>: 
 						Function
 						<p>
-						A middleware function which will receive pipeline element(s) and a `next` method to call if the objects should continue down the route.
+						The iterator function which will be called with each collection element in sequence.
 						</p>
 					</li>
 					
@@ -287,9 +416,9 @@
 			<ul class="api-item-list api-item-returns">
 				<li>
 					
-						Router
+						URICollection
 						<p>
-							The same router instance is returned (chained).
+							A URICollection instance created by applying `iterFn` to each of a cloned array of internal `URIjs` instances.
 						</p>
 					
 				</li>
@@ -300,22 +429,62 @@
 	
 	<div class="api-list-item">
 		<div class="api-item-title">
-		<a name="useRoute">
+		<a name="every">
 				
-			<h3>useRoute(predicateFn, handlerFn)
+			<h3>every(truthTest)
 			</h3>
 
 		</a>
 		</div>
 		<div class="api-list-item-body">
 			<div class="api-item-description">
-				<p>Define a route by passing in a predicate (truth-test) and route handler.</p>
+				<p>Returns true if every element passes a truth test passed in as a callback.</p>
 
-<p>A route is specified by passing in two functions.  The first is a predicate which is passed the piped object(s), inspects them, and returns <code>true</code> if it wants to accept responsibility for them. Otherwise, it should return <code>false</code> or should not return at all.  This predicate is a generalization of Connect's URL-based routing, intended for pipelines where there may not be an obvious single string to base routing on. </p>
+<p>Uses Underscore's <code>_.every</code>, but guarantees immutability.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>truthTest</code>: 
+						Function
+						<p>
+						A function which is handed collection elements in sequence and should return true or false depending on the element's attributes.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Boolean
+						<p>
+							True if every element passes the test; false if any element fails.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
 
-<p>If the predicate returns true, the object(s) are removed from the pipeline and passed to the the route handler.  No route predicates further down the pipeline are tested: the earlier a route is defined in the script, the higher its priority.</p>
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="filter">
+				
+			<h3>filter(predicateFn)
+			</h3>
 
-<p>The route handler should implement the actual logic / data operations associated with the route: extracting information, writing results to disk, and so on.  Implementing this kind of code in the predicate may make the pipeline difficult to modify.</p>
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Just like the Underscore <code>_.filter</code> method, but returns a new URICollection with cloned URI instances.</p>
+
+<p>Accepts a predicate function <code>predicateFn</code> and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return true.</p>
 			</div>
 			<h5 class="api-item-subtitle">Parameters</h5>
 			<ul class="api-item-list api-item-params">
@@ -325,15 +494,7 @@
 						<code>predicateFn</code>: 
 						Function
 						<p>
-						A function which is passed the routed object(s) and returns `true` if its associated handler should be passed the objects.
-						</p>
-					</li>
-					
-					<li>
-						<code>handlerFn</code>: 
-						Function
-						<p>
-						A function which is passed the routed object(s) if its associated predicate returns true, after which the objects are removed from the pipeline and no further route predicates are tested.
+						A function which will be handed each collection element and should return `true` for all elements to be included in the new collection.
 						</p>
 					</li>
 					
@@ -343,9 +504,1005 @@
 			<ul class="api-item-list api-item-returns">
 				<li>
 					
-						Router
+						URICollection
 						<p>
-							The same router instance is returned (chained).
+							A new URICollection instance containing the matching elements, regardless of the number of matches.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="find">
+				
+			<h3>find(testFn)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a truth-testing function and returns the first element to cause a <code>true</code> return value.  Proxies to Underscore's <code>_.find</code>, but returns a cloned URIjs instance to ensure immutability of collection elements.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>testFn</code>: 
+						Function
+						<p>
+						The truth-testing function which will iterate over collection elements, short-circuiting at the first to return true.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URI, null
+						<p>
+							If a result is found, a clone of the matching `URIjs` instance. Otherwise, returns `null`.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="findWhere">
+				
+			<h3>findWhere(queryObject)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a query object and returns the first collection element with properties matching the key-value pairs in that object.  Like <code>#where()</code>, but only returns the first result and does not wrap it in a collection - it returns a <code>URIjs</code> instance.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>queryObject</code>: 
+						Object
+						<p>
+						A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URI
+						<p>
+							A clone of the first `URIjs` element in the collection matching the query.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="first">
+				
+			<h3>first(n)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns the first <code>n</code> list elements.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>n</code>: 
+						Number
+						<p>
+						The number of elements to return, defaulting to 1.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection, URI
+						<p>
+							If `n > 1`, returns a `URICollection`. If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="groupBy">
+				
+			<h3>groupBy(groupingMethod, asStrings)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a property name or a function and uses it to create a plain Javascript object with the collection's elements keyed by the results of the grouping function or property.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>groupingMethod</code>: 
+						String, Function
+						<p>
+						A string representing a method to invoke on each element, grouping by the output, or a function which is passed each element in sequence and calculates the correct group key.
+						</p>
+					</li>
+					
+					<li>
+						<code>asStrings</code>: 
+						Boolean
+						<p>
+						(Optional) If `true` is passed, the value for each group key on the returned object will be an array of URI strings instead of URICollections.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Object
+						<p>
+							An object with keys determined by the grouping criteria, with URICollections as the values. If `asStrings=true`, the values are converted to arrays of URI strings.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="initial">
+				
+			<h3>initial(n)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns a new URICollection with copies of the elements from from index 0 up to index <code>#length() - n</code>.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>n</code>: 
+						Number
+						<p>
+						The number of ending elements to omit, defaulting to 1.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A URICollection instance, even if only one element is returned. This is in line with Underscore's behavior.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="invoke">
+				
+			<h3>invoke(methodName, args)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a method name and optional additional arguments to pass to that method, and invokes the given method on each URIjs instance in the collection.</p>
+
+<p>Because <code>URIjs</code> methods without argument return attribute information - e.g. <code>uri.domain()</code> returns the string-format URI domain - a plain array of results is returned if no additional arguments are supplied.</p>
+
+<p>Calling <code>URIjs</code> methods with arguments generally causes mutation and returns the object - e.g. <code>uri.domain("justcats.net")</code> returns the same object with its domain changed to <code>justcats.net</code>.  For this reason, passing additional arguments causes the result to be wrapped in a new URICollection instance.</p>
+
+<p>No changes are made to the original collection elements.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>methodName</code>: 
+						String
+						<p>
+						A string representing the method name to invoke on each collection element.
+						</p>
+					</li>
+					
+					<li>
+						<code>args</code>: 
+						Array
+						<p>
+						(Optional) Additional arguments to pass when invoking `methodName`.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Array, URICollection
+						<p>
+							If no additional arguments are passed, a plain array of results. Otherwise, a new URICollection wrapping clones of the URIjs elements from the original collection.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="last">
+				
+			<h3>last(n)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns the last <code>n</code> list elements.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>n</code>: 
+						Number
+						<p>
+						The number of elements to return, defaulting to 1.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection, URI
+						<p>
+							If `n > 1`, returns a `URICollection`. If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="map">
+				
+			<h3>map(mapFn)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts an iterator function and applies it to a cloned list of collection elements.  Depending on the iterator's output, this method will either return a new <code>URICollection</code> instance or a plain array.</p>
+
+<p>If the <code>mapFn</code> returns an array of <code>URIjs</code> instances, they will be wrapped in a new <code>URICollection</code> and returned.  If it returns another type of result, the plain array will be returned to the client.</p>
+
+<p>A given map operation's outputs are assumed to be homogeneous with respect to type, so the type of the internal array resulting from proxying to <code>_.map(list, mapFn)</code> is determined by testing only the first element. </p>
+
+<p>No changes are made to the original collection elements.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>mapFn</code>: 
+						Function
+						<p>
+						The iterator function which will be called with each collection element in sequence.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Array, URICollection
+						<p>
+							Either a new `URICollection` (if an array of `URIjs` instances are returned) or a plain array of results (e.g. if strings of element hostnames are returned.)
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="pluck">
+				
+			<h3>pluck(propertyName)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a property name and returns a plain array with the value of that property for each element in the collection.<br />Similar to Underscore's own <code>_.pluck</code> but internally uses _.resolve in a map operation, because URIjs properties are all returned by methods. </p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>propertyName</code>: 
+						String
+						<p>
+						A string representing the property to pluck from each collection element.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Array
+						<p>
+							A plain array of results.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="push">
+				
+			<h3>push(linkList)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Alias for <code>#add()</code></p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>linkList</code>: 
+						String, Object, Array
+						<p>
+						A single link, multiple links, or an array of links. A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A reference to the same URICollection (i.e. chained).
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="reduce">
+				
+			<h3>reduce(iterator, initial)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Typical reduce operation, creating a single result by iterating over a list of elements from left to right.</p>
+
+<p>Proxies to Underscore's <code>_.reduce</code> with an added safety for immutability.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>iterator</code>: 
+						Function
+						<p>
+						A function which takes `(soFar, elem)` as its arguments, where `soFar` is the value of the reduce operation up to that point and `elem` is the current collection element. It receives collection elements in left to right order.
+						</p>
+					</li>
+					
+					<li>
+						<code>initial</code>: 
+						Any
+						<p>
+						Initial value to pass as `current` to the first cycle of the iterator function.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Any
+						<p>
+							Any value returned by the reduce operation. There is no automatic wrapping in new URICollection instances.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="reduceRight">
+				
+			<h3>reduceRight(iterator, initial)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Typical reduce operation but reversed, creating a single result by iterating over a list of elements from right to left.</p>
+
+<p>Proxies to Underscore's <code>_.reduce</code> with an added safety for immutability.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>iterator</code>: 
+						Function
+						<p>
+						A function which takes `(soFar, elem)` as its arguments, where `soFar` is the value of the reduce operation up to that point and `elem` is the current collection element. It receives collection elements in right to left order.
+						</p>
+					</li>
+					
+					<li>
+						<code>initial</code>: 
+						Any
+						<p>
+						Initial value to pass as `current` to the first cycle of the iterator function.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Any
+						<p>
+							Any value returned by the reduce operation. There is no automatic wrapping in new URICollection instances.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="reject">
+				
+			<h3>reject(predicateFn)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Just like the Underscore <code>_.reject</code> method (the inverse of <code>_.filter</code>), but returns a new URICollection with cloned URI instances.</p>
+
+<p>Accepts a predicate function <code>predicateFn</code> and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return false.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>predicateFn</code>: 
+						Function
+						<p>
+						A function which will be handed each collection element and should return `false` for all elements to be included in the new collection.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A new URICollection instance containing the matching elements, regardless of the number of matches.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="rest">
+				
+			<h3>rest(n)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns a new URICollection with copies of the elements from index <code>n</code> to the end.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>n</code>: 
+						Number
+						<p>
+						The index to start copying from, defaulting to 1.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A URICollection instance, even if only one element is returned. This is in line with Underscore's behavior.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="sample">
+				
+			<h3>sample(n)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns <code>n</code> randomly selected elements from the collection.  If <code>n==1</code> or <code>typeof n === "null"</code>, returns a <code>URIjs</code> instance.  If <code>n &gt; 1</code>, returns a new <code>URICollection</code> instance.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>n</code>: 
+						Number
+						<p>
+						The number of elements to return in the sample, defaulting to 1.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection, URI
+						<p>
+							A URICollection instance if `n > 1`, or a `URIjs` instance otherwise.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="shuffle">
+				
+			<h3>shuffle()
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Just like the Underscore <code>_.shuffle</code> method, but returns a new URICollection with cloned URI instances.</p>
+
+<p>The new collection has its elements randomly shuffled.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					<li>
+						None.
+					</li>
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A new URICollection instance containing clones of the shuffled elements.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="size">
+				
+			<h3>size()
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns the number of URI elements in the collection.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					<li>
+						None.
+					</li>
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Number
+						<p>
+							The size of the collection.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="some">
+				
+			<h3>some(truthTest)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns true if any element passes a truth test passed in as a callback.</p>
+
+<p>Uses Underscore's <code>_.some</code>, but guarantees immutability.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>truthTest</code>: 
+						Function
+						<p>
+						A function which is handed collection elements in sequence and should return true or false depending on the element's attributes.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Boolean
+						<p>
+							True if any element passes the test; false if none of them do.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="sortBy">
+				
+			<h3>sortBy(sortingMethod)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a method name or a function and uses it to create a new URICollection with elements ordered by the function output or method invocation output for each object.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>sortingMethod</code>: 
+						String, Function
+						<p>
+						A string representing a method to invoke on each element, returning a value used to sort by, or a function which is passed each element in sequence and calculates the correct value to sort by.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A new collection with elements sorted according to the returned sorting criteria.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="stringAt">
+				
+			<h3>stringAt(i)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns the <code>#toString()</code> result of the URIjs instance at index <code>i</code>. </p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>i</code>: 
+						Number
+						<p>
+						The index of the instance to call `#toString()` on.
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						String
+						<p>
+							The string returned from calling `#toString()` on the instance.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="toArray">
+				
+			<h3>toArray()
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns a plain array of cloned URIjs instances matching those in the collection. </p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					<li>
+						None.
+					</li>
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Array
+						<p>
+							An array of URIjs instances.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="toString">
+				
+			<h3>toString()
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Returns an array of URI strings created by calling <code>#toString()</code> on each URIjs instance in the collection.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					<li>
+						None.
+					</li>
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						Array
+						<p>
+							An array of URI strings.
+						</p>
+					
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	
+	<div class="api-list-item">
+		<div class="api-item-title">
+		<a name="where">
+				
+			<h3>where(queryObject)
+			</h3>
+
+		</a>
+		</div>
+		<div class="api-list-item-body">
+			<div class="api-item-description">
+				<p>Accepts a query object and returns all collection elements with properties matching the key-value pairs in that object.</p>
+			</div>
+			<h5 class="api-item-subtitle">Parameters</h5>
+			<ul class="api-item-list api-item-params">
+				
+					
+					<li>
+						<code>queryObject</code>: 
+						Object
+						<p>
+						A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`
+						</p>
+					</li>
+					
+				
+			</ul>
+			<h5 class="api-item-subtitle">Returns</h5>
+			<ul class="api-item-list api-item-returns">
+				<li>
+					
+						URICollection
+						<p>
+							A new URICollection instance.
 						</p>
 					
 				</li>
