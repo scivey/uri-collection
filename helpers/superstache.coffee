@@ -76,8 +76,13 @@ render = (templateName, options, cb) ->
 
 	loadHandle layoutToPath(options.layout), (err, lay) ->
 		loadHandle _templatePath, (err, tmpl) ->
+			windowTitle = options.projectTitle
+			if options.title
+				windowTitle = options.title + " | " + windowTitle
+			else
+				windowTitle = windowTitle + " | " + "scivey"
 			contents = tmpl(options)
-			html = lay({contents: contents, title: options.title, headLinks: links})
+			html = lay({contents: contents, title: options.title, windowTitle: windowTitle, projectTitle: options.projectTitle, headLinks: links})
 			cb null, html
 
 

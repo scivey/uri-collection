@@ -61,6 +61,7 @@ readJSON indir("doxed.json"), (err, data) ->
 	toRender =
 		items: mapped3
 		title: "API"
+		projectTitle: "uri-collection"
 		linkName: "API"
 
 	#console.log mapped3

@@ -41,10 +41,12 @@ readJSON indir("spec.json"), (err, data) ->
 
 	toRender =
 		title: "Specs"
+		projectTitle: "uri-collection"
 		stats:
 			total: data.stats.tests
 			passes: data.stats.passes
 		linkName: "Specs"
+		githubSpecsLink: "https://github.com/scivey/uri-collection/tree/master/spec"
 		testSuites: mapped
 
 	#console.log mapped[0]

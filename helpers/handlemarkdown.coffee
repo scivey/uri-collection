@@ -26,7 +26,7 @@ fs.readFile indir("../mdsrc/intro.md"), "utf8", (err, res) ->
 		title = false
 		if title
 			windowtitle = title + " | " + windowTitle
-		stache.render "straight", {linkName: "Home", pageContents: html, windowTitle: windowTitle, title: title}, (err, rendered) ->
+		stache.render "straight", {linkName: "Home", projectTitle: "uri-collection", pageContents: html, windowTitle: windowTitle, title: title}, (err, rendered) ->
 			fs.writeFile indir("../index.html"), rendered, (err) ->
 				console.log "done"
 
@@ -37,7 +37,7 @@ fs.readFile indir("../mdsrc/overview.md"), "utf8", (err, res) ->
 		windowTitle = "uri-collection"
 		if title?
 			windowtitle = title + " | " + windowTitle
-		stache.render "straight", {linkName: "Overview", pageContents: html, windowTitle: windowTitle, title: title}, (err, rendered) ->
+		stache.render "straight", {linkName: "Overview", projectTitle: "uri-collection", pageContents: html, windowTitle: windowTitle, title: title}, (err, rendered) ->
 			#console.log rendered
 			fs.writeFile indir("../overview.html"), rendered, (err) ->
 				console.log "done"

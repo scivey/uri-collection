@@ -4,35 +4,33 @@
       {
         "type": "param",
         "types": [
-          "String",
-          "Object",
-          "Array"
+          "Function"
         ],
-        "name": "linkList",
-        "description": "A single link, multiple links, or an array of links. A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance."
+        "name": "midwareFn",
+        "description": "A middleware function which will receive pipeline element(s) and a `next` method to call if the objects should continue down the route."
       },
       {
         "type": "return",
         "types": [
-          "URICollection"
+          "Router"
         ],
-        "description": "A reference to the same URICollection (i.e. chained)."
+        "description": "The same router instance is returned (chained)."
       }
     ],
     "description": {
-      "full": "<p>Add URIs to the collection.</p>",
-      "summary": "<p>Add URIs to the collection.</p>",
+      "full": "<p>Add a middleware function to the stack.  Middleware is a function with a <code>req, res, next</code>-type signature, as in Connect, but the number of parameters before <code>next</code> is allowed to vary for the sake of flexibility.  In practice this should be locked down with the global <code>enforceArity</code> option.</p>",
+      "summary": "<p>Add a middleware function to the stack.  Middleware is a function with a <code>req, res, next</code>-type signature, as in Connect, but the number of parameters before <code>next</code> is allowed to vary for the sake of flexibility.  In practice this should be locked down with the global <code>enforceArity</code> option.</p>",
       "body": ""
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "URICollection.prototype.add = function() {\n      var linkList, _uris;\n      linkList = 1 <= arguments.length ? __slice.call(arguments, 0) : [];\n      linkList = _.flatten(linkList);\n      _uris = this._uris;\n      _.each(linkList, function(aLink) {\n        if (!isURI(aLink)) {\n          aLink = new URI(aLink);\n        }\n        return _uris.push(aLink);\n      });\n      return this;\n    };",
+    "code": "outputRef.useMiddleware = _useMiddleware;",
     "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "add",
-      "string": "URICollection.prototype.add()"
+      "type": "property",
+      "receiver": "outputRef",
+      "name": "useMiddleware",
+      "value": "_useMiddleware",
+      "string": "outputRef.useMiddleware"
     }
   },
   {
@@ -40,95 +38,33 @@
       {
         "type": "param",
         "types": [
-          "String",
-          "Object",
-          "Array"
+          "Object(s)"
         ],
-        "name": "linkList",
-        "description": "A single link, multiple links, or an array of links. A given link can be an existing URIjs instance or a string, which will be converted into a URIjs instance."
+        "name": "elem1[,elem2...]",
+        "description": "One or more objects to be passed through the middleware and routing systems. In Connect, these would be the `req` and `res` objects."
       },
       {
         "type": "return",
         "types": [
-          "URICollection"
+          "Router"
         ],
-        "description": "A reference to the same URICollection (i.e. chained)."
+        "description": "The same router instance is returned (chained)."
       }
     ],
     "description": {
-      "full": "<p>Alias for <code>#add()</code></p>",
-      "summary": "<p>Alias for <code>#add()</code></p>",
+      "full": "<p>Pass object(s) in for handling as pipeline elements.  Objects wil be filtered through middleware and then routed.  In Connect, this corresponds to the client's HTTP request being passed to Connect's middleware handling system. </p>",
+      "summary": "<p>Pass object(s) in for handling as pipeline elements.  Objects wil be filtered through middleware and then routed.  In Connect, this corresponds to the client's HTTP request being passed to Connect's middleware handling system. </p>",
       "body": ""
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "URICollection.prototype.push = function() {\n      var linkList;\n      linkList = 1 <= arguments.length ? __slice.call(arguments, 0) : [];\n      this.add(_.flatten(linkList));\n      return this;\n    };",
+    "code": "outputRef.handle = _handleRequest;",
     "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "push",
-      "string": "URICollection.prototype.push()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "return",
-        "types": [
-          "Array"
-        ],
-        "description": "An array of URI strings."
-      },
-      {
-        "type": "api",
-        "visibility": "public"
-      }
-    ],
-    "description": {
-      "full": "<p>Returns an array of URI strings created by calling <code>#toString()</code> on each URIjs instance in the collection.</p>",
-      "summary": "<p>Returns an array of URI strings created by calling <code>#toString()</code> on each URIjs instance in the collection.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.toString = function() {\n      var _strings;\n      _strings = _.map(this._uris, function(oneLink) {\n        return oneLink.toString();\n      });\n      return _strings;\n    };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "toString",
-      "string": "URICollection.prototype.toString()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "return",
-        "types": [
-          "Array"
-        ],
-        "description": "An array of URIjs instances."
-      },
-      {
-        "type": "api",
-        "visibility": "public"
-      }
-    ],
-    "description": {
-      "full": "<p>Returns a plain array of cloned URIjs instances matching those in the collection. </p>",
-      "summary": "<p>Returns a plain array of cloned URIjs instances matching those in the collection. </p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.toArray = function() {\n      var _uris;\n      _uris = cloneUris(this._uris);\n      return _uris;\n    };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "toArray",
-      "string": "URICollection.prototype.toArray()"
+      "type": "property",
+      "receiver": "outputRef",
+      "name": "handle",
+      "value": "_handleRequest",
+      "string": "outputRef.handle"
     }
   },
   {
@@ -136,239 +72,52 @@
       {
         "type": "param",
         "types": [
-          "Number"
+          "Function"
         ],
-        "name": "i",
-        "description": "The index of the instance to clone."
+        "name": "predicateFn",
+        "description": "A function which is passed the routed object(s) and returns `true` if its associated handler should be passed the objects."
+      },
+      {
+        "type": "param",
+        "types": [
+          "Function"
+        ],
+        "name": "handlerFn",
+        "description": "A function which is passed the routed object(s) if its associated predicate returns true, after which the objects are removed from the pipeline and no further route predicates are tested."
       },
       {
         "type": "return",
         "types": [
-          "URI"
+          "Router"
         ],
-        "description": "A clone of the corresponding URIjs instance from the collection."
-      },
-      {
-        "type": "api",
-        "visibility": "public"
+        "description": "The same router instance is returned (chained)."
       }
     ],
     "description": {
-      "full": "<p>Returns a clone of the URIjs instance at index <code>i</code>. </p>",
-      "summary": "<p>Returns a clone of the URIjs instance at index <code>i</code>. </p>",
-      "body": ""
+      "full": "<p>Define a route by passing in a predicate (truth-test) and route handler.</p>\n\n<p>A route is specified by passing in two functions.  The first is a predicate which is passed the piped object(s), inspects them, and returns <code>true</code> if it wants to accept responsibility for them. Otherwise, it should return <code>false</code> or should not return at all.  This predicate is a generalization of Connect's URL-based routing, intended for pipelines where there may not be an obvious single string to base routing on. </p>\n\n<p>If the predicate returns true, the object(s) are removed from the pipeline and passed to the the route handler.  No route predicates further down the pipeline are tested: the earlier a route is defined in the script, the higher its priority.</p>\n\n<p>The route handler should implement the actual logic / data operations associated with the route: extracting information, writing results to disk, and so on.  Implementing this kind of code in the predicate may make the pipeline difficult to modify.</p>",
+      "summary": "<p>Define a route by passing in a predicate (truth-test) and route handler.</p>",
+      "body": "<p>A route is specified by passing in two functions.  The first is a predicate which is passed the piped object(s), inspects them, and returns <code>true</code> if it wants to accept responsibility for them. Otherwise, it should return <code>false</code> or should not return at all.  This predicate is a generalization of Connect's URL-based routing, intended for pipelines where there may not be an obvious single string to base routing on. </p>\n\n<p>If the predicate returns true, the object(s) are removed from the pipeline and passed to the the route handler.  No route predicates further down the pipeline are tested: the earlier a route is defined in the script, the higher its priority.</p>\n\n<p>The route handler should implement the actual logic / data operations associated with the route: extracting information, writing results to disk, and so on.  Implementing this kind of code in the predicate may make the pipeline difficult to modify.</p>"
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "URICollection.prototype.at = function(index) {\n      if (index < 0) {\n        index = this.size() + index;\n      }\n      if (this._uris[index] != null) {\n        return this._uris[index].clone();\n      } else {\n        return null;\n      }\n    };",
+    "code": "outputRef.useRoute = _useRoute;",
     "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "at",
-      "string": "URICollection.prototype.at()"
+      "type": "property",
+      "receiver": "outputRef",
+      "name": "useRoute",
+      "value": "_useRoute",
+      "string": "outputRef.useRoute"
     }
   },
   {
     "tags": [
       {
         "type": "param",
-        "types": [
-          "Number"
-        ],
-        "name": "i",
-        "description": "The index of the instance to call `#toString()` on."
-      },
-      {
-        "type": "return",
         "types": [
           "String"
         ],
-        "description": "The string returned from calling `#toString()` on the instance."
-      },
-      {
-        "type": "api",
-        "visibility": "public"
-      }
-    ],
-    "description": {
-      "full": "<p>Returns the <code>#toString()</code> result of the URIjs instance at index <code>i</code>. </p>",
-      "summary": "<p>Returns the <code>#toString()</code> result of the URIjs instance at index <code>i</code>. </p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.stringAt = function(index) {\n      return this._uris[index].toString();\n    };\n\n    return URICollection;\n\n  })();",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "stringAt",
-      "string": "URICollection.prototype.stringAt()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A new URICollection."
-      },
-      {
-        "type": "api",
-        "visibility": "public"
-      }
-    ],
-    "description": {
-      "full": "<p>Returns a new URICollection instance containing clones of the same URIs.</p>",
-      "summary": "<p>Returns a new URICollection instance containing clones of the same URIs.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.clone = function() {\n    var _uris;\n    _uris = cloneUris(this._uris);\n    return new URICollection(_uris);\n  };\n\n  makeCollectionReturningMethod = function(methodName) {\n    return function() {\n      var params, _result, _uris;\n      params = 1 <= arguments.length ? __slice.call(arguments, 0) : [];\n      _uris = cloneUris(this._uris);\n      params.unshift(_uris);\n      _result = _[methodName].apply(null, params);\n      return new URICollection(_result);\n    };\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "clone",
-      "string": "URICollection.prototype.clone()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "predicateFn",
-        "description": "A function which will be handed each collection element and should return `true` for all elements to be included in the new collection."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A new URICollection instance containing the matching elements, regardless of the number of matches."
-      }
-    ],
-    "description": {
-      "full": "<p>Just like the Underscore <code>_.filter</code> method, but returns a new URICollection with cloned URI instances.</p>\n\n<p>Accepts a predicate function <code>predicateFn</code> and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return true.</p>",
-      "summary": "<p>Just like the Underscore <code>_.filter</code> method, but returns a new URICollection with cloned URI instances.</p>",
-      "body": "<p>Accepts a predicate function <code>predicateFn</code> and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return true.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.filter = makeCollectionReturningMethod(\"filter\");",
-    "ctx": {
-      "type": "property",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "filter",
-      "value": "makeCollectionReturningMethod(\"filter\")",
-      "string": "URICollection.prototype.filter"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "predicateFn",
-        "description": "A function which will be handed each collection element and should return `false` for all elements to be included in the new collection."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A new URICollection instance containing the matching elements, regardless of the number of matches."
-      }
-    ],
-    "description": {
-      "full": "<p>Just like the Underscore <code>_.reject</code> method (the inverse of <code>_.filter</code>), but returns a new URICollection with cloned URI instances.</p>\n\n<p>Accepts a predicate function <code>predicateFn</code> and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return false.</p>",
-      "summary": "<p>Just like the Underscore <code>_.reject</code> method (the inverse of <code>_.filter</code>), but returns a new URICollection with cloned URI instances.</p>",
-      "body": "<p>Accepts a predicate function <code>predicateFn</code> and applies it to each element in sequence, returning a collection containing all elements that cause the predicate to return false.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.reject = makeCollectionReturningMethod(\"reject\");",
-    "ctx": {
-      "type": "property",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "reject",
-      "value": "makeCollectionReturningMethod(\"reject\")",
-      "string": "URICollection.prototype.reject"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A new URICollection instance containing clones of the shuffled elements."
-      }
-    ],
-    "description": {
-      "full": "<p>Just like the Underscore <code>_.shuffle</code> method, but returns a new URICollection with cloned URI instances.</p>\n\n<p>The new collection has its elements randomly shuffled.</p>",
-      "summary": "<p>Just like the Underscore <code>_.shuffle</code> method, but returns a new URICollection with cloned URI instances.</p>",
-      "body": "<p>The new collection has its elements randomly shuffled.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.shuffle = makeCollectionReturningMethod(\"shuffle\");\n\n  makeNonCollectionReturningMethod = function(methodName) {\n    return function() {\n      var params, _uris;\n      params = 1 <= arguments.length ? __slice.call(arguments, 0) : [];\n      _uris = cloneUris(this._uris);\n      params.unshift(_uris);\n      return _[methodName].apply(null, params);\n    };\n  };",
-    "ctx": {
-      "type": "property",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "shuffle",
-      "value": "makeCollectionReturningMethod(\"shuffle\")",
-      "string": "URICollection.prototype.shuffle"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "return",
-        "types": [
-          "Number"
-        ],
-        "description": "The size of the collection."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns the number of URI elements in the collection.</p>",
-      "summary": "<p>Returns the number of URI elements in the collection.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.size = function() {\n    return this._uris.length;\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "size",
-      "string": "URICollection.prototype.size()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "truthTest",
-        "description": "A function which is handed collection elements in sequence and should return true or false depending on the element's attributes."
+        "name": "optName",
+        "description": "The parameter name."
       },
       {
         "type": "",
@@ -377,472 +126,25 @@
       {
         "type": "return",
         "types": [
-          "Boolean"
-        ],
-        "description": "True if any element passes the test; false if none of them do."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns true if any element passes a truth test passed in as a callback.</p>\n\n<p>Uses Underscore's <code>_.some</code>, but guarantees immutability.</p>",
-      "summary": "<p>Returns true if any element passes a truth test passed in as a callback.</p>",
-      "body": "<p>Uses Underscore's <code>_.some</code>, but guarantees immutability.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.some = makeNonCollectionReturningMethod(\"some\");",
-    "ctx": {
-      "type": "property",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "some",
-      "value": "makeNonCollectionReturningMethod(\"some\")",
-      "string": "URICollection.prototype.some"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "truthTest",
-        "description": "A function which is handed collection elements in sequence and should return true or false depending on the element's attributes."
-      },
-      {
-        "type": "",
-        "string": ""
-      },
-      {
-        "type": "return",
-        "types": [
-          "Boolean"
-        ],
-        "description": "True if every element passes the test; false if any element fails."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns true if every element passes a truth test passed in as a callback.</p>\n\n<p>Uses Underscore's <code>_.every</code>, but guarantees immutability.</p>",
-      "summary": "<p>Returns true if every element passes a truth test passed in as a callback.</p>",
-      "body": "<p>Uses Underscore's <code>_.every</code>, but guarantees immutability.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.every = makeNonCollectionReturningMethod(\"every\");",
-    "ctx": {
-      "type": "property",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "every",
-      "value": "makeNonCollectionReturningMethod(\"every\")",
-      "string": "URICollection.prototype.every"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "iterator",
-        "description": "A function which takes `(soFar, elem)` as its arguments, where `soFar` is the value of the reduce operation up to that point and `elem` is the current collection element. It receives collection elements in left to right order."
-      },
-      {
-        "type": "param",
-        "types": [
-          "Any"
-        ],
-        "name": "initial",
-        "description": "Initial value to pass as `current` to the first cycle of the iterator function."
-      },
-      {
-        "type": "return",
-        "types": [
-          "Any"
-        ],
-        "description": "Any value returned by the reduce operation. There is no automatic wrapping in new URICollection instances."
-      }
-    ],
-    "description": {
-      "full": "<p>Typical reduce operation, creating a single result by iterating over a list of elements from left to right.</p>\n\n<p>Proxies to Underscore's <code>_.reduce</code> with an added safety for immutability.</p>",
-      "summary": "<p>Typical reduce operation, creating a single result by iterating over a list of elements from left to right.</p>",
-      "body": "<p>Proxies to Underscore's <code>_.reduce</code> with an added safety for immutability.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.reduce = makeNonCollectionReturningMethod(\"reduce\");",
-    "ctx": {
-      "type": "property",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "reduce",
-      "value": "makeNonCollectionReturningMethod(\"reduce\")",
-      "string": "URICollection.prototype.reduce"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "iterator",
-        "description": "A function which takes `(soFar, elem)` as its arguments, where `soFar` is the value of the reduce operation up to that point and `elem` is the current collection element. It receives collection elements in right to left order."
-      },
-      {
-        "type": "param",
-        "types": [
-          "Any"
-        ],
-        "name": "initial",
-        "description": "Initial value to pass as `current` to the first cycle of the iterator function."
-      },
-      {
-        "type": "return",
-        "types": [
-          "Any"
-        ],
-        "description": "Any value returned by the reduce operation. There is no automatic wrapping in new URICollection instances."
-      }
-    ],
-    "description": {
-      "full": "<p>Typical reduce operation but reversed, creating a single result by iterating over a list of elements from right to left.</p>\n\n<p>Proxies to Underscore's <code>_.reduce</code> with an added safety for immutability.</p>",
-      "summary": "<p>Typical reduce operation but reversed, creating a single result by iterating over a list of elements from right to left.</p>",
-      "body": "<p>Proxies to Underscore's <code>_.reduce</code> with an added safety for immutability.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.reduceRight = makeNonCollectionReturningMethod(\"reduceRight\");",
-    "ctx": {
-      "type": "property",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "reduceRight",
-      "value": "makeNonCollectionReturningMethod(\"reduceRight\")",
-      "string": "URICollection.prototype.reduceRight"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Number"
-        ],
-        "name": "n",
-        "description": "The number of elements to return, defaulting to 1."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection",
-          "URI"
-        ],
-        "description": "If `n > 1`, returns a `URICollection`. If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns the first <code>n</code> list elements.</p>",
-      "summary": "<p>Returns the first <code>n</code> list elements.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.first = function(n) {\n    var _origUris;\n    if ((n != null) && n !== 1) {\n      _origUris = _.first(this._uris, n);\n      return new URICollection(cloneUris(_origUris));\n    } else {\n      return this.at(0).clone();\n    }\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "first",
-      "string": "URICollection.prototype.first()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Number"
-        ],
-        "name": "n",
-        "description": "The number of elements to return, defaulting to 1."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection",
-          "URI"
-        ],
-        "description": "If `n > 1`, returns a `URICollection`. If `n===1` or `typeof n === 'null'`, returns a cloned URIjs instance."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns the last <code>n</code> list elements.</p>",
-      "summary": "<p>Returns the last <code>n</code> list elements.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.last = function(n) {\n    var _origUris;\n    if ((n != null) && n !== 1) {\n      _origUris = _.last(this._uris, n);\n      return new URICollection(cloneUris(_origUris));\n    } else {\n      return this.at(this.size() - 1).clone();\n    }\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "last",
-      "string": "URICollection.prototype.last()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Number"
-        ],
-        "name": "n",
-        "description": "The index to start copying from, defaulting to 1."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A URICollection instance, even if only one element is returned. This is in line with Underscore's behavior."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns a new URICollection with copies of the elements from index <code>n</code> to the end.</p>",
-      "summary": "<p>Returns a new URICollection with copies of the elements from index <code>n</code> to the end.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.rest = function(n) {\n    var _origUris;\n    if (n == null) {\n      n = 1;\n    }\n    _origUris = _.rest(this._uris, n);\n    return new URICollection(cloneUris(_origUris));\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "rest",
-      "string": "URICollection.prototype.rest()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Number"
-        ],
-        "name": "n",
-        "description": "The number of ending elements to omit, defaulting to 1."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A URICollection instance, even if only one element is returned. This is in line with Underscore's behavior."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns a new URICollection with copies of the elements from from index 0 up to index <code>#length() - n</code>.</p>",
-      "summary": "<p>Returns a new URICollection with copies of the elements from from index 0 up to index <code>#length() - n</code>.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.initial = function(n) {\n    var _origUris;\n    if (n == null) {\n      n = 1;\n    }\n    _origUris = _.initial(this._uris, n);\n    return new URICollection(cloneUris(_origUris));\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "initial",
-      "string": "URICollection.prototype.initial()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "String",
-          "Object",
-          "RegExp"
-        ],
-        "name": "val",
-        "description": "The value to search for."
-      },
-      {
-        "type": "return",
-        "types": [
-          "Boolean"
-        ],
-        "description": "`true` if the collection contains the value; `false` otherwise."
-      }
-    ],
-    "description": {
-      "full": "<p>Predicate function indicating whether the collection contains the passed URI, given as a string, <code>URIjs</code> instance, or <code>RegExp</code>.</p>\n\n<p>The comparison is against the array of <code>#toString()</code> results of the collection's elements.</p>\n\n<p>If a URIjs instance is passed in as <code>val</code>, its own <code>#toString()</code> is used for comparison.</p>\n\n<p>If a RegExp instance is passed in as <code>val</code>, the result is determined by calling its <code>#.test()</code> method with each collection element's <code>#toString()</code>, short-circuiting when any returns true.</p>",
-      "summary": "<p>Predicate function indicating whether the collection contains the passed URI, given as a string, <code>URIjs</code> instance, or <code>RegExp</code>.</p>",
-      "body": "<p>The comparison is against the array of <code>#toString()</code> results of the collection's elements.</p>\n\n<p>If a URIjs instance is passed in as <code>val</code>, its own <code>#toString()</code> is used for comparison.</p>\n\n<p>If a RegExp instance is passed in as <code>val</code>, the result is determined by calling its <code>#.test()</code> method with each collection element's <code>#toString()</code>, short-circuiting when any returns true.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.contains = function(val) {\n    var _stringUris;\n    _stringUris = this._strungList();\n    if (_.isString(val)) {\n      return _.contains(_stringUris, val);\n    } else if (val instanceof URI) {\n      return _.contains(_stringUris, val.toString());\n    } else if (_.isRegExp(val)) {\n      return _.some(_stringUris, function(aString) {\n        return val.test(aString);\n      });\n    }\n    throw new Error(\"Unrecognized value passed for URICollection.contains: \" + val);\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "contains",
-      "string": "URICollection.prototype.contains()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "testFn",
-        "description": "The truth-testing function which will iterate over collection elements, short-circuiting at the first to return true."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URI",
+          "Any",
           "null"
         ],
-        "description": "If a result is found, a clone of the matching `URIjs` instance. Otherwise, returns `null`."
+        "description": "Return type depends on the particular setting, and most settings will be defined by code layered on top of the router. `null` is returned if the option has not been defined."
       }
     ],
     "description": {
-      "full": "<p>Accepts a truth-testing function and returns the first element to cause a <code>true</code> return value.  Proxies to Underscore's <code>_.find</code>, but returns a cloned URIjs instance to ensure immutability of collection elements.</p>",
-      "summary": "<p>Accepts a truth-testing function and returns the first element to cause a <code>true</code> return value.  Proxies to Underscore's <code>_.find</code>, but returns a cloned URIjs instance to ensure immutability of collection elements.</p>",
+      "full": "<p>Get the value of a router-wide option, if it's defined.</p>",
+      "summary": "<p>Get the value of a router-wide option, if it's defined.</p>",
       "body": ""
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "URICollection.prototype.find = function(testFn) {\n    var result, _uris;\n    _uris = cloneUris(this._uris);\n    result = _.find(_uris, testFn);\n    if (result != null) {\n      return result;\n    }\n    return null;\n  };",
+    "code": "outputRef.get = function(aKey) {\n      if (_options[aKey] != null) {\n        return _options[aKey];\n      } else {\n        return null;\n      }\n    };",
     "ctx": {
       "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "find",
-      "string": "URICollection.prototype.find()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "iterFn",
-        "description": "The iterator function which will be called with each collection element in sequence."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A URICollection instance created by applying `iterFn` to each of a cloned array of internal `URIjs` instances."
-      }
-    ],
-    "description": {
-      "full": "<p>Accepts an iterator function and applies it to a cloned list of collection elements, returning a new <code>URICollection</code> instance with the results.</p>\n\n<p>This is distinct from <code>#map()</code> because this implementation of <code>#each()</code> <em>always</em> returns a new URICollection, even if <code>iterFn</code> doesn't have any return value.  <code>#map()</code> only returns a new URICollection if it results in an array of <code>URIjs</code> instances. </p>\n\n<p>No changes are made to the original collection elements.</p>",
-      "summary": "<p>Accepts an iterator function and applies it to a cloned list of collection elements, returning a new <code>URICollection</code> instance with the results.</p>",
-      "body": "<p>This is distinct from <code>#map()</code> because this implementation of <code>#each()</code> <em>always</em> returns a new URICollection, even if <code>iterFn</code> doesn't have any return value.  <code>#map()</code> only returns a new URICollection if it results in an array of <code>URIjs</code> instances. </p>\n\n<p>No changes are made to the original collection elements.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.each = function(iterFn) {\n    var _results, _uris;\n    _uris = cloneUris(this._uris);\n    _results = _.map(_uris, iterFn);\n    return new URICollection(_results);\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "each",
-      "string": "URICollection.prototype.each()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Function"
-        ],
-        "name": "mapFn",
-        "description": "The iterator function which will be called with each collection element in sequence."
-      },
-      {
-        "type": "return",
-        "types": [
-          "Array",
-          "URICollection"
-        ],
-        "description": "Either a new `URICollection` (if an array of `URIjs` instances are returned) or a plain array of results (e.g. if strings of element hostnames are returned.)"
-      }
-    ],
-    "description": {
-      "full": "<p>Accepts an iterator function and applies it to a cloned list of collection elements.  Depending on the iterator's output, this method will either return a new <code>URICollection</code> instance or a plain array.</p>\n\n<p>If the <code>mapFn</code> returns an array of <code>URIjs</code> instances, they will be wrapped in a new <code>URICollection</code> and returned.  If it returns another type of result, the plain array will be returned to the client.</p>\n\n<p>A given map operation's outputs are assumed to be homogeneous with respect to type, so the type of the internal array resulting from proxying to <code>_.map(list, mapFn)</code> is determined by testing only the first element. </p>\n\n<p>No changes are made to the original collection elements.</p>",
-      "summary": "<p>Accepts an iterator function and applies it to a cloned list of collection elements.  Depending on the iterator's output, this method will either return a new <code>URICollection</code> instance or a plain array.</p>",
-      "body": "<p>If the <code>mapFn</code> returns an array of <code>URIjs</code> instances, they will be wrapped in a new <code>URICollection</code> and returned.  If it returns another type of result, the plain array will be returned to the client.</p>\n\n<p>A given map operation's outputs are assumed to be homogeneous with respect to type, so the type of the internal array resulting from proxying to <code>_.map(list, mapFn)</code> is determined by testing only the first element. </p>\n\n<p>No changes are made to the original collection elements.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.map = function() {\n    var params, _results, _uris;\n    params = 1 <= arguments.length ? __slice.call(arguments, 0) : [];\n    _uris = cloneUris(this._uris);\n    params.unshift(_uris);\n    _results = _.map.apply(null, params);\n    if (isURI(_results[0])) {\n      return new URICollection(_results);\n    } else {\n      return _results;\n    }\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "map",
-      "string": "URICollection.prototype.map()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "String"
-        ],
-        "name": "methodName",
-        "description": "A string representing the method name to invoke on each collection element."
-      },
-      {
-        "type": "param",
-        "types": [
-          "Array"
-        ],
-        "name": "args",
-        "description": "(Optional) Additional arguments to pass when invoking `methodName`."
-      },
-      {
-        "type": "return",
-        "types": [
-          "Array",
-          "URICollection"
-        ],
-        "description": "If no additional arguments are passed, a plain array of results. Otherwise, a new URICollection wrapping clones of the URIjs elements from the original collection."
-      }
-    ],
-    "description": {
-      "full": "<p>Accepts a method name and optional additional arguments to pass to that method, and invokes the given method on each URIjs instance in the collection.</p>\n\n<p>Because <code>URIjs</code> methods without argument return attribute information - e.g. <code>uri.domain()</code> returns the string-format URI domain - a plain array of results is returned if no additional arguments are supplied.</p>\n\n<p>Calling <code>URIjs</code> methods with arguments generally causes mutation and returns the object - e.g. <code>uri.domain(\"justcats.net\")</code> returns the same object with its domain changed to <code>justcats.net</code>.  For this reason, passing additional arguments causes the result to be wrapped in a new URICollection instance.</p>\n\n<p>No changes are made to the original collection elements.</p>",
-      "summary": "<p>Accepts a method name and optional additional arguments to pass to that method, and invokes the given method on each URIjs instance in the collection.</p>",
-      "body": "<p>Because <code>URIjs</code> methods without argument return attribute information - e.g. <code>uri.domain()</code> returns the string-format URI domain - a plain array of results is returned if no additional arguments are supplied.</p>\n\n<p>Calling <code>URIjs</code> methods with arguments generally causes mutation and returns the object - e.g. <code>uri.domain(\"justcats.net\")</code> returns the same object with its domain changed to <code>justcats.net</code>.  For this reason, passing additional arguments causes the result to be wrapped in a new URICollection instance.</p>\n\n<p>No changes are made to the original collection elements.</p>"
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.invoke = function() {\n    var params, _method, _results, _uris;\n    params = 1 <= arguments.length ? __slice.call(arguments, 0) : [];\n    if (params.length === 1) {\n      _method = params[0];\n      _results = _.map(this._uris, function(oneUri) {\n        return oneUri[_method]();\n      });\n      return _results;\n    } else {\n      _uris = cloneUris(this._uris);\n      params.unshift(_uris);\n      _results = _.invoke.apply(null, params);\n      return new URICollection(_results);\n    }\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "invoke",
-      "string": "URICollection.prototype.invoke()"
+      "receiver": "outputRef",
+      "name": "get",
+      "string": "outputRef.get()"
     }
   },
   {
@@ -851,145 +153,44 @@
         "type": "param",
         "types": [
           "String",
-          "Function"
-        ],
-        "name": "groupingMethod",
-        "description": "A string representing a method to invoke on each element, grouping by the output, or a function which is passed each element in sequence and calculates the correct group key."
-      },
-      {
-        "type": "param",
-        "types": [
-          "Boolean"
-        ],
-        "name": "asStrings",
-        "description": "(Optional) If `true` is passed, the value for each group key on the returned object will be an array of URI strings instead of URICollections."
-      },
-      {
-        "type": "return",
-        "types": [
           "Object"
         ],
-        "description": "An object with keys determined by the grouping criteria, with URICollections as the values. If `asStrings=true`, the values are converted to arrays of URI strings."
-      }
-    ],
-    "description": {
-      "full": "<p>Accepts a property name or a function and uses it to create a plain Javascript object with the collection's elements keyed by the results of the grouping function or property.</p>",
-      "summary": "<p>Accepts a property name or a function and uses it to create a plain Javascript object with the collection's elements keyed by the results of the grouping function or property.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.groupBy = function(propOrFunc, asStrings) {\n    var groupFn, _finalResults, _results, _uris;\n    _uris = cloneUris(this._uris);\n    if (_.isString(propOrFunc)) {\n      groupFn = function(listElem) {\n        return _.result(listElem, propOrFunc);\n      };\n    } else {\n      groupFn = propOrFunc;\n    }\n    _results = _.groupBy(_uris, groupFn);\n    _finalResults = _results;\n    if (asStrings === true) {\n      _finalResults = _.chain(_results).pairs().map(function(aPair) {\n        return [\n          aPair[0], _.map(aPair[1], function(el) {\n            return el.toString();\n          })\n        ];\n      }).object().value();\n    } else {\n      _finalResults = _.chain(_results).pairs().map(function(aPair) {\n        return [aPair[0], new URICollection(aPair[1])];\n      }).object().value();\n    }\n    return _finalResults;\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "groupBy",
-      "string": "URICollection.prototype.groupBy()"
-    }
-  },
-  {
-    "tags": [
+        "name": "optName",
+        "description": "The name of the option to be set, if given as a key-value pair. Alternately, an object with multiple options to be set."
+      },
       {
         "type": "param",
         "types": [
-          "String",
-          "Function"
+          "Any"
         ],
-        "name": "countingMethod",
-        "description": "A string representing a method to invoke on each element, counting by the output, or a function which is passed each element in sequence and calculates the correct result to count by."
+        "name": "newVal",
+        "description": "The updated value of the option, if given as a key-value pair."
+      },
+      {
+        "type": "",
+        "string": ""
       },
       {
         "type": "return",
         "types": [
-          "Object"
+          "Router"
         ],
-        "description": "An object with keys determined by the counting criteria, with `Number` values corresponding to the number of times a given key was returned."
+        "description": "The same router instance is returned (chained)."
       }
     ],
     "description": {
-      "full": "<p>Accepts a property name or a function and uses it to create a plain Javascript object keyed by the outputs of the counting function, with values equal to the number of times a given output was returned.</p>",
-      "summary": "<p>Accepts a property name or a function and uses it to create a plain Javascript object keyed by the outputs of the counting function, with values equal to the number of times a given output was returned.</p>",
+      "full": "<p>Set the value of a router-wide option, given as a key-val pair, or set the value of multiple options by passing in an object.</p>",
+      "summary": "<p>Set the value of a router-wide option, given as a key-val pair, or set the value of multiple options by passing in an object.</p>",
       "body": ""
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "URICollection.prototype.countBy = function(propOrFunc) {\n    var countFn, _results, _uris;\n    if (_.isString(propOrFunc)) {\n      _uris = this._uris;\n      countFn = function(listElem) {\n        return _.result(listElem, propOrFunc);\n      };\n    } else {\n      _uris = cloneUris(this._uris);\n      countFn = propOrFunc;\n    }\n    return _results = _.countBy(_uris, countFn);\n  };",
+    "code": "outputRef.set = function(aKey, aVal) {\n      if (_.isObject(aKey)) {\n        _.extend(_options, aKey);\n      } else {\n        _options[aKey] = aVal;\n      }\n      return outputRef;\n    };\n    return outputRef;\n  };\n\n  exp = {};",
     "ctx": {
       "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "countBy",
-      "string": "URICollection.prototype.countBy()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "String",
-          "Function"
-        ],
-        "name": "sortingMethod",
-        "description": "A string representing a method to invoke on each element, returning a value used to sort by, or a function which is passed each element in sequence and calculates the correct value to sort by."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A new collection with elements sorted according to the returned sorting criteria."
-      }
-    ],
-    "description": {
-      "full": "<p>Accepts a method name or a function and uses it to create a new URICollection with elements ordered by the function output or method invocation output for each object.</p>",
-      "summary": "<p>Accepts a method name or a function and uses it to create a new URICollection with elements ordered by the function output or method invocation output for each object.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.sortBy = function(propOrFunc) {\n    var sortFn, _results, _uris;\n    _uris = cloneUris(this._uris);\n    if (_.isString(propOrFunc)) {\n      sortFn = function(listElem) {\n        return _.result(listElem, propOrFunc);\n      };\n    } else {\n      sortFn = propOrFunc;\n    }\n    _results = _.sortBy(_uris, sortFn);\n    return new URICollection(_results);\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "sortBy",
-      "string": "URICollection.prototype.sortBy()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "String"
-        ],
-        "name": "propertyName",
-        "description": "A string representing the property to pluck from each collection element."
-      },
-      {
-        "type": "return",
-        "types": [
-          "Array"
-        ],
-        "description": "A plain array of results."
-      }
-    ],
-    "description": {
-      "full": "<p>Accepts a property name and returns a plain array with the value of that property for each element in the collection.<br />Similar to Underscore's own <code>_.pluck</code> but internally uses _.resolve in a map operation, because URIjs properties are all returned by methods. </p>",
-      "summary": "<p>Accepts a property name and returns a plain array with the value of that property for each element in the collection.<br />Similar to Underscore's own <code>_.pluck</code> but internally uses _.resolve in a map operation, because URIjs properties are all returned by methods. </p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.pluck = function(attrib) {\n    var _results, _uris;\n    _uris = this._uris;\n    _results = _.map(_uris, function(oneUri) {\n      return _.result(oneUri, attrib);\n    });\n    return _results;\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "pluck",
-      "string": "URICollection.prototype.pluck()"
+      "receiver": "outputRef",
+      "name": "set",
+      "string": "outputRef.set()"
     }
   },
   {
@@ -999,100 +200,35 @@
         "types": [
           "Object"
         ],
-        "name": "queryObject",
-        "description": "A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`"
+        "name": "options",
+        "description": "A hash of options "
+      },
+      {
+        "type": "",
+        "string": ""
       },
       {
         "type": "return",
-        "types": [
-          "URICollection"
-        ],
-        "description": "A new URICollection instance."
-      }
-    ],
-    "description": {
-      "full": "<p>Accepts a query object and returns all collection elements with properties matching the key-value pairs in that object.</p>",
-      "summary": "<p>Accepts a query object and returns all collection elements with properties matching the key-value pairs in that object.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.where = function(whereObject) {\n    var _pred, _results;\n    _pred = compileWhereObjectIntoPredicate(whereObject);\n    _results = _.chain(this._uris).filter(_pred).map(function(aUri) {\n      return aUri.clone();\n    }).value();\n    return new URICollection(_results);\n  };",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "where",
-      "string": "URICollection.prototype.where()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
         "types": [
           "Object"
         ],
-        "name": "queryObject",
-        "description": "A plain Javascript object containing properties to match, e.g. `{domain: 'google.com'}`"
-      },
-      {
-        "type": "return",
-        "types": [
-          "URI"
-        ],
-        "description": "A clone of the first `URIjs` element in the collection matching the query."
+        "description": "A new routing object with methods for adding middleware, adding routes, handling new pipeline elements, and getting and setting options."
       }
     ],
     "description": {
-      "full": "<p>Accepts a query object and returns the first collection element with properties matching the key-value pairs in that object.  Like <code>#where()</code>, but only returns the first result and does not wrap it in a collection - it returns a <code>URIjs</code> instance.</p>",
-      "summary": "<p>Accepts a query object and returns the first collection element with properties matching the key-value pairs in that object.  Like <code>#where()</code>, but only returns the first result and does not wrap it in a collection - it returns a <code>URIjs</code> instance.</p>",
-      "body": ""
+      "full": "<p>A factory function for constructing new routers.  It isn't a constructor function, so there's no need to call it with <code>new</code>.</p>\n\n<p>Options include: </p>\n\n<ul>\n<li><code>defaultRoute</code>: a route to use if no route predicate returns true.  The built-in <code>defaultRoute</code> throws an error.</li>\n<li><code>enforceArity</code>: limits middleware and routing handlers to the given arity, <em>plus one</em> for the <code>next</code> parameter.</li>\n</ul>\n\n<p>There is no default arity enforcement.  Internally, <code>next</code> is appended onto the array of passed parameters and they're all passed to a handler via <code>#apply</code>.</p>",
+      "summary": "<p>A factory function for constructing new routers.  It isn't a constructor function, so there's no need to call it with <code>new</code>.</p>",
+      "body": "<p>Options include: </p>\n\n<ul>\n<li><code>defaultRoute</code>: a route to use if no route predicate returns true.  The built-in <code>defaultRoute</code> throws an error.</li>\n<li><code>enforceArity</code>: limits middleware and routing handlers to the given arity, <em>plus one</em> for the <code>next</code> parameter.</li>\n</ul>\n\n<p>There is no default arity enforcement.  Internally, <code>next</code> is appended onto the array of passed parameters and they're all passed to a handler via <code>#apply</code>.</p>"
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "URICollection.prototype.findWhere = function(whereObject) {\n    var _pred, _result;\n    _pred = compileWhereObjectIntoPredicate(whereObject);\n    _result = _.find(this._uris, _pred);\n    if (_result == null) {\n      return null;\n    }\n    return _result.clone();\n  };",
+    "code": "exp.inmedia = makeMiddlewareRouter;\n\n  module.exports = exp.inmedia;\n\n}).call(this);",
     "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "findWhere",
-      "string": "URICollection.prototype.findWhere()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "types": [
-          "Number"
-        ],
-        "name": "n",
-        "description": "The number of elements to return in the sample, defaulting to 1."
-      },
-      {
-        "type": "return",
-        "types": [
-          "URICollection",
-          "URI"
-        ],
-        "description": "A URICollection instance if `n > 1`, or a `URIjs` instance otherwise."
-      }
-    ],
-    "description": {
-      "full": "<p>Returns <code>n</code> randomly selected elements from the collection.  If <code>n==1</code> or <code>typeof n === \"null\"</code>, returns a <code>URIjs</code> instance.  If <code>n &gt; 1</code>, returns a new <code>URICollection</code> instance.</p>",
-      "summary": "<p>Returns <code>n</code> randomly selected elements from the collection.  If <code>n==1</code> or <code>typeof n === \"null\"</code>, returns a <code>URIjs</code> instance.  If <code>n &gt; 1</code>, returns a new <code>URICollection</code> instance.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "URICollection.prototype.sample = function(n) {\n    var params, sample, _results, _uris;\n    if ((n != null) && n !== 1) {\n      _uris = cloneUris(this._uris);\n      params = [_uris, n];\n      _results = _.sample.apply(null, params);\n      return new URICollection(_results);\n    } else {\n      sample = _.sample(this._uris);\n      return sample.clone();\n    }\n  };\n\n  module.exports = {\n    URICollection: URICollection,\n    isURI: isURI\n  };\n\n}).call(this);",
-    "ctx": {
-      "type": "method",
-      "constructor": "URICollection",
-      "cons": "URICollection",
-      "name": "sample",
-      "string": "URICollection.prototype.sample()"
+      "type": "property",
+      "receiver": "exp",
+      "name": "inmedia",
+      "value": "makeMiddlewareRouter",
+      "string": "exp.inmedia"
     }
   }
 ]

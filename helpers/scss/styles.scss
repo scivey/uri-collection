@@ -272,9 +272,10 @@ pre {
 	}
 }
 
+$p-indent-val: 1.5em;
 
 p {
-	$indent-val: 1.5em;
+	$indent-val: $p-indent-val;
 	margin: auto auto $indent-val;
 
 	& + h5 {
@@ -1035,8 +1036,23 @@ pre code {
 	list-style-image: url('../img/check16.png');
 }
 
+strong {
+	font-weight: 700;
+}
 
 
 pre {
 	overflow: scroll
+}
+
+.api-item-description ul {
+	list-style-type: square;
+	margin-left: $p-indent-val;
+	margin-bottom: 1.0em;
+}
+
+em {
+	font-style: italic;
+	//margin-left: 0.0em;
+	margin-right: 0.2em;
 }
